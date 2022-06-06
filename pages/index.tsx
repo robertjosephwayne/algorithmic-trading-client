@@ -1,7 +1,16 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import Listings from '../components/Listings';
-
 export default function IndexPage() {
-    return <a href="/listings/latest">Latest Listings</a>;
+    return (
+        <div>
+            <ul>
+                <li>
+                    <a href="/cryptocurrency/listings/latest">
+                        Latest Listings
+                    </a>
+                </li>
+                <li>
+                    <a href="/cryptocurrency/categories">Categories</a>
+                </li>
+            </ul>
+        </div>
+    );
 }
