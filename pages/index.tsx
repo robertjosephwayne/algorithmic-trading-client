@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function Home() {
+export default function IndexPage() {
     const [listings, setListings] = useState([]);
 
     useEffect(() => {
