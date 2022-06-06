@@ -21,6 +21,6 @@
         "**/*.tsx",
         "pages/api/hello.js",
         "pages/_app.ts"
-    ],
+, "next.config.js"    ],
     "exclude": ["node_modules"]
 }
