@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Listings from '../components/Listings';
 
 export default function IndexPage() {
     const [listings, setListings] = useState([]);
@@ -11,5 +12,5 @@ export default function IndexPage() {
         });
     }, []);
 
-    return listings.map((listing) => <div key={listing.id}>{listing.id}</div>);
+    return <Listings data={listings} />;
 }
