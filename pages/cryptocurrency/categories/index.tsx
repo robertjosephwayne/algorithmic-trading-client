@@ -8,7 +8,7 @@ export default function CategoriesPage() {
     useEffect(() => {
         const url = '/api/cryptocurrency/categories';
         axios.get(url).then((response) => {
-            setCategories(response.data.data.data);
+            setCategories(response.data.data);
         });
     }, []);
 
