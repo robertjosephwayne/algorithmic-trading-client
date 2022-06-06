@@ -1,14 +1,18 @@
+import Link from 'next/link';
+
 export default function IndexPage() {
     return (
         <div>
             <ul>
                 <li>
-                    <a href="/cryptocurrency/listings/latest">
-                        Latest Listings
-                    </a>
+                    <Link href="/cryptocurrency/listings/latest">
+                        <a>Latest Listings</a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="/cryptocurrency/categories">Categories</a>
+                    <Link href="/cryptocurrency/categories">
+                        <a>Categories</a>
+                    </Link>
                 </li>
             </ul>
         </div>
