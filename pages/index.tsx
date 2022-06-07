@@ -5,13 +5,8 @@ export default function IndexPage() {
         <div>
             <ul>
                 <li>
-                    <Link href="/cryptocurrency/listings/latest">
-                        <a>Latest Listings</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/cryptocurrency/categories">
-                        <a>Categories</a>
+                    <Link href="/fundamentals/income-statement">
+                        <a>Income Statements</a>
                     </Link>
                 </li>
             </ul>
