@@ -11,6 +11,8 @@ jobs:
     environment: production
     concurrency: production
     steps:
-      - name: deploy
+      - name: Install dependencies
+        run: npm install
+      - name: Deploy
         run: npm run deploy
       
