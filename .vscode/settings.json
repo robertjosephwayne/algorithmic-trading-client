@@ -7,5 +7,6 @@
     "files.autoSave": "onFocusChange",
     "[typescript]": {
         "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-    } // optional but recommended
+    }, // optional but recommended
+    "eslint.validate": ["javascript", "javascriptreact", "html", "typescriptreact"]
 }
