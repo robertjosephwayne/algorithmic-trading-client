@@ -10,9 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     concurrency: production
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
     steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Install dependencies
         run: npm install
+        
       - name: Deploy
         run: npm run deploy
       
