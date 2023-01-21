@@ -7,7 +7,7 @@ const socket = io(wsUrl);
 
 function App() {
     const [isConnected, setIsConnected] = useState(socket.connected);
-    const [lastPong, setLastPong] = useState('');
+    const [bar, setBar] = useState<any>({});
 
     useEffect(() => {
         socket.on('connect', () => {
@@ -18,26 +18,26 @@ function App() {
             setIsConnected(false);
         });
 
-        socket.on('pong', () => {
-            setLastPong(new Date().toISOString());
+        socket.on('bar', (bar) => {
+            setBar(bar);
         });
 
         return () => {
             socket.off('connect');
             socket.off('disconnect');
-            socket.off('pong');
+            socket.off('bar');
         };
     }, []);
-
-    const sendPing = () => {
-        socket.emit('ping', 'test');
-    };
 
     return (
         <div>
             <p>Connected: {'' + isConnected}</p>
-            <p>Last pong: {lastPong || '-'}</p>
-            <button onClick={sendPing}>Send ping</button>
+            <p>Last update: {new Date(bar.t).toLocaleString() || '-'}</p>
+            {isConnected && bar && (
+                <div key={bar.i}>
+                    {bar.pair} {(bar.p || 0).toLocaleString(2)}
+                </div>
+            )}
         </div>
     );
 }
