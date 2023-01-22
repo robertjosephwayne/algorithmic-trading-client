@@ -19,7 +19,8 @@ function App() {
         });
 
         socket.on('bar', (bar) => {
-            console.log(bar);
+            if (!bar.pair) return;
+
             setBars((existingBars) => {
                 const updatedBars = {
                     ...existingBars,
