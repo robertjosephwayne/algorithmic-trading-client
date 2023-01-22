@@ -30,7 +30,7 @@ function HomePage() {
 
     useEffect(() => {
         socket.on('bar', (bar) => {
-            if (!bar.pair) return;
+            if (!bar.pair || !bar.pair.includes('-USD')) return;
 
             setBars((existingBars) => {
                 const updatedBars = {
