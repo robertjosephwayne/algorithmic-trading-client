@@ -14,13 +14,10 @@ function HomePage() {
             const pair = bar[0];
             const pairDetails: any = bar[1];
 
-            const rowData: any = {};
-            rowData.pair = pair;
-            rowData.prices = {};
-
-            for (const exchange in pairDetails) {
-                rowData.prices[exchange] = pairDetails[exchange].price;
-            }
+            const rowData: any = {
+                pair,
+                price: pairDetails.price,
+            };
 
             return rowData;
         });
@@ -37,9 +34,7 @@ function HomePage() {
                     ...existingBars,
                     [bar.pair]: {
                         ...existingBars[bar.pair],
-                        [bar.x]: {
-                            price: bar.p,
-                        },
+                        price: bar.p,
                     },
                 };
                 return updatedBars;
@@ -59,10 +54,7 @@ function HomePage() {
                 style={{ fontWeight: 'bold', borderBottom: '2px solid black', marginBottom: '5px' }}
             >
                 <div style={{ width: '150px', display: 'inline-block' }}>Pair</div>
-                <div style={{ width: '150px', display: 'inline-block' }}>Coinbase</div>
-                <div style={{ width: '150px', display: 'inline-block' }}>Bitfinex</div>
-                <div style={{ width: '150px', display: 'inline-block' }}>Bitstamp</div>
-                <div style={{ width: '150px', display: 'inline-block' }}>Kraken</div>
+                <div style={{ width: '150px', display: 'inline-block' }}>Price</div>
             </div>
             {rowData.map((row) => (
                 <div key={row.pair}>
@@ -70,16 +62,7 @@ function HomePage() {
                         {row.pair}
                     </div>
                     <div style={{ width: '150px', display: 'inline-block' }}>
-                        {currencyFormatter(row.prices[1]) || '-'}
-                    </div>
-                    <div style={{ width: '150px', display: 'inline-block' }}>
-                        {currencyFormatter(row.prices[2]) || '-'}
-                    </div>
-                    <div style={{ width: '150px', display: 'inline-block' }}>
-                        {currencyFormatter(row.prices[6]) || '-'}
-                    </div>
-                    <div style={{ width: '150px', display: 'inline-block' }}>
-                        {currencyFormatter(row.prices[23]) || '-'}
+                        {currencyFormatter(row.price) || '-'}
                     </div>
                 </div>
             ))}
