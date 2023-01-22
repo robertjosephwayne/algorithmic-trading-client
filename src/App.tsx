@@ -15,7 +15,11 @@ function App() {
     const [rowData, setRowData] = useState<any[]>([]);
     const [columnDefs] = useState([
         { field: 'pair', width: 200 },
-        { field: 'price', width: 200 },
+        {
+            field: 'price',
+            width: 200,
+            valueFormatter: (params: any) => currencyFormatter(params.data.price),
+        },
     ]);
 
     useEffect(() => {
@@ -72,3 +76,10 @@ function App() {
 }
 
 export default App;
+
+function currencyFormatter(value: number) {
+    return value.toLocaleString(undefined, {
+        currency: 'usd',
+        style: 'currency',
+    });
+}
