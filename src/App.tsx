@@ -7,7 +7,7 @@ const socket = io(wsUrl);
 
 function App() {
     const [isConnected, setIsConnected] = useState(socket.connected);
-    const [bar, setBar] = useState<any>({});
+    const [bars, setBars] = useState<{ [key: string]: { price?: number } }>({});
 
     useEffect(() => {
         socket.on('connect', () => {
@@ -19,7 +19,16 @@ function App() {
         });
 
         socket.on('bar', (bar) => {
-            setBar(bar);
+            console.log(bar);
+            setBars((existingBars) => {
+                const updatedBars = {
+                    ...existingBars,
+                    [bar.pair]: {
+                        price: bar.p,
+                    },
+                };
+                return updatedBars;
+            });
         });
 
         return () => {
@@ -31,13 +40,16 @@ function App() {
 
     return (
         <div>
-            <p>Connected: {'' + isConnected}</p>
-            <p>Last update: {new Date(bar.t).toLocaleString() || '-'}</p>
-            {isConnected && bar && (
-                <div key={bar.i}>
-                    {bar.pair} {(bar.p || 0).toLocaleString(2)}
-                </div>
-            )}
+            {isConnected &&
+                Object.keys(bars).map((key) => (
+                    <div key={key}>
+                        {key}{' '}
+                        {(bars[key].price || 0).toLocaleString(undefined, {
+                            currency: 'usd',
+                            style: 'currency',
+                        })}
+                    </div>
+                ))}
         </div>
     );
 }
