@@ -10,7 +10,6 @@ const wsUrl = config.SERVER_URL;
 const socket = io(wsUrl);
 
 function HomePage() {
-    const [isConnected, setIsConnected] = useState(socket.connected);
     const [bars, setBars] = useState<{ [key: string]: { price?: number } }>({});
     const [rowData, setRowData] = useState<any[]>([]);
     const [columnDefs] = useState([
@@ -35,14 +34,6 @@ function HomePage() {
     }, [bars]);
 
     useEffect(() => {
-        socket.on('connect', () => {
-            setIsConnected(true);
-        });
-
-        socket.on('disconnect', () => {
-            setIsConnected(false);
-        });
-
         socket.on('bar', (bar) => {
             if (!bar.pair) return;
 
