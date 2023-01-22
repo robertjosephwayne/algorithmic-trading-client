@@ -12,12 +12,19 @@ function HomePage() {
     useEffect(() => {
         const updatedRowData = Object.entries(bars).map((bar) => {
             const pair = bar[0];
-            const pairDetails = bar[1];
-            return {
-                pair,
-                price: pairDetails.price,
-            };
+            const pairDetails: any = bar[1];
+
+            const rowData: any = {};
+            rowData.pair = pair;
+            rowData.prices = {};
+
+            for (const exchange in pairDetails) {
+                rowData.prices[exchange] = pairDetails[exchange].price;
+            }
+
+            return rowData;
         });
+
         setRowData(updatedRowData);
     }, [bars]);
 
@@ -29,7 +36,10 @@ function HomePage() {
                 const updatedBars = {
                     ...existingBars,
                     [bar.pair]: {
-                        price: bar.p,
+                        ...existingBars[bar.pair],
+                        [bar.x]: {
+                            price: bar.p,
+                        },
                     },
                 };
                 return updatedBars;
@@ -45,10 +55,32 @@ function HomePage() {
 
     return (
         <div style={{ margin: '10px' }}>
+            <div
+                style={{ fontWeight: 'bold', borderBottom: '2px solid black', marginBottom: '5px' }}
+            >
+                <div style={{ width: '150px', display: 'inline-block' }}>Pair</div>
+                <div style={{ width: '150px', display: 'inline-block' }}>Coinbase</div>
+                <div style={{ width: '150px', display: 'inline-block' }}>Bitfinex</div>
+                <div style={{ width: '150px', display: 'inline-block' }}>Bitstamp</div>
+                <div style={{ width: '150px', display: 'inline-block' }}>Kraken</div>
+            </div>
             {rowData.map((row) => (
                 <div key={row.pair}>
-                    <div style={{ width: '150px', display: 'inline-block' }}>{row.pair}</div>
-                    <span>{currencyFormatter(row.price)}</span>
+                    <div style={{ width: '150px', display: 'inline-block', padding: '2px 0' }}>
+                        {row.pair}
+                    </div>
+                    <div style={{ width: '150px', display: 'inline-block' }}>
+                        {currencyFormatter(row.prices[1]) || '-'}
+                    </div>
+                    <div style={{ width: '150px', display: 'inline-block' }}>
+                        {currencyFormatter(row.prices[2]) || '-'}
+                    </div>
+                    <div style={{ width: '150px', display: 'inline-block' }}>
+                        {currencyFormatter(row.prices[6]) || '-'}
+                    </div>
+                    <div style={{ width: '150px', display: 'inline-block' }}>
+                        {currencyFormatter(row.prices[23]) || '-'}
+                    </div>
                 </div>
             ))}
         </div>
@@ -58,6 +90,8 @@ function HomePage() {
 export default HomePage;
 
 function currencyFormatter(value: number) {
+    if (!value) return;
+
     return value.toLocaleString(undefined, {
         currency: 'usd',
         style: 'currency',
