@@ -49,7 +49,7 @@ function CryptoSummaryTable() {
     const [bars, setBars] = useState<{ [key: string]: { price?: number } }>({});
     const [rowData, setRowData] = useState<CryptoSummaryTableRow[]>([]);
 
-    const [columnResizeMode, setColumnResizeMode] = useState<ColumnResizeMode>('onChange');
+    const [columnResizeMode] = useState<ColumnResizeMode>('onChange');
     const [sorting, setSorting] = useState<SortingState>([]);
 
     const table = useReactTable({
