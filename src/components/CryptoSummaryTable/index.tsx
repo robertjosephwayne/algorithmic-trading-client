@@ -1,21 +1,60 @@
-import { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import './index.css';
 
+import { useState, useEffect } from 'react';
+import {
+    useReactTable,
+    createColumnHelper,
+    flexRender,
+    getCoreRowModel,
+    ColumnResizeMode,
+} from '@tanstack/react-table';
+import io from 'socket.io-client';
 import { cryptoSymbol } from 'crypto-symbol';
 const { nameLookup } = cryptoSymbol({
     Celo: 'CGLD',
     Paxos: 'PAX',
 });
-
 import { getSnapshotAllTickers } from '../../api/crypto';
 import { config } from '../../constants';
 
 const wsUrl = config.SERVER_URL;
 const socket = io(wsUrl);
 
+type CryptoSummaryTableRow = {
+    pair: string;
+    price: number;
+    displayName: string;
+};
+
+const columnHelper = createColumnHelper<CryptoSummaryTableRow>();
+const columns = [
+    columnHelper.accessor('displayName', {
+        header: 'Name',
+        cell: (info) => info.getValue(),
+        minSize: 250,
+    }),
+    columnHelper.accessor('pair', {
+        header: 'Pair',
+        cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor('price', {
+        header: 'Price',
+        cell: (info) => currencyFormatter(info.getValue()),
+    }),
+];
+
 function CryptoSummaryTable() {
     const [bars, setBars] = useState<{ [key: string]: { price?: number } }>({});
-    const [rowData, setRowData] = useState<any[]>([]);
+    const [rowData, setRowData] = useState<CryptoSummaryTableRow[]>([]);
+
+    const [columnResizeMode, setColumnResizeMode] = useState<ColumnResizeMode>('onChange');
+
+    const table = useReactTable({
+        data: rowData,
+        columns,
+        columnResizeMode,
+        getCoreRowModel: getCoreRowModel(),
+    });
 
     useEffect(() => {
         const updatedRowData = Object.entries(bars).map((bar) => {
@@ -84,28 +123,35 @@ function CryptoSummaryTable() {
     }, []);
 
     return (
-        <div style={{ margin: '10px' }}>
-            <div
-                style={{ fontWeight: 'bold', borderBottom: '2px solid black', marginBottom: '5px' }}
-            >
-                <div style={{ width: '250px', display: 'inline-block' }}>Name</div>
-                <div style={{ width: '150px', display: 'inline-block' }}>Pair</div>
-                <div style={{ width: '150px', display: 'inline-block' }}>Price</div>
-            </div>
-            {rowData.map((row) => (
-                <div key={row.pair}>
-                    <div style={{ width: '250px', display: 'inline-block', padding: '2px 0' }}>
-                        {row.displayName}
-                    </div>
-                    <div style={{ width: '150px', display: 'inline-block', padding: '2px 0' }}>
-                        {row.pair}
-                    </div>
-                    <div style={{ width: '150px', display: 'inline-block' }}>
-                        {currencyFormatter(row.price) || '-'}
-                    </div>
-                </div>
-            ))}
-        </div>
+        <table className='crypto-summary-table'>
+            <thead>
+                {table.getHeaderGroups().map((headerGroup) => (
+                    <tr key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                            <th key={header.id} style={{ width: header.getSize() }}>
+                                {header.isPlaceholder
+                                    ? null
+                                    : flexRender(
+                                          header.column.columnDef.header,
+                                          header.getContext(),
+                                      )}
+                            </th>
+                        ))}
+                    </tr>
+                ))}
+            </thead>
+            <tbody>
+                {table.getRowModel().rows.map((row) => (
+                    <tr key={row.id}>
+                        {row.getVisibleCells().map((cell) => (
+                            <td key={cell.id} style={{ width: cell.column.getSize() }}>
+                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+            </tbody>
+        </table>
     );
 }
 

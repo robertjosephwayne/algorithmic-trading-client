@@ -1,0 +1,9 @@
+.crypto-summary-table {
+    width: 600px;
+    margin: 10px;
+}
+
+.crypto-summary-table th {
+    text-align: left;
+    border-bottom: 1px solid black;
+}
