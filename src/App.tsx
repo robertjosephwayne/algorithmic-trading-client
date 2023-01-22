@@ -2,12 +2,33 @@ import { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { config } from './constants';
 
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
 const wsUrl = config.SERVER_URL;
 const socket = io(wsUrl);
 
 function App() {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [bars, setBars] = useState<{ [key: string]: { price?: number } }>({});
+    const [rowData, setRowData] = useState<any[]>([]);
+    const [columnDefs] = useState([
+        { field: 'pair', width: 200 },
+        { field: 'price', width: 200 },
+    ]);
+
+    useEffect(() => {
+        const updatedRowData = Object.entries(bars).map((bar) => {
+            const pair = bar[0];
+            const pairDetails = bar[1];
+            return {
+                pair,
+                price: pairDetails.price,
+            };
+        });
+        setRowData(updatedRowData);
+    }, [bars]);
 
     useEffect(() => {
         socket.on('connect', () => {
@@ -40,17 +61,12 @@ function App() {
     }, []);
 
     return (
-        <div>
-            {isConnected &&
-                Object.keys(bars).map((key) => (
-                    <div key={key}>
-                        {key}{' '}
-                        {(bars[key].price || 0).toLocaleString(undefined, {
-                            currency: 'usd',
-                            style: 'currency',
-                        })}
-                    </div>
-                ))}
+        <div className='ag-theme-alpine' style={{ margin: '40px auto', width: 402 }}>
+            <AgGridReact
+                rowData={rowData}
+                columnDefs={columnDefs}
+                domLayout='autoHeight'
+            ></AgGridReact>
         </div>
     );
 }
