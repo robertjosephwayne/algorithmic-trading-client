@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import { getSnapshotAllTickers } from '../api/crypto';
 import { config } from '../constants';
 
 const wsUrl = config.SERVER_URL;
@@ -46,6 +47,28 @@ function HomePage() {
             socket.off('disconnect');
             socket.off('bar');
         };
+    }, []);
+
+    useEffect(() => {
+        getSnapshotAllTickers().then((response) => {
+            const tickers = response.data;
+            const initialBars: any = {};
+
+            for (const ticker of tickers) {
+                if (!ticker.ticker.includes('-USD')) continue;
+
+                initialBars[ticker.ticker] = {
+                    price: ticker.lastTrade.p,
+                };
+            }
+
+            setBars((existingBars) => {
+                return {
+                    ...existingBars,
+                    ...initialBars,
+                };
+            });
+        });
     }, []);
 
     return (

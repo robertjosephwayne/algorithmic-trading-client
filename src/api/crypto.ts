@@ -9,4 +9,9 @@ const getTickers = () => {
     return api.get(url);
 };
 
-export { getTickers };
+const getSnapshotAllTickers = (): Promise<any> => {
+    const url = 'snapshot/markets/crypto/tickers';
+    return api.get(url);
+};
+
+export { getTickers, getSnapshotAllTickers };
