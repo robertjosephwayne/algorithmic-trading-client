@@ -13,9 +13,10 @@ function HomePage() {
     const [bars, setBars] = useState<{ [key: string]: { price?: number } }>({});
     const [rowData, setRowData] = useState<any[]>([]);
     const [columnDefs] = useState([
-        { field: 'pair', width: 200 },
+        { field: 'pair', width: 200, sortable: true },
         {
             field: 'price',
+            sortable: true,
             width: 200,
             valueFormatter: (params: any) => currencyFormatter(params.data.price),
         },
