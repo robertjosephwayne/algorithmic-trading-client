@@ -2,25 +2,12 @@ import { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { config } from '../constants';
 
-import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
-
 const wsUrl = config.SERVER_URL;
 const socket = io(wsUrl);
 
 function HomePage() {
     const [bars, setBars] = useState<{ [key: string]: { price?: number } }>({});
     const [rowData, setRowData] = useState<any[]>([]);
-    const [columnDefs] = useState([
-        { field: 'pair', width: 200, sortable: true },
-        {
-            field: 'price',
-            sortable: true,
-            width: 200,
-            valueFormatter: (params: any) => currencyFormatter(params.data.price),
-        },
-    ]);
 
     useEffect(() => {
         const updatedRowData = Object.entries(bars).map((bar) => {
@@ -57,12 +44,13 @@ function HomePage() {
     }, []);
 
     return (
-        <div className='ag-theme-alpine' style={{ margin: '40px auto', width: 402 }}>
-            <AgGridReact
-                rowData={rowData}
-                columnDefs={columnDefs}
-                domLayout='autoHeight'
-            ></AgGridReact>
+        <div style={{ margin: '10px' }}>
+            {rowData.map((row) => (
+                <div key={row.pair}>
+                    <div style={{ width: '150px', display: 'inline-block' }}>{row.pair}</div>
+                    <span>{currencyFormatter(row.price)}</span>
+                </div>
+            ))}
         </div>
     );
 }
