@@ -1,7 +1,5 @@
 import CryptoSummaryTable from '../components/CryptoSummaryTable';
 
-function HomePage() {
+export default function Root() {
     return <CryptoSummaryTable />;
 }
-
-export default HomePage;
