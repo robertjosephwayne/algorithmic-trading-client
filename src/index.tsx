@@ -8,18 +8,23 @@ import ErrorPage from './components/ErrorPage';
 import Charts from './routes/Charts';
 import Root from './routes/Root';
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+    [
+        {
+            path: '/',
+            element: <Root />,
+            errorElement: <ErrorPage />,
+        },
+        {
+            path: '/charts',
+            element: <Charts />,
+            errorElement: <ErrorPage />,
+        },
+    ],
     {
-        path: '/',
-        element: <Root />,
-        errorElement: <ErrorPage />,
+        basename: '/financial-dashboard-client',
     },
-    {
-        path: '/charts',
-        element: <Charts />,
-        errorElement: <ErrorPage />,
-    },
-]);
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
