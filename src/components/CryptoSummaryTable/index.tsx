@@ -45,7 +45,7 @@ export default function CryptoSummaryTable() {
     const [rowData, setRowData] = useState<CryptoSummaryTableRow[]>([]);
 
     const [columnResizeMode] = useState<ColumnResizeMode>('onChange');
-    const [sorting, setSorting] = useState<SortingState>([]);
+    const [sorting, setSorting] = useState<SortingState>([{ id: 'price', desc: true }]);
 
     const bars = useSelector((state: RootState) => state.crypto.bars);
 
@@ -94,7 +94,9 @@ export default function CryptoSummaryTable() {
     }, [bars]);
 
     return isLoading ? (
-        <CircleLoader />
+        <div className='loader-container'>
+            <CircleLoader />
+        </div>
     ) : (
         <table className='crypto-summary-table'>
             <thead>

@@ -1,6 +1,6 @@
 .crypto-summary-table {
     width: 600px;
-    margin: 10px;
+    margin: 20px auto;
 }
 
 .crypto-summary-table th {
@@ -15,4 +15,10 @@
 
 .select-none {
     user-select: none;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
