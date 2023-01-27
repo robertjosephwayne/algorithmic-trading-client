@@ -1,3 +1,5 @@
+import CryptoChart from '../components/CryptoChart';
+
 export default function Charts() {
-    return <div>Charts page</div>;
+    return <CryptoChart />;
 }

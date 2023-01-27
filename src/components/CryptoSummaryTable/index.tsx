@@ -10,17 +10,12 @@ import {
     ColumnResizeMode,
     SortingState,
 } from '@tanstack/react-table';
-import io from 'socket.io-client';
-import { cryptoSymbol } from 'crypto-symbol';
-const { nameLookup } = cryptoSymbol({
-    Celo: 'CGLD',
-    Paxos: 'PAX',
-});
-import { getSnapshotAllTickers } from '../../api/crypto';
-import { config } from '../../constants';
 
-const wsUrl = config.SERVER_URL;
-const socket = io(wsUrl);
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { useGetSnapshotAllTickersQuery } from '../../api/apiSlice';
+import { addBar } from '../../redux/features/crypto/cryptoSlice';
+import CircleLoader from 'react-spinners/CircleLoader';
 
 type CryptoSummaryTableRow = {
     pair: string;
@@ -45,12 +40,29 @@ const columns = [
     }),
 ];
 
-function CryptoSummaryTable() {
-    const [bars, setBars] = useState<{ [key: string]: { price?: number } }>({});
+export default function CryptoSummaryTable() {
+    const dispatch = useDispatch();
     const [rowData, setRowData] = useState<CryptoSummaryTableRow[]>([]);
 
     const [columnResizeMode] = useState<ColumnResizeMode>('onChange');
     const [sorting, setSorting] = useState<SortingState>([]);
+
+    const bars = useSelector((state: RootState) => state.crypto.bars);
+
+    const { data, isLoading } = useGetSnapshotAllTickersQuery({});
+
+    useEffect(() => {
+        if (data) {
+            for (const ticker of data) {
+                const bar = {
+                    pair: ticker.ticker,
+                    p: ticker.lastTrade.p,
+                };
+
+                dispatch(addBar(bar));
+            }
+        }
+    }, [data]);
 
     const table = useReactTable({
         data: rowData,
@@ -65,7 +77,7 @@ function CryptoSummaryTable() {
     });
 
     useEffect(() => {
-        const updatedRowData = Object.entries(bars).map((bar) => {
+        const updatedRowData = Object.entries(bars || []).map((bar) => {
             const pair = bar[0];
             const pairDetails: any = bar[1];
 
@@ -81,56 +93,9 @@ function CryptoSummaryTable() {
         setRowData(updatedRowData);
     }, [bars]);
 
-    useEffect(() => {
-        socket.on('bar', (bar) => {
-            if (!bar.pair || !bar.pair.includes('-USD')) return;
-
-            const displayName = nameLookup(bar.pair.replace('-USD', ''));
-            setBars((existingBars) => {
-                const updatedBars = {
-                    ...existingBars,
-                    [bar.pair]: {
-                        ...existingBars[bar.pair],
-                        price: bar.p,
-                        displayName,
-                    },
-                };
-                return updatedBars;
-            });
-        });
-
-        return () => {
-            socket.off('connect');
-            socket.off('disconnect');
-            socket.off('bar');
-        };
-    }, []);
-
-    useEffect(() => {
-        getSnapshotAllTickers().then((response) => {
-            const tickers = response.data;
-            const initialBars: any = {};
-
-            for (const ticker of tickers) {
-                if (!ticker.ticker.includes('-USD')) continue;
-
-                const displayName = nameLookup(ticker.ticker.replace('-USD', ''));
-                initialBars[ticker.ticker] = {
-                    price: ticker.lastTrade.p,
-                    displayName,
-                };
-            }
-
-            setBars((existingBars) => {
-                return {
-                    ...existingBars,
-                    ...initialBars,
-                };
-            });
-        });
-    }, []);
-
-    return (
+    return isLoading ? (
+        <CircleLoader />
+    ) : (
         <table className='crypto-summary-table'>
             <thead>
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -175,8 +140,6 @@ function CryptoSummaryTable() {
         </table>
     );
 }
-
-export default CryptoSummaryTable;
 
 function currencyFormatter(value: number) {
     if (!value) return;
