@@ -1,5 +1,3 @@
-import './index.css';
-
 import { useState, useEffect } from 'react';
 import {
     useReactTable,
@@ -16,6 +14,7 @@ import { RootState } from '../../redux/store';
 import { useGetSnapshotAllTickersQuery } from '../../api/apiSlice';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
 import CircleLoader from 'react-spinners/CircleLoader';
+import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
 type CryptoSummaryTableRow = {
     pair: string;
@@ -98,17 +97,17 @@ export default function CryptoSummaryTable() {
             <CircleLoader />
         </div>
     ) : (
-        <table className='crypto-summary-table'>
+        <table className='mx-auto mt-4 text-white'>
             <thead>
                 {table.getHeaderGroups().map((headerGroup) => (
-                    <tr key={headerGroup.id}>
+                    <tr className='text-left border-b-2' key={headerGroup.id}>
                         {headerGroup.headers.map((header) => (
                             <th key={header.id} style={{ width: header.getSize() }}>
                                 {header.isPlaceholder ? null : (
                                     <div
                                         {...{
                                             className: header.column.getCanSort()
-                                                ? 'cursor-pointer select-none'
+                                                ? 'cursor-pointer select-none flex align-middle'
                                                 : '',
                                             onClick: header.column.getToggleSortingHandler(),
                                         }}
@@ -118,8 +117,18 @@ export default function CryptoSummaryTable() {
                                             header.getContext(),
                                         )}
                                         {{
-                                            asc: ' 🔼',
-                                            desc: ' 🔽',
+                                            asc: (
+                                                <ArrowUpward
+                                                    sx={{ fontSize: 22 }}
+                                                    className='ml-1 bg-transparent'
+                                                />
+                                            ),
+                                            desc: (
+                                                <ArrowDownward
+                                                    sx={{ fontSize: 22 }}
+                                                    className='ml-1 bg-transparent'
+                                                />
+                                            ),
                                         }[header.column.getIsSorted() as string] ?? null}
                                     </div>
                                 )}
