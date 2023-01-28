@@ -93,7 +93,7 @@ export default function CryptoSummaryTable() {
     }, [bars]);
 
     return isLoading ? (
-        <div className='flex justify-center p-20'>
+        <div className='flex flex-col items-center justify-center w-screen h-screen'>
             <CircleLoader color='white' />
         </div>
     ) : (
