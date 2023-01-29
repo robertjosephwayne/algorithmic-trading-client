@@ -15,18 +15,19 @@ export const cryptoSlice = createSlice({
         addBar: (state, action) => {
             const bar = action.payload;
 
-            if (!bar.pair.includes('-USD')) return;
+            if (!bar.symbol.endsWith('USD')) return;
 
-            const displayName = nameLookup(bar.pair.replace('-USD', ''));
+            const ticker = bar.symbol.replace('USD', '');
+            const displayName = nameLookup(ticker);
 
-            if (!state.bars[bar.pair]) {
-                state.bars[bar.pair] = {};
+            if (!state.bars[ticker]) {
+                state.bars[ticker] = {};
             }
 
-            state.bars[bar.pair].price = bar.p;
+            state.bars[ticker].price = bar.price;
 
-            if (!state.bars[bar.pair].displayName) {
-                state.bars[bar.pair].displayName = displayName;
+            if (!state.bars[ticker].displayName) {
+                state.bars[ticker].displayName = displayName;
             }
         },
     },

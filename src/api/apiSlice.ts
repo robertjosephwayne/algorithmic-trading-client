@@ -9,7 +9,10 @@ export const apiSlice = createApi({
         getSnapshotAllTickers: builder.query({
             query: () => '/snapshot/markets/crypto/tickers',
         }),
+        getLatestTrades: builder.query({
+            query: () => '/trades/latest',
+        }),
     }),
 });
 
-export const { useGetSnapshotAllTickersQuery } = apiSlice;
+export const { useGetLatestTradesQuery, useGetSnapshotAllTickersQuery } = apiSlice;

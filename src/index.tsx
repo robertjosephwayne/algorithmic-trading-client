@@ -11,23 +11,18 @@ import store from './redux/store';
 
 import WebSocketProvider from './components/WebSocket';
 
-const router = createBrowserRouter(
-    [
-        {
-            path: '/',
-            element: <Root />,
-            errorElement: <ErrorPage />,
-        },
-        {
-            path: '/charts',
-            element: <Charts />,
-            errorElement: <ErrorPage />,
-        },
-    ],
+const router = createBrowserRouter([
     {
-        basename: '/financial-dashboard-client',
+        path: '/',
+        element: <Root />,
+        errorElement: <ErrorPage />,
     },
-);
+    {
+        path: '/charts',
+        element: <Charts />,
+        errorElement: <ErrorPage />,
+    },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
