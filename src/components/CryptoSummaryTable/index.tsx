@@ -11,13 +11,13 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { useGetSnapshotAllTickersQuery } from '../../api/apiSlice';
+import { useGetLatestTradesQuery, useGetSnapshotAllTickersQuery } from '../../api/apiSlice';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
 type CryptoSummaryTableRow = {
-    pair: string;
+    ticker: string;
     price: number;
     displayName: string;
 };
@@ -29,8 +29,8 @@ const columns = [
         cell: (info) => info.getValue(),
         minSize: 250,
     }),
-    columnHelper.accessor('pair', {
-        header: 'Pair',
+    columnHelper.accessor('ticker', {
+        header: 'Ticker',
         cell: (info) => info.getValue(),
     }),
     columnHelper.accessor('price', {
@@ -48,14 +48,14 @@ export default function CryptoSummaryTable() {
 
     const bars = useSelector((state: RootState) => state.crypto.bars);
 
-    const { data, isLoading } = useGetSnapshotAllTickersQuery({});
+    const { data, isLoading } = useGetLatestTradesQuery({});
 
     useEffect(() => {
         if (data) {
-            for (const ticker of data) {
+            for (const symbol in data) {
                 const bar = {
-                    pair: ticker.ticker,
-                    p: ticker.lastTrade.p,
+                    symbol,
+                    price: data[symbol].Price,
                 };
 
                 dispatch(addBar(bar));
@@ -76,14 +76,14 @@ export default function CryptoSummaryTable() {
     });
 
     useEffect(() => {
-        const updatedRowData = Object.entries(bars || []).map((bar) => {
-            const pair = bar[0];
-            const pairDetails: any = bar[1];
+        const updatedRowData = Object.entries(bars).map((bar) => {
+            const ticker = bar[0];
+            const { price, displayName } = bar[1];
 
             const rowData: any = {
-                pair,
-                price: pairDetails.price,
-                displayName: pairDetails.displayName,
+                ticker,
+                price,
+                displayName,
             };
 
             return rowData;
