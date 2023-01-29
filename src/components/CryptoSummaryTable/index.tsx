@@ -11,7 +11,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { useGetLatestTradesQuery, useGetSnapshotAllTickersQuery } from '../../api/apiSlice';
+import { useGetLatestTradesQuery } from '../../api/apiSlice';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
