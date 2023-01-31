@@ -15,15 +15,28 @@ export default function CryptoChart() {
             <div className='flex justify-end p-4 text-white'>
                 <Link to='/'>Table</Link>
             </div>
+            <div className='flex justify-center text-white'>
+                <span>BTC Price</span>
+            </div>
             <div className='flex items-center justify-center h-full text-white'>
                 <ResponsiveContainer className='' width='80%' height='80%'>
                     <LineChart width={400} height={400} data={data}>
                         <Line type='monotone' dataKey='Close' stroke='#2196f3' />
                         <XAxis dataKey='Timestamp' />
-                        <YAxis />
+                        <YAxis tickFormatter={currencyFormatter} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
         </div>
     );
+}
+
+function currencyFormatter(value: any, index: number): string {
+    if (!value) return '';
+
+    return value.toLocaleString(undefined, {
+        currency: 'usd',
+        style: 'currency',
+        maximumFractionDigits: 0,
+    });
 }
