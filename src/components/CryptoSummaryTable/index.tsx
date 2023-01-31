@@ -146,11 +146,7 @@ export default function CryptoSummaryTable() {
                     {table.getRowModel().rows.map((row) => (
                         <tr key={row.id}>
                             {row.getVisibleCells().map((cell) => (
-                                <td
-                                    key={cell.id}
-                                    className='hover:bg-red-500'
-                                    style={{ width: cell.column.getSize() }}
-                                >
+                                <td key={cell.id} style={{ width: cell.column.getSize() }}>
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                 </td>
                             ))}
