@@ -31,7 +31,7 @@ export default function CryptoChart() {
     );
 }
 
-function currencyFormatter(value: any, index: number): string {
+function currencyFormatter(value: any): string {
     if (!value) return '';
 
     return value.toLocaleString(undefined, {
@@ -41,7 +41,7 @@ function currencyFormatter(value: any, index: number): string {
     });
 }
 
-function dateFormatter(value: any, index: number): string {
+function dateFormatter(value: any): string {
     if (!value) return '';
 
     return new Date(value).toLocaleDateString();
