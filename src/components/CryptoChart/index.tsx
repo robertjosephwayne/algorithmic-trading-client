@@ -22,7 +22,7 @@ export default function CryptoChart() {
                 <ResponsiveContainer className='' width='80%' height='80%'>
                     <LineChart width={400} height={400} data={data}>
                         <Line type='monotone' dataKey='Close' stroke='#2196f3' />
-                        <XAxis dataKey='Timestamp' />
+                        <XAxis dataKey='Timestamp' tickFormatter={dateFormatter} />
                         <YAxis tickFormatter={currencyFormatter} />
                     </LineChart>
                 </ResponsiveContainer>
@@ -39,4 +39,10 @@ function currencyFormatter(value: any, index: number): string {
         style: 'currency',
         maximumFractionDigits: 0,
     });
+}
+
+function dateFormatter(value: any, index: number): string {
+    if (!value) return '';
+
+    return new Date(value).toLocaleDateString();
 }
