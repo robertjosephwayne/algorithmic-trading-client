@@ -15,6 +15,7 @@ import { useGetLatestTradesQuery } from '../../api/apiSlice';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 type CryptoSummaryTableRow = {
     ticker: string;
@@ -97,58 +98,67 @@ export default function CryptoSummaryTable() {
             <CircleLoader color='white' />
         </div>
     ) : (
-        <table className='mx-auto mt-4 text-white'>
-            <thead>
-                {table.getHeaderGroups().map((headerGroup) => (
-                    <tr className='text-left border-b-2' key={headerGroup.id}>
-                        {headerGroup.headers.map((header) => (
-                            <th key={header.id} style={{ width: header.getSize() }}>
-                                {header.isPlaceholder ? null : (
-                                    <div
-                                        {...{
-                                            className: header.column.getCanSort()
-                                                ? 'cursor-pointer select-none flex align-middle'
-                                                : '',
-                                            onClick: header.column.getToggleSortingHandler(),
-                                        }}
-                                    >
-                                        {flexRender(
-                                            header.column.columnDef.header,
-                                            header.getContext(),
-                                        )}
-                                        {{
-                                            asc: (
-                                                <ArrowUpward
-                                                    sx={{ fontSize: 22 }}
-                                                    className='ml-1 bg-transparent'
-                                                />
-                                            ),
-                                            desc: (
-                                                <ArrowDownward
-                                                    sx={{ fontSize: 22 }}
-                                                    className='ml-1 bg-transparent'
-                                                />
-                                            ),
-                                        }[header.column.getIsSorted() as string] ?? null}
-                                    </div>
-                                )}
-                            </th>
-                        ))}
-                    </tr>
-                ))}
-            </thead>
-            <tbody>
-                {table.getRowModel().rows.map((row) => (
-                    <tr key={row.id}>
-                        {row.getVisibleCells().map((cell) => (
-                            <td key={cell.id} style={{ width: cell.column.getSize() }}>
-                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                            </td>
-                        ))}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <div className='text-white'>
+            <div className='flex justify-end p-4'>
+                <Link to='/charts'>Charts</Link>
+            </div>
+            <table className='mx-auto mt-4'>
+                <thead>
+                    {table.getHeaderGroups().map((headerGroup) => (
+                        <tr className='text-left border-b-2' key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => (
+                                <th key={header.id} style={{ width: header.getSize() }}>
+                                    {header.isPlaceholder ? null : (
+                                        <div
+                                            {...{
+                                                className: header.column.getCanSort()
+                                                    ? 'cursor-pointer select-none flex align-middle'
+                                                    : '',
+                                                onClick: header.column.getToggleSortingHandler(),
+                                            }}
+                                        >
+                                            {flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext(),
+                                            )}
+                                            {{
+                                                asc: (
+                                                    <ArrowUpward
+                                                        sx={{ fontSize: 22 }}
+                                                        className='ml-1 bg-transparent'
+                                                    />
+                                                ),
+                                                desc: (
+                                                    <ArrowDownward
+                                                        sx={{ fontSize: 22 }}
+                                                        className='ml-1 bg-transparent'
+                                                    />
+                                                ),
+                                            }[header.column.getIsSorted() as string] ?? null}
+                                        </div>
+                                    )}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody>
+                    {table.getRowModel().rows.map((row) => (
+                        <tr key={row.id}>
+                            {row.getVisibleCells().map((cell) => (
+                                <td
+                                    key={cell.id}
+                                    className='hover:bg-red-500'
+                                    style={{ width: cell.column.getSize() }}
+                                >
+                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 }
 

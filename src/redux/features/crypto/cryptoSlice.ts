@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { cryptoSymbol } from 'crypto-symbol';
-const { nameLookup } = cryptoSymbol({
-    Celo: 'CGLD',
-    Paxos: 'PAX',
-});
+const { nameLookup } = cryptoSymbol({});
 
 const initialState = { bars: {} } as CryptoState;
 

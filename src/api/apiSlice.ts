@@ -12,7 +12,10 @@ export const apiSlice = createApi({
         getLatestTrades: builder.query({
             query: () => '/trades/latest',
         }),
+        getBars: builder.query({
+            query: () => '/crypto/bars',
+        }),
     }),
 });
 
-export const { useGetLatestTradesQuery, useGetSnapshotAllTickersQuery } = apiSlice;
+export const { useGetBarsQuery, useGetLatestTradesQuery, useGetSnapshotAllTickersQuery } = apiSlice;

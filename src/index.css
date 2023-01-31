@@ -6,3 +6,9 @@
     background-color: black;
     font-family: 'Helvetica Monospaced', sans-serif;
 }
+
+html,
+body,
+#root {
+    height: 100%;
+}
