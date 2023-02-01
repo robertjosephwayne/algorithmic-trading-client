@@ -3,7 +3,7 @@ import { CircleLoader } from 'react-spinners';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
 import { useGetBarsQuery } from '../../api/apiSlice';
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
         return (
             <div className='p-2 bg-black'>
@@ -22,7 +22,7 @@ export default function CryptoChart() {
     const btcIsLoading = btcBarsQueryResponse.isLoading;
 
     const ethBarsQueryResponse = useGetBarsQuery({ symbol: 'ETHUSD' });
-    const ethData = ethBarsQueryResponse.data;
+    // const ethData = ethBarsQueryResponse.data;
     const ethIsLoading = ethBarsQueryResponse.isLoading;
 
     return btcIsLoading || ethIsLoading ? (
@@ -79,6 +79,6 @@ function dateFormatter(value: any): string {
     return new Date(value).toLocaleDateString();
 }
 
-function tooltipFormatter(value: any, name: any, props: any) {
+function tooltipFormatter(value: any) {
     return currencyFormatter(value);
 }
