@@ -13,7 +13,7 @@ export const apiSlice = createApi({
             query: () => '/trades/latest',
         }),
         getBars: builder.query({
-            query: ({ symbol }) => `/crypto/bars/${symbol}`,
+            query: ({ symbol, timeframe }) => `/crypto/bars/${timeframe}/${symbol}`,
         }),
     }),
 });

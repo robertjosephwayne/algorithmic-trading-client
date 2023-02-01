@@ -15,8 +15,16 @@ const CustomTooltip = ({ active, payload }: any) => {
     return null;
 };
 
-export default function CryptoChart({ symbol, lineColor }: { symbol: string; lineColor?: string }) {
-    const { data, isLoading } = useGetBarsQuery({ symbol });
+export default function CryptoChart({
+    symbol,
+    lineColor,
+    timeframe,
+}: {
+    symbol: string;
+    lineColor?: string;
+    timeframe: string;
+}) {
+    const { data, isLoading } = useGetBarsQuery({ symbol, timeframe });
 
     return isLoading ? (
         <div className='absolute flex flex-col items-center justify-center w-screen h-screen'>
