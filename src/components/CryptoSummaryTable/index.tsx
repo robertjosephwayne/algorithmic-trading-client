@@ -15,7 +15,6 @@ import { useGetLatestTradesQuery } from '../../api/apiSlice';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
 
 type CryptoSummaryTableRow = {
     ticker: string;
@@ -94,14 +93,11 @@ export default function CryptoSummaryTable() {
     }, [bars]);
 
     return isLoading ? (
-        <div className='flex flex-col items-center justify-center w-screen h-screen'>
+        <div className='absolute flex flex-col items-center justify-center w-screen h-screen'>
             <CircleLoader color='white' />
         </div>
     ) : (
         <div className='text-white'>
-            <div className='flex justify-end p-4'>
-                <Link to='/charts'>Charts</Link>
-            </div>
             <table className='mx-auto mt-4'>
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (
