@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { useGetLatestTradesQuery } from '../../api/apiSlice';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
-import CircleLoader from 'react-spinners/CircleLoader';
+import { PuffLoader } from 'react-spinners';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
 type CryptoSummaryTableRow = {
@@ -94,7 +94,7 @@ export default function CryptoSummaryTable() {
 
     return isLoading ? (
         <div className='absolute flex flex-col items-center justify-center w-screen h-screen'>
-            <CircleLoader color='white' />
+            <PuffLoader color='white' />
         </div>
     ) : (
         <div className='text-white'>
