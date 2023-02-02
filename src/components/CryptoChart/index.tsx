@@ -1,6 +1,5 @@
 import { PuffLoader } from 'react-spinners';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
-import { useGetBarsQuery } from '../../api/apiSlice';
 
 const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
@@ -16,27 +15,25 @@ const CustomTooltip = ({ active, payload }: any) => {
 };
 
 export default function CryptoChart({
-    symbol,
+    data,
+    isLoading,
     lineColor,
-    timeframe,
+    title,
+    yAxisKey,
 }: {
-    symbol: string;
+    data: any;
+    isLoading: boolean;
     lineColor?: string;
-    timeframe: string;
+    yAxisKey: string;
+    title: string;
 }) {
-    const { data, isLoading, isFetching } = useGetBarsQuery({ symbol, timeframe });
-
-    return isLoading ? (
-        <div className='absolute flex flex-col items-center justify-center w-screen h-screen'>
-            <PuffLoader color='white' />
-        </div>
-    ) : (
+    return (
         <>
             <div className='flex justify-center text-lg text-white'>
-                <span>Closing Price</span>
+                <span>{title}</span>
             </div>
             <div className='flex items-center justify-center h-full text-white'>
-                {isFetching ? (
+                {isLoading ? (
                     <div
                         className='flex flex-col items-center justify-center text-white'
                         style={{ width: '80%', height: '80%' }}
@@ -46,10 +43,10 @@ export default function CryptoChart({
                 ) : (
                     <ResponsiveContainer className='text-white' width='80%' height='80%'>
                         <LineChart width={400} height={400} data={data}>
-                            {!isFetching && (
+                            {!isLoading && (
                                 <Line
                                     type='monotone'
-                                    dataKey='Close'
+                                    dataKey={yAxisKey}
                                     stroke={lineColor || '#BB86FC'}
                                     dot={false}
                                     strokeWidth={2}
