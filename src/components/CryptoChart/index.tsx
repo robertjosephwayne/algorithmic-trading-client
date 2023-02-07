@@ -6,7 +6,7 @@ const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
         return (
             <div className='p-2 bg-black'>
-                <p>{dateFormatter(payload[0].payload.Timestamp, true)}</p>
+                <p>{dateFormatter(payload[0].payload.Timestamp, false)}</p>
                 <div>Price: {currencyFormatter(payload[0].payload.Close)}</div>
             </div>
         );
