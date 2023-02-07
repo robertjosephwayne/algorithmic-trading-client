@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { PuffLoader } from 'react-spinners';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
 import { format } from 'date-fns';

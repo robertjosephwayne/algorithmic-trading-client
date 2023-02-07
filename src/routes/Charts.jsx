@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CryptoChart from '../components/CryptoChart';
 import cn from 'classnames';
 import { useGetBarsQuery } from '../api/apiSlice';
-import { PuffLoader } from 'react-spinners';
-import { format, formatRFC3339, sub } from 'date-fns';
+import { formatRFC3339 } from 'date-fns';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -21,7 +20,7 @@ export default function Charts() {
     const [selectedSymbol, setSelectedSymbol] = useState('BTCUSD');
     const [selectedTimeframe, setSelectedTimeframe] = useState('Month');
     const [startDate, setStartDate] = useState(formatRFC3339(new Date(2015, 0, 1)));
-    const [interval, setInterval] = useState(1);
+    const [interval] = useState(1);
 
     const { data, isLoading, isFetching } = useGetBarsQuery({
         symbol: selectedSymbol,
