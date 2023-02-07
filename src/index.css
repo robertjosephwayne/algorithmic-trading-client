@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    background-color: black;
-    font-family: 'Helvetica Monospaced', sans-serif;
-}
-
 html,
 body,
 #root {
+    background-color: black;
+    font-family: 'Helvetica Monospaced', sans-serif;
     height: 100%;
 }

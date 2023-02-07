@@ -1,12 +1,14 @@
+import { useEffect, useState } from 'react';
 import { PuffLoader } from 'react-spinners';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import { format } from 'date-fns';
 
 const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
         return (
             <div className='p-2 bg-black'>
-                <p>Date: {dateFormatter(payload[0].payload.Timestamp)}</p>
-                <div>Closing Price: {currencyFormatter(payload[0].payload.Close)}</div>
+                <p>{dateFormatter(payload[0].payload.Timestamp, true)}</p>
+                <div>Price: {currencyFormatter(payload[0].payload.Close)}</div>
             </div>
         );
     }
@@ -18,20 +20,15 @@ export default function CryptoChart({
     data,
     isLoading,
     lineColor,
-    title,
     yAxisKey,
 }: {
     data: any;
     isLoading: boolean;
     lineColor?: string;
     yAxisKey: string;
-    title: string;
 }) {
     return (
         <>
-            <div className='flex justify-center text-lg text-white'>
-                <span>{title}</span>
-            </div>
             <div className='flex items-center justify-center h-full text-white'>
                 {isLoading ? (
                     <div
@@ -54,7 +51,7 @@ export default function CryptoChart({
                             )}
                             <XAxis
                                 dataKey='Timestamp'
-                                tickFormatter={dateFormatter}
+                                tickFormatter={(value) => dateFormatter(value, false)}
                                 interval='preserveStartEnd'
                                 tick={{ fill: 'white' }}
                                 axisLine={{ stroke: 'white', strokeWidth: 2 }}
@@ -85,10 +82,15 @@ function currencyFormatter(value: any): string {
     });
 }
 
-function dateFormatter(value: any): string {
+function dateFormatter(value: any, showTime: boolean): string {
     if (!value) return '';
 
-    return new Date(value).toLocaleDateString();
+    let formattedDate = format(new Date(value), 'M/d/yyyy');
+    if (showTime) {
+        formattedDate = format(new Date(value), 'M/d/yyyy, pp');
+    }
+
+    return formattedDate;
 }
 
 function tooltipFormatter(value: any) {

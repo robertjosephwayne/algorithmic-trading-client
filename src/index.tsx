@@ -10,6 +10,8 @@ import Root from './routes/Root';
 import store from './redux/store';
 
 import WebSocketProvider from './components/WebSocket';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 
 const router = createBrowserRouter([
     {
@@ -27,10 +29,12 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <WebSocketProvider>
-                <RouterProvider router={router} />
-            </WebSocketProvider>
-        </Provider>
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+            <Provider store={store}>
+                <WebSocketProvider>
+                    <RouterProvider router={router} />
+                </WebSocketProvider>
+            </Provider>
+        </LocalizationProvider>
     </React.StrictMode>,
 );

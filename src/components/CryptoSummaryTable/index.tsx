@@ -97,7 +97,7 @@ export default function CryptoSummaryTable() {
             <PuffLoader color='white' />
         </div>
     ) : (
-        <div className='text-white'>
+        <div className='p-4 text-white'>
             <table className='mx-auto mt-4'>
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (
