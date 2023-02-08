@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CryptoChart from '../components/CryptoChart';
 import cn from 'classnames';
@@ -21,6 +21,7 @@ export default function Charts() {
     const [selectedTimeframe, setSelectedTimeframe] = useState('Month');
     const [startDate, setStartDate] = useState(formatRFC3339(new Date(2015, 0, 1)));
     const [interval] = useState(1);
+    const [chartData, setChartData] = useState([]);
 
     const { data, isLoading, isFetching } = useGetBarsQuery({
         symbol: selectedSymbol,
@@ -28,6 +29,15 @@ export default function Charts() {
         start: startDate,
         interval,
     });
+
+    useEffect(() => {
+        if (!data) return;
+
+        const visibleBars = 60;
+
+        const chartData = data.slice(0, visibleBars);
+        setChartData(chartData);
+    }, [data]);
 
     const handleStartDateChange = (event) => {
         setStartDate(formatRFC3339(new Date(event)));
@@ -49,7 +59,11 @@ export default function Charts() {
                     </Link>
                 </div>
 
-                <CryptoChart data={data} isLoading={isFetching || isLoading} yAxisKey='Close' />
+                <CryptoChart
+                    data={chartData}
+                    isLoading={isFetching || isLoading}
+                    yAxisKey='Close'
+                />
 
                 <div className='flex flex-col items-center justify-center pb-4 text-white'>
                     <div className='p-1 m-1'>
