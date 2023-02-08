@@ -33,7 +33,7 @@ export default function Charts() {
     useEffect(() => {
         if (!data) return;
 
-        const visibleBars = 60;
+        const visibleBars = 100;
 
         const chartData = data.slice(0, visibleBars);
         setChartData(chartData);
