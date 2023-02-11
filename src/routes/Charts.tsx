@@ -7,7 +7,7 @@ import { formatRFC3339 } from 'date-fns';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 
-export default function Charts(props: any) {
+export default function Charts() {
     const symbols = ['BTCUSD', 'ETHUSD', 'LTCUSD'];
     const timeframes = ['Day', 'Week', 'Month'];
 
