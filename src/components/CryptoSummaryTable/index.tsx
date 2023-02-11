@@ -78,20 +78,7 @@ export default function CryptoSummaryTable() {
         </div>
     ) : (
         <div className='p-4'>
-            <MaterialReactTable
-                columns={columns}
-                data={rowData}
-                muiTableBodyRowProps={({ row }) => ({
-                    onClick: (event) => {
-                        console.info(event, row.id);
-                        console.log(row.original.ticker);
-                        navigate('/charts', { state: { selectedSymbol: 'USDETH' } });
-                    },
-                    sx: {
-                        cursor: 'pointer',
-                    },
-                })}
-            />
+            <MaterialReactTable columns={columns} data={rowData} />
         </div>
     );
 }
