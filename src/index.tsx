@@ -13,6 +13,14 @@ import WebSocketProvider from './components/WebSocket';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -32,7 +40,9 @@ root.render(
         <LocalizationProvider dateAdapter={AdapterMoment}>
             <Provider store={store}>
                 <WebSocketProvider>
-                    <RouterProvider router={router} />
+                    <ThemeProvider theme={darkTheme}>
+                        <RouterProvider router={router} />
+                    </ThemeProvider>
                 </WebSocketProvider>
             </Provider>
         </LocalizationProvider>

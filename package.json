@@ -21,6 +21,7 @@
         "axios": "^1.2.3",
         "crypto-symbol": "^3.5.294",
         "date-fns": "^2.29.3",
+        "material-react-table": "^1.7.2",
         "moment": "^2.29.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
