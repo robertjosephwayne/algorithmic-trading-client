@@ -6,7 +6,6 @@ import { useGetLatestTradesQuery } from '../../api/apiSlice';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
 import { PuffLoader } from 'react-spinners';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { useNavigate } from 'react-router-dom';
 
 type CryptoSummaryTableRow = {
     ticker: string;
@@ -16,7 +15,6 @@ type CryptoSummaryTableRow = {
 
 export default function CryptoSummaryTable() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [rowData, setRowData] = useState<CryptoSummaryTableRow[]>([]);
 
     const bars = useSelector((state: RootState) => state.crypto.bars);
