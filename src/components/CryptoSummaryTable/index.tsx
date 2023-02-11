@@ -35,6 +35,7 @@ export default function CryptoSummaryTable() {
                 accessorKey: 'price',
                 header: 'Price',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                filterVariant: 'range',
             },
         ],
         [],
