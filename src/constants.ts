@@ -3,7 +3,7 @@ const production = {
 };
 
 const development = {
-    SERVER_URL: 'http://localhost:8000',
+    SERVER_URL: 'http://localhost:5000',
 };
 
 export const config = process.env.NODE_ENV === 'development' ? development : production;
