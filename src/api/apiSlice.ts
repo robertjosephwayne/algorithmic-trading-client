@@ -10,7 +10,7 @@ export const apiSlice = createApi({
             query: () => '/snapshot/markets/crypto/tickers',
         }),
         getLatestTrades: builder.query({
-            query: () => '/trades/latest',
+            query: () => '/crypto/trades/latest',
         }),
         getBars: builder.query({
             query: ({ start, symbol, timeframe, interval }) =>
