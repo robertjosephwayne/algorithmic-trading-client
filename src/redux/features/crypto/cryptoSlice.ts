@@ -14,7 +14,7 @@ export const cryptoSlice = createSlice({
 
             if (!bar.symbol.endsWith('USD')) return;
 
-            const ticker = bar.symbol.replace('USD', '');
+            const ticker = bar.symbol.replace('/', '').replace('USD', '');
             const displayName = nameLookup(ticker);
 
             if (!state.bars[ticker]) {
