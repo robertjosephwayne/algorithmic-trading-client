@@ -1,6 +1,6 @@
 # Financial Dashboard Client
 
-Client for the following application: [https://trading.robertjosephwayne.com/](https://trading.robertjosephwayne.com/)
+Client for the following application: <a href="https://trading.robertjosephwayne.com" target="_blank">trading.robertjosephwayne.com</a>
 
 ---
 
