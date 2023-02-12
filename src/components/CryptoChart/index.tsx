@@ -153,8 +153,7 @@ export default function CryptoChart({
                         <BarChart width={300} height={300} data={chartData}>
                             <XAxis
                                 dataKey='timestamp'
-                                tickFormatter={(value) => dateFormatter(value, false)}
-                                interval='preserveStartEnd'
+                                tickFormatter={(value) => dateFormatter(value, !!showTooltipTime)}
                                 tick={{ fill: 'white' }}
                                 axisLine={{ stroke: 'white', strokeWidth: 2 }}
                                 tickLine={false}
