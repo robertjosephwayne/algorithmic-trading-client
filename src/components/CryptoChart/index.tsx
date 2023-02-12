@@ -27,13 +27,13 @@ const Candlestick = (props: any) => {
         y,
         width,
         height,
-        // low,
-        // high,
+        low,
+        high,
         openClose: [open, close],
     } = props;
     const isGrowing = open < close;
     const color = isGrowing ? 'green' : 'red';
-    // const ratio = Math.abs(height / (open - close));
+    const ratio = Math.abs(height / (open - close));
 
     return (
         <g stroke={color} fill='black' strokeWidth='2'>
@@ -47,7 +47,7 @@ const Candlestick = (props: any) => {
         `}
             />
             {/* bottom line */}
-            {/* {isGrowing ? (
+            {isGrowing ? (
                 <path
                     d={`
             M ${x + width / 2}, ${y + height}
@@ -61,9 +61,9 @@ const Candlestick = (props: any) => {
             v ${(close - low) * ratio}
           `}
                 />
-            )} */}
+            )}
             {/* top line */}
-            {/* {isGrowing ? (
+            {isGrowing ? (
                 <path
                     d={`
             M ${x + width / 2}, ${y}
@@ -77,7 +77,7 @@ const Candlestick = (props: any) => {
             v ${(open - high) * ratio}
           `}
                 />
-            )} */}
+            )}
         </g>
     );
 };
@@ -102,6 +102,7 @@ export default function CryptoChart({
     isLoading: boolean;
     showTooltipTime?: boolean;
 }) {
+    const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(0);
     const [chartData, setChartData] = useState([]);
 
@@ -127,6 +128,7 @@ export default function CryptoChart({
             minValue,
         );
 
+        setMinValue(minValue);
         setMaxValue(maxValue);
     }, [data]);
 
@@ -158,7 +160,7 @@ export default function CryptoChart({
                                 tickLine={false}
                             />
                             <YAxis
-                                domain={[0, maxValue]}
+                                domain={[minValue, maxValue]}
                                 tickFormatter={currencyFormatter}
                                 tick={{ fill: 'white' }}
                                 axisLine={{ stroke: 'white', strokeWidth: 2 }}
