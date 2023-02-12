@@ -6,10 +6,10 @@ const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
         return (
             <div className='p-2 bg-black'>
-                <p className='font-bold'>{dateFormatter(payload[0].payload.Timestamp, false)}</p>
+                <p className='font-bold'>{dateFormatter(payload[0].payload.timestamp, false)}</p>
                 <div>
-                    <div>High: {currencyFormatter(payload[0].payload.High)}</div>
-                    <div>Low: {currencyFormatter(payload[0].payload.Low)}</div>
+                    <div>High: {currencyFormatter(payload[0].payload.high)}</div>
+                    <div>Low: {currencyFormatter(payload[0].payload.low)}</div>
                     <div>Open: {currencyFormatter(payload[0].payload.openClose[0])}</div>
                     <div>Close: {currencyFormatter(payload[0].payload.openClose[1])}</div>
                 </div>
@@ -84,10 +84,10 @@ const Candlestick = (props: any) => {
 const prepareData = (data: any) => {
     if (!data) return;
 
-    return data.map(({ Open, Close, ...other }: any) => {
+    return data.map(({ open, close, ...other }: any) => {
         return {
             ...other,
-            openClose: [Open, Close],
+            openClose: [open, close],
         };
     });
 };
@@ -129,7 +129,7 @@ export default function CryptoChart({ data, isLoading }: { data: any; isLoading:
                     >
                         <BarChart width={300} height={300} data={chartData}>
                             <XAxis
-                                dataKey='Timestamp'
+                                dataKey='timestamp'
                                 tickFormatter={(value) => dateFormatter(value, false)}
                                 interval='preserveStartEnd'
                                 tick={{ fill: 'white' }}
@@ -142,7 +142,8 @@ export default function CryptoChart({ data, isLoading }: { data: any; isLoading:
                                 tick={{ fill: 'white' }}
                                 axisLine={{ stroke: 'white', strokeWidth: 2 }}
                                 tickLine={false}
-                                padding={{ bottom: 1 }}
+                                padding={{ bottom: 3 }}
+                                allowDataOverflow={true}
                             />
                             <Tooltip
                                 formatter={tooltipFormatter}

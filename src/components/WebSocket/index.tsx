@@ -18,12 +18,7 @@ export default function WebSocket({ children }: { children: ReactNode }) {
     if (!socket) {
         socket = io(wsUrl);
 
-        socket.on('bar', (payload) => {
-            const bar = {
-                symbol: payload.Symbol,
-                price: payload.Price,
-            };
-
+        socket.on('bar', (bar) => {
             dispatch(addBar(bar));
         });
     }

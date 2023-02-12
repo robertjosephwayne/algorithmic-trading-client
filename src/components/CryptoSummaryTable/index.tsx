@@ -46,7 +46,7 @@ export default function CryptoSummaryTable() {
             for (const symbol in data) {
                 const bar = {
                     symbol,
-                    price: data[symbol].Price,
+                    price: data[symbol].price,
                 };
 
                 dispatch(addBar(bar));
