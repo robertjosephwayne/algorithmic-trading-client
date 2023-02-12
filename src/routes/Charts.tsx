@@ -4,12 +4,12 @@ import CryptoChart from '../components/CryptoChart';
 import cn from 'classnames';
 import { useGetBarsQuery } from '../api/apiSlice';
 import { formatRFC3339 } from 'date-fns';
-import { DesktopDatePicker } from '@mui/x-date-pickers';
+import { DesktopDatePicker, DesktopDateTimePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 
 export default function Charts() {
-    const symbols = ['BTCUSD', 'ETHUSD', 'LTCUSD'];
-    const timeframes = ['Day', 'Week', 'Month'];
+    const symbols = ['BTCUSD', 'ETHUSD', 'LTCUSD', 'BCHUSD'];
+    const timeframes = ['Minute', 'Hour', 'Day', 'Week', 'Month'];
 
     const [selectedSymbol, setSelectedSymbol] = useState('BTCUSD');
     const [selectedTimeframe, setSelectedTimeframe] = useState('Month');
@@ -52,17 +52,31 @@ export default function Charts() {
                 </Link>
             </div>
 
-            <CryptoChart data={chartData} isLoading={isFetching || isLoading} />
+            <CryptoChart
+                data={chartData}
+                isLoading={isFetching || isLoading}
+                showTooltipTime={selectedTimeframe === 'Minute' || selectedTimeframe === 'Hour'}
+            />
 
             <div className='flex flex-col items-center justify-center pb-4 text-white'>
                 <div className='p-1 m-1'>
-                    <DesktopDatePicker
-                        label='Start Date'
-                        inputFormat='MM/DD/YYYY'
-                        value={startDate}
-                        onChange={handleStartDateChange}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
+                    {selectedTimeframe === 'Day' || selectedTimeframe === 'Month' ? (
+                        <DesktopDatePicker
+                            label='Start Date'
+                            inputFormat='MM/DD/YYYY'
+                            value={startDate}
+                            onChange={handleStartDateChange}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    ) : (
+                        <DesktopDateTimePicker
+                            label='Start Date'
+                            inputFormat='MM/DD/YYYY'
+                            value={startDate}
+                            onChange={handleStartDateChange}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    )}
                 </div>
 
                 <div className='p-1 m-1 border border-white border-1'>

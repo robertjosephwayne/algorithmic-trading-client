@@ -3,11 +3,11 @@ import { XAxis, YAxis, ResponsiveContainer, Tooltip, BarChart, Bar, Cell } from 
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
-const CustomTooltip = ({ active, payload }: any) => {
+const CustomTooltip = ({ active, payload, showTime }: any) => {
     if (active && payload && payload.length) {
         return (
             <div className='p-2 bg-black'>
-                <p className='font-bold'>{dateFormatter(payload[0].payload.timestamp, false)}</p>
+                <p className='font-bold'>{dateFormatter(payload[0].payload.timestamp, showTime)}</p>
                 <div>
                     <div>High: {currencyFormatter(payload[0].payload.high)}</div>
                     <div>Low: {currencyFormatter(payload[0].payload.low)}</div>
@@ -93,7 +93,15 @@ const prepareData = (data: any) => {
     });
 };
 
-export default function CryptoChart({ data, isLoading }: { data: any; isLoading: boolean }) {
+export default function CryptoChart({
+    data,
+    isLoading,
+    showTooltipTime,
+}: {
+    data: any;
+    isLoading: boolean;
+    showTooltipTime?: boolean;
+}) {
     const [maxValue, setMaxValue] = useState(0);
     const [chartData, setChartData] = useState([]);
 
@@ -160,7 +168,7 @@ export default function CryptoChart({ data, isLoading }: { data: any; isLoading:
                             />
                             <Tooltip
                                 formatter={tooltipFormatter}
-                                content={<CustomTooltip />}
+                                content={<CustomTooltip showTime={showTooltipTime} />}
                                 cursor={{ fill: 'white', opacity: 0.2 }}
                             />
                             <Bar dataKey='openClose' fill='#8884d8' shape={<Candlestick />}>
