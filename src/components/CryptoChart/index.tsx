@@ -1,6 +1,7 @@
 import { PuffLoader } from 'react-spinners';
 import { XAxis, YAxis, ResponsiveContainer, Tooltip, BarChart, Bar, Cell } from 'recharts';
 import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
 
 const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
@@ -26,16 +27,16 @@ const Candlestick = (props: any) => {
         y,
         width,
         height,
-        low,
-        high,
+        // low,
+        // high,
         openClose: [open, close],
     } = props;
     const isGrowing = open < close;
     const color = isGrowing ? 'green' : 'red';
-    const ratio = Math.abs(height / (open - close));
+    // const ratio = Math.abs(height / (open - close));
 
     return (
-        <g stroke={color} fill='none' strokeWidth='2'>
+        <g stroke={color} fill='black' strokeWidth='2'>
             <path
                 d={`
           M ${x},${y}
@@ -46,7 +47,7 @@ const Candlestick = (props: any) => {
         `}
             />
             {/* bottom line */}
-            {isGrowing ? (
+            {/* {isGrowing ? (
                 <path
                     d={`
             M ${x + width / 2}, ${y + height}
@@ -60,9 +61,9 @@ const Candlestick = (props: any) => {
             v ${(close - low) * ratio}
           `}
                 />
-            )}
+            )} */}
             {/* top line */}
-            {isGrowing ? (
+            {/* {isGrowing ? (
                 <path
                     d={`
             M ${x + width / 2}, ${y}
@@ -76,13 +77,13 @@ const Candlestick = (props: any) => {
             v ${(open - high) * ratio}
           `}
                 />
-            )}
+            )} */}
         </g>
     );
 };
 
 const prepareData = (data: any) => {
-    if (!data) return;
+    if (!data) return [];
 
     return data.map(({ open, close, ...other }: any) => {
         return {
@@ -93,21 +94,35 @@ const prepareData = (data: any) => {
 };
 
 export default function CryptoChart({ data, isLoading }: { data: any; isLoading: boolean }) {
-    const chartData = prepareData(data);
+    const [minValue, setMinValue] = useState(0);
+    const [maxValue, setMaxValue] = useState(0);
+    const [chartData, setChartData] = useState([]);
 
-    let minValue;
-    let maxValue;
-    if (chartData) {
-        minValue = chartData.reduce((minValue: any, { low, openClose: [open, close] }: any) => {
-            const currentMin = Math.min(low, open, close);
-            return minValue === null || currentMin < minValue ? currentMin : minValue;
-        }, null);
+    useEffect(() => {
+        if (!data) return;
 
-        maxValue = chartData.reduce((maxValue: any, { high, openClose: [open, close] }: any) => {
-            const currentMax = Math.max(high, open, close);
-            return currentMax > maxValue ? currentMax : maxValue;
-        }, minValue);
-    }
+        const chartData = prepareData(data);
+        setChartData(chartData);
+
+        const minValue = chartData.reduce(
+            (minValue: any, { low, openClose: [open, close] }: any) => {
+                const currentMin = Math.min(low, open, close);
+                return minValue === null || currentMin < minValue ? currentMin : minValue;
+            },
+            null,
+        );
+
+        const maxValue = chartData.reduce(
+            (maxValue: any, { high, openClose: [open, close] }: any) => {
+                const currentMax = Math.max(high, open, close);
+                return currentMax > maxValue ? currentMax : maxValue;
+            },
+            minValue,
+        );
+
+        setMinValue(minValue);
+        setMaxValue(maxValue);
+    }, [data]);
 
     return (
         <>
