@@ -94,7 +94,6 @@ const prepareData = (data: any) => {
 };
 
 export default function CryptoChart({ data, isLoading }: { data: any; isLoading: boolean }) {
-    const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(0);
     const [chartData, setChartData] = useState([]);
 
@@ -120,7 +119,6 @@ export default function CryptoChart({ data, isLoading }: { data: any; isLoading:
             minValue,
         );
 
-        setMinValue(minValue);
         setMaxValue(maxValue);
     }, [data]);
 
