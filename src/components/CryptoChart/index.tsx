@@ -2,6 +2,7 @@ import { PuffLoader } from 'react-spinners';
 import { XAxis, YAxis, ResponsiveContainer, Tooltip, BarChart, Bar, Cell } from 'recharts';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
+import cn from 'classnames';
 
 const CustomTooltip = ({ active, payload, showTime }: any) => {
     if (active && payload && payload.length) {
@@ -30,6 +31,7 @@ const Candlestick = (props: any) => {
         low,
         high,
         openClose: [open, close],
+        showHighLow,
     } = props;
     const isGrowing = open < close;
     const color = isGrowing ? 'green' : 'red';
@@ -49,6 +51,7 @@ const Candlestick = (props: any) => {
             {/* bottom line */}
             {isGrowing ? (
                 <path
+                    className={cn({ 'opacity-0': !showHighLow })}
                     d={`
             M ${x + width / 2}, ${y + height}
             v ${(open - low) * ratio}
@@ -56,6 +59,7 @@ const Candlestick = (props: any) => {
                 />
             ) : (
                 <path
+                    className={cn({ 'opacity-0': !showHighLow })}
                     d={`
             M ${x + width / 2}, ${y}
             v ${(close - low) * ratio}
@@ -65,6 +69,7 @@ const Candlestick = (props: any) => {
             {/* top line */}
             {isGrowing ? (
                 <path
+                    className={cn({ 'opacity-0': !showHighLow })}
                     d={`
             M ${x + width / 2}, ${y}
             v ${(close - high) * ratio}
@@ -72,6 +77,7 @@ const Candlestick = (props: any) => {
                 />
             ) : (
                 <path
+                    className={cn({ 'opacity-0': !showHighLow })}
                     d={`
             M ${x + width / 2}, ${y + height}
             v ${(open - high) * ratio}
@@ -105,6 +111,7 @@ export default function CryptoChart({
     const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(0);
     const [chartData, setChartData] = useState([]);
+    const [showHighLow, setShowHighLow] = useState(false);
 
     useEffect(() => {
         if (!data) return;
@@ -172,7 +179,16 @@ export default function CryptoChart({
                                 content={<CustomTooltip showTime={showTooltipTime} />}
                                 cursor={{ fill: 'white', opacity: 0.2 }}
                             />
-                            <Bar dataKey='openClose' fill='#8884d8' shape={<Candlestick />}>
+                            <Bar
+                                dataKey='openClose'
+                                fill='#8884d8'
+                                shape={<Candlestick showHighLow={showHighLow} />}
+                                onAnimationStart={() => {
+                                    setShowHighLow(false);
+                                }}
+                                onAnimationEnd={() => setShowHighLow(true)}
+                                animationEasing='ease-in'
+                            >
                                 {data.map((entry: any, index: any) => (
                                     <Cell key={`cell-${index}`} fill={'white'} />
                                 ))}
