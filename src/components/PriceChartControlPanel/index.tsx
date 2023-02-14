@@ -11,7 +11,7 @@ interface Props {
     onSelectedSymbolChange: (symbol: string) => void;
 }
 
-export default function CryptoChartControlPanel({
+export default function PriceChartControlPanel({
     selectedTimeframe,
     startDate,
     selectedSymbol,

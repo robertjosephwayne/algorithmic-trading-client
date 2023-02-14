@@ -3,7 +3,7 @@ import PriceChart from '../components/PriceChart';
 import { useGetBarsQuery } from '../api/apiSlice';
 import { formatRFC3339 } from 'date-fns';
 import Page from '../components/Page';
-import CryptoChartControlPanel from '../components/CryptoChartControlPanel';
+import PriceChartControlPanel from '../components/PriceChartControlPanel';
 
 export default function Charts() {
     const [selectedSymbol, setSelectedSymbol] = useState('BTCUSD');
@@ -49,7 +49,7 @@ export default function Charts() {
                 isLoading={isFetching || isLoading}
                 showTooltipTime={selectedTimeframe === 'Minute' || selectedTimeframe === 'Hour'}
             />
-            <CryptoChartControlPanel
+            <PriceChartControlPanel
                 selectedSymbol={selectedSymbol}
                 selectedTimeframe={selectedTimeframe}
                 startDate={startDate}
