@@ -3,24 +3,7 @@ import { XAxis, YAxis, ResponsiveContainer, Tooltip, BarChart, Bar, Cell } from 
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
-
-const CustomTooltip = ({ active, payload, showTime }: any) => {
-    if (active && payload && payload.length) {
-        return (
-            <div className='p-2 bg-black'>
-                <p className='font-bold'>{dateFormatter(payload[0].payload.timestamp, showTime)}</p>
-                <div>
-                    <div>High: {currencyFormatter(payload[0].payload.high)}</div>
-                    <div>Low: {currencyFormatter(payload[0].payload.low)}</div>
-                    <div>Open: {currencyFormatter(payload[0].payload.openClose[0])}</div>
-                    <div>Close: {currencyFormatter(payload[0].payload.openClose[1])}</div>
-                </div>
-            </div>
-        );
-    }
-
-    return null;
-};
+import CustomTooltip from '../CustomTooltip';
 
 const Candlestick = (props: any) => {
     const {
