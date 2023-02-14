@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import CryptoChart from '../components/CryptoChart';
-import cn from 'classnames';
 import { useGetBarsQuery } from '../api/apiSlice';
 import { formatRFC3339 } from 'date-fns';
-import { DesktopDatePicker, DesktopDateTimePicker } from '@mui/x-date-pickers';
-import TextField from '@mui/material/TextField';
-import PageHeader from '../components/PageHeader';
 import Page from '../components/Page';
 import CryptoChartControlPanel from '../components/CryptoChartControlPanel';
 
