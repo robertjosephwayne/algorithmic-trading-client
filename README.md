@@ -1,4 +1,4 @@
-# Financial Dashboard Client
+# Algorithmic Trading Client
 
 Client for the following application: <a href="https://trading.robertjosephwayne.com" target="_blank">trading.robertjosephwayne.com</a>
 
