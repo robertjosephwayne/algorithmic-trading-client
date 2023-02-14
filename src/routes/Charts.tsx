@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import CryptoChart from '../components/CryptoChart';
+import PriceChart from '../components/PriceChart';
 import { useGetBarsQuery } from '../api/apiSlice';
 import { formatRFC3339 } from 'date-fns';
 import Page from '../components/Page';
@@ -44,7 +44,7 @@ export default function Charts() {
 
     return (
         <Page>
-            <CryptoChart
+            <PriceChart
                 data={chartData}
                 isLoading={isFetching || isLoading}
                 showTooltipTime={selectedTimeframe === 'Minute' || selectedTimeframe === 'Hour'}

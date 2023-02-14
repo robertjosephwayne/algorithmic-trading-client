@@ -22,7 +22,7 @@ interface Props {
     showTooltipTime: boolean;
 }
 
-export default function CryptoChart({ data, isLoading, showTooltipTime }: Props) {
+export default function PriceChart({ data, isLoading, showTooltipTime }: Props) {
     const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(0);
     const [chartData, setChartData] = useState([]);
