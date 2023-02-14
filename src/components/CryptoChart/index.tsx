@@ -1,4 +1,3 @@
-import { PuffLoader } from 'react-spinners';
 import { XAxis, YAxis, ResponsiveContainer, Tooltip, BarChart, Bar, Cell } from 'recharts';
 import { useEffect, useState } from 'react';
 import { currencyFormatter, dateFormatter } from '../../utils';
