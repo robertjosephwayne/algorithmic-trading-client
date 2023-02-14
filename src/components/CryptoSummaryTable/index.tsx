@@ -6,6 +6,7 @@ import { useGetLatestTradesQuery } from '../../api/apiSlice';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
 import { PuffLoader } from 'react-spinners';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import { currencyFormatter } from '../../utils';
 
 type CryptoSummaryTableRow = {
     ticker: string;
@@ -80,13 +81,4 @@ export default function CryptoSummaryTable() {
             <MaterialReactTable columns={columns} data={rowData} />
         </div>
     );
-}
-
-function currencyFormatter(value: number) {
-    if (!value) return;
-
-    return value.toLocaleString(undefined, {
-        currency: 'usd',
-        style: 'currency',
-    });
 }

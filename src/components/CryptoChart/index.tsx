@@ -1,8 +1,8 @@
 import { PuffLoader } from 'react-spinners';
 import { XAxis, YAxis, ResponsiveContainer, Tooltip, BarChart, Bar, Cell } from 'recharts';
-import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
+import { currencyFormatter, dateFormatter } from '../../utils';
 import CustomTooltip from '../CustomTooltip';
 
 const Candlestick = (props: any) => {
@@ -156,7 +156,7 @@ export default function CryptoChart({ data, isLoading, showTooltipTime }: Props)
                                 allowDataOverflow={true}
                             />
                             <Tooltip
-                                formatter={tooltipFormatter}
+                                formatter={currencyFormatter}
                                 content={<CustomTooltip showTime={showTooltipTime} />}
                                 cursor={{ fill: 'white', opacity: 0.2 }}
                             />
@@ -181,29 +181,4 @@ export default function CryptoChart({ data, isLoading, showTooltipTime }: Props)
             </div>
         </>
     );
-}
-
-function currencyFormatter(value: any): string {
-    if (!value) return '';
-
-    return value.toLocaleString(undefined, {
-        currency: 'usd',
-        style: 'currency',
-        maximumFractionDigits: 0,
-    });
-}
-
-function dateFormatter(value: any, showTime: boolean): string {
-    if (!value) return '';
-
-    let formattedDate = format(new Date(value), 'M/d/yyyy');
-    if (showTime) {
-        formattedDate = format(new Date(value), 'M/d/yyyy, pp');
-    }
-
-    return formattedDate;
-}
-
-function tooltipFormatter(value: any) {
-    return currencyFormatter(value);
 }
