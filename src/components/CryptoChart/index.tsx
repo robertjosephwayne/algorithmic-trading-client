@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { currencyFormatter, dateFormatter } from '../../utils';
 import CustomTooltip from '../CustomTooltip';
 import Candlestick from '../Candlestick';
+import Loader from '../Loader';
 
 const prepareData = (data: any) => {
     if (!data) return [];
@@ -58,12 +59,7 @@ export default function CryptoChart({ data, isLoading, showTooltipTime }: Props)
         <>
             <div className='flex items-center justify-center h-full text-white'>
                 {isLoading ? (
-                    <div
-                        className='flex flex-col items-center justify-center text-white'
-                        style={{ width: '80%', height: '80%' }}
-                    >
-                        <PuffLoader color='white' />
-                    </div>
+                    <Loader />
                 ) : (
                     <ResponsiveContainer
                         className='text-white'

@@ -7,6 +7,7 @@ import { addBar } from '../../redux/features/crypto/cryptoSlice';
 import { PuffLoader } from 'react-spinners';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter } from '../../utils';
+import Loader from '../Loader';
 
 type CryptoSummaryTableRow = {
     ticker: string;
@@ -73,9 +74,7 @@ export default function CryptoSummaryTable() {
     }, [bars]);
 
     return isLoading ? (
-        <div className='absolute flex flex-col items-center justify-center w-screen h-screen'>
-            <PuffLoader color='white' />
-        </div>
+        <Loader fullPage={true} />
     ) : (
         <div className='p-4'>
             <MaterialReactTable columns={columns} data={rowData} />
