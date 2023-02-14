@@ -1,12 +1,16 @@
 import { format } from 'date-fns';
 
-export function currencyFormatter(value: any): string {
+export function currencyFormatter(value: number | string): string {
     if (!value) return '';
+
+    if (typeof value === 'string') {
+        value = parseInt(value);
+    }
 
     return value.toLocaleString(undefined, {
         currency: 'usd',
         style: 'currency',
-        maximumFractionDigits: 0,
+        maximumFractionDigits: 2,
     });
 }
 

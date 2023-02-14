@@ -10,6 +10,10 @@ export default function PageHeader() {
             label: 'Charts',
             path: '/charts',
         },
+        {
+            label: 'Sandbox',
+            path: '/sandbox',
+        },
     ];
 
     return (

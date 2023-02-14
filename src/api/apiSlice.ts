@@ -18,7 +18,15 @@ export const apiSlice = createApi({
                     start,
                 )}&interval=${interval}`,
         }),
+        getAccount: builder.query({
+            query: () => '/crypto/account',
+        }),
     }),
 });
 
-export const { useGetBarsQuery, useGetLatestTradesQuery, useGetSnapshotAllTickersQuery } = apiSlice;
+export const {
+    useGetAccountQuery,
+    useGetBarsQuery,
+    useGetLatestTradesQuery,
+    useGetSnapshotAllTickersQuery,
+} = apiSlice;
