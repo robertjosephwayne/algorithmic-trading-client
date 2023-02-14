@@ -1,10 +1,10 @@
-import CryptoSummaryTable from '../components/CryptoSummaryTable';
+import SummaryTable from '../components/SummaryTable';
 import Page from '../components/Page';
 
 export default function Summary() {
     return (
         <Page>
-            <CryptoSummaryTable />
+            <SummaryTable />
         </Page>
     );
 }
