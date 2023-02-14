@@ -99,15 +99,13 @@ const prepareData = (data: any) => {
     });
 };
 
-export default function CryptoChart({
-    data,
-    isLoading,
-    showTooltipTime,
-}: {
+interface Props {
     data: any;
     isLoading: boolean;
-    showTooltipTime?: boolean;
-}) {
+    showTooltipTime: boolean;
+}
+
+export default function CryptoChart({ data, isLoading, showTooltipTime }: Props) {
     const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(0);
     const [chartData, setChartData] = useState([]);
@@ -188,6 +186,7 @@ export default function CryptoChart({
                                 }}
                                 onAnimationEnd={() => setShowHighLow(true)}
                                 animationEasing='ease-in'
+                                animationDuration={200}
                             >
                                 {data.map((entry: any, index: any) => (
                                     <Cell key={`cell-${index}`} fill={'white'} />

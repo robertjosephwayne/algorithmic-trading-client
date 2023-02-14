@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ErrorPage from './components/ErrorPage';
 import Charts from './routes/Charts';
-import Root from './routes/Root';
+import Summary from './routes/Summary';
 import store from './redux/store';
 
 import WebSocketProvider from './components/WebSocket';
@@ -24,7 +24,7 @@ const darkTheme = createTheme({
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root />,
+        element: <Summary />,
         errorElement: <ErrorPage />,
     },
     {

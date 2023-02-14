@@ -6,11 +6,11 @@ import { useGetBarsQuery } from '../api/apiSlice';
 import { formatRFC3339 } from 'date-fns';
 import { DesktopDatePicker, DesktopDateTimePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
+import PageHeader from '../components/PageHeader';
+import Page from '../components/Page';
+import CryptoChartControlPanel from '../components/CryptoChartControlPanel';
 
 export default function Charts() {
-    const symbols = ['BTCUSD', 'ETHUSD', 'LTCUSD', 'BCHUSD'];
-    const timeframes = ['Minute', 'Hour', 'Day', 'Week', 'Month'];
-
     const [selectedSymbol, setSelectedSymbol] = useState('BTCUSD');
     const [selectedTimeframe, setSelectedTimeframe] = useState('Month');
     const [startDate, setStartDate] = useState(formatRFC3339(new Date(2015, 0, 1)));
@@ -33,87 +33,35 @@ export default function Charts() {
         setChartData(chartData);
     }, [data]);
 
-    const handleStartDateChange = (event: any) => {
-        setStartDate(formatRFC3339(new Date(event)));
+    const handleStartDateChange = (startDate: string | null) => {
+        if (startDate) {
+            setStartDate(formatRFC3339(new Date(startDate)));
+        }
+    };
+
+    const handleSelectedSymbolChange = (symbol: string) => {
+        setSelectedSymbol(symbol);
+    };
+
+    const handleTimeframeChange = (timeframe: string) => {
+        setSelectedTimeframe(timeframe);
     };
 
     return (
-        <div className='flex flex-col w-full h-full'>
-            <div className='flex justify-end p-4 space-x-4 text-sm text-white'>
-                <Link
-                    className='w-24 px-2 py-1 text-center hover:bg-white hover:bg-opacity-20'
-                    to='/'
-                >
-                    Live Prices
-                </Link>
-
-                <Link className='w-24 px-2 py-1 text-center text-black bg-white' to='/charts'>
-                    Charts
-                </Link>
-            </div>
-
+        <Page>
             <CryptoChart
                 data={chartData}
                 isLoading={isFetching || isLoading}
                 showTooltipTime={selectedTimeframe === 'Minute' || selectedTimeframe === 'Hour'}
             />
-
-            <div className='flex flex-col items-center justify-center pb-4 text-white'>
-                <div className='p-1 m-1'>
-                    {selectedTimeframe === 'Day' || selectedTimeframe === 'Month' ? (
-                        <DesktopDatePicker
-                            label='Start Date'
-                            inputFormat='MM/DD/YYYY'
-                            value={startDate}
-                            onChange={handleStartDateChange}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
-                    ) : (
-                        <DesktopDateTimePicker
-                            label='Start Date'
-                            inputFormat='MM/DD/YYYY'
-                            value={startDate}
-                            onChange={handleStartDateChange}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
-                    )}
-                </div>
-
-                <div className='p-1 m-1 border border-white border-1'>
-                    {symbols.map((symbol) => {
-                        return (
-                            <button
-                                className={cn(
-                                    'w-20',
-                                    { 'bg-white': symbol === selectedSymbol },
-                                    { 'text-black': symbol === selectedSymbol },
-                                )}
-                                key={symbol}
-                                onClick={() => setSelectedSymbol(symbol)}
-                            >
-                                {symbol.replace('USD', '')}
-                            </button>
-                        );
-                    })}
-                </div>
-                <div className='p-1 m-1 border border-white border-1'>
-                    {timeframes.map((timeframe) => {
-                        return (
-                            <button
-                                className={cn(
-                                    'w-20',
-                                    { 'bg-white': timeframe === selectedTimeframe },
-                                    { 'text-black': timeframe === selectedTimeframe },
-                                )}
-                                key={timeframe}
-                                onClick={() => setSelectedTimeframe(timeframe)}
-                            >
-                                {timeframe}
-                            </button>
-                        );
-                    })}
-                </div>
-            </div>
-        </div>
+            <CryptoChartControlPanel
+                selectedSymbol={selectedSymbol}
+                selectedTimeframe={selectedTimeframe}
+                startDate={startDate}
+                onSelectedSymbolChange={handleSelectedSymbolChange}
+                onTimeframeChange={handleTimeframeChange}
+                onStartDateChange={handleStartDateChange}
+            />
+        </Page>
     );
 }
