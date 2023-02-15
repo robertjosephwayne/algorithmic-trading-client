@@ -21,6 +21,9 @@ export const apiSlice = createApi({
         getAccount: builder.query({
             query: () => '/crypto/account',
         }),
+        getPositions: builder.query({
+            query: () => '/crypto/positions',
+        }),
     }),
 });
 
@@ -28,5 +31,6 @@ export const {
     useGetAccountQuery,
     useGetBarsQuery,
     useGetLatestTradesQuery,
+    useGetPositionsQuery,
     useGetSnapshotAllTickersQuery,
 } = apiSlice;
