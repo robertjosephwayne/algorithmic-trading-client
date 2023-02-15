@@ -14,7 +14,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Sandbox from './routes/Sandbox';
+import Positions from './routes/Positions';
 
 const darkTheme = createTheme({
     palette: {
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
-        path: '/sandbox',
-        element: <Sandbox />,
+        path: '/positions',
+        element: <Positions />,
         errorElement: <ErrorPage />,
     },
 ]);

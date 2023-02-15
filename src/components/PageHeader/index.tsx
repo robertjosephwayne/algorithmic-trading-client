@@ -11,13 +11,13 @@ export default function PageHeader() {
             path: '/charts',
         },
         {
-            label: 'Sandbox',
-            path: '/sandbox',
+            label: 'Positions',
+            path: '/positions',
         },
     ];
 
     return (
-        <div className='flex justify-end p-4 space-x-4 text-sm text-white'>
+        <div className='flex justify-end p-4 text-sm text-white'>
             {pages.map((page) => (
                 <PageHeaderButton key={page.label} path={page.path} label={page.label} />
             ))}
