@@ -60,6 +60,8 @@ export default function PositionSummaryTable() {
     );
 
     useEffect(() => {
+        if (!positions) return;
+
         const updatedRowData = Object.entries(positions).map((position: any) => {
             const rowData: any = {
                 symbol: position[1].symbol,

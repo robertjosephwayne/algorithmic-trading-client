@@ -1,4 +1,4 @@
-import { useGetAccountQuery } from '../api/apiSlice';
+import { useGetAccountQuery, useGetPositionsQuery } from '../api/apiSlice';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
 import PositionSummaryTable from '../components/PositionSummaryTable';
@@ -6,10 +6,11 @@ import { currencyFormatter } from '../utils';
 
 export default function Positions() {
     const { data: accountData, isLoading: accountQueryIsLoading } = useGetAccountQuery({});
+    const { isLoading: positionsQueryIsLoading } = useGetPositionsQuery({});
 
     return (
         <Page>
-            {accountQueryIsLoading ? (
+            {accountQueryIsLoading || positionsQueryIsLoading ? (
                 <Loader fullPage={true} />
             ) : (
                 <div className='p-4'>
