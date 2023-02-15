@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useGetAccountQuery, useGetPositionsQuery } from '../api/apiSlice';
+import { useGetAccountQuery } from '../api/apiSlice';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
 import PositionSummaryTable from '../components/PositionSummaryTable';
