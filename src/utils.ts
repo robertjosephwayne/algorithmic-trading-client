@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 
-export function currencyFormatter(value: number | string): string {
+export function currencyFormatter(value: number | string, maximumFractionDigits = 2): string {
     if (!value) return '';
 
     if (typeof value === 'string') {
@@ -10,7 +10,7 @@ export function currencyFormatter(value: number | string): string {
     return value.toLocaleString(undefined, {
         currency: 'usd',
         style: 'currency',
-        maximumFractionDigits: 2,
+        maximumFractionDigits: maximumFractionDigits,
     });
 }
 

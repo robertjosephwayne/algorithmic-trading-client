@@ -77,7 +77,7 @@ export default function PriceChart({ data, isLoading, showTooltipTime }: Props) 
                             />
                             <YAxis
                                 domain={[minValue, maxValue]}
-                                tickFormatter={currencyFormatter}
+                                tickFormatter={(value: string) => currencyFormatter(value, 0)}
                                 tick={{ fill: 'white' }}
                                 axisLine={{ stroke: 'white', strokeWidth: 2 }}
                                 tickLine={false}
@@ -85,7 +85,7 @@ export default function PriceChart({ data, isLoading, showTooltipTime }: Props) 
                                 allowDataOverflow={true}
                             />
                             <Tooltip
-                                formatter={currencyFormatter}
+                                formatter={(value: string) => currencyFormatter(value, 2)}
                                 content={<CustomTooltip showTime={showTooltipTime} />}
                                 cursor={{ fill: 'white', opacity: 0.2 }}
                             />
