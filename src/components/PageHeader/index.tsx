@@ -3,7 +3,7 @@ import PageHeaderButton from '../PageHeaderButton';
 export default function PageHeader() {
     const pages = [
         {
-            label: 'Live Prices',
+            label: 'Market',
             path: '/',
         },
         {

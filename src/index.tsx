@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ErrorPage from './components/ErrorPage';
 import Charts from './routes/Charts';
-import Summary from './routes/Summary';
 import store from './redux/store';
 
 import WebSocketProvider from './components/WebSocket';
@@ -14,6 +13,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Market from './routes/Market';
 import Positions from './routes/Positions';
 
 const darkTheme = createTheme({
@@ -25,7 +25,7 @@ const darkTheme = createTheme({
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Summary />,
+        element: <Market />,
         errorElement: <ErrorPage />,
     },
     {

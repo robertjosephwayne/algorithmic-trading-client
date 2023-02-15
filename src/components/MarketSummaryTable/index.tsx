@@ -8,21 +8,21 @@ import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter } from '../../utils';
 import Loader from '../Loader';
 
-type SummaryTableRow = {
+type MarketSummaryTableRow = {
     ticker: string;
     price: number;
     displayName: string;
 };
 
-export default function SummaryTable() {
+export default function MarketSummaryTable() {
     const dispatch = useDispatch();
-    const [rowData, setRowData] = useState<SummaryTableRow[]>([]);
+    const [rowData, setRowData] = useState<MarketSummaryTableRow[]>([]);
 
     const bars = useSelector((state: RootState) => state.crypto.bars);
 
     const { data, isLoading } = useGetLatestTradesQuery({});
 
-    const columns = useMemo<MRT_ColumnDef<SummaryTableRow>[]>(
+    const columns = useMemo<MRT_ColumnDef<MarketSummaryTableRow>[]>(
         () => [
             {
                 accessorKey: 'displayName',
