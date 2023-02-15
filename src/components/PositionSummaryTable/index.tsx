@@ -17,7 +17,7 @@ type PositionSummaryTableRow = {
 export default function PositionSummaryTable() {
     const [rowData, setRowData] = useState<PositionSummaryTableRow[]>([]);
 
-    const { data: positions, isLoading } = useGetPositionsQuery({});
+    const { data: positions, isLoading } = useGetPositionsQuery({}, { pollingInterval: 5000 });
 
     const columns = useMemo<MRT_ColumnDef<PositionSummaryTableRow>[]>(
         () => [

@@ -5,7 +5,10 @@ import PositionSummaryTable from '../components/PositionSummaryTable';
 import { currencyFormatter } from '../utils';
 
 export default function Positions() {
-    const { data: accountData, isLoading: accountQueryIsLoading } = useGetAccountQuery({});
+    const { data: accountData, isLoading: accountQueryIsLoading } = useGetAccountQuery(
+        {},
+        { pollingInterval: 5000 },
+    );
     const { isLoading: positionsQueryIsLoading } = useGetPositionsQuery({});
 
     return (
