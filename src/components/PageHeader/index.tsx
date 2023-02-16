@@ -18,6 +18,10 @@ export default function PageHeader() {
             label: 'Activities',
             path: '/activities',
         },
+        {
+            label: 'Account',
+            path: '/account',
+        },
     ];
 
     return (
