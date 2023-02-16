@@ -1,6 +1,4 @@
 import { useState, useEffect, useMemo } from 'react';
-
-import { useDispatch } from 'react-redux';
 import { useGetActivitiesQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter, dateFormatter } from '../../utils';
