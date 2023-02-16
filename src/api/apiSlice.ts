@@ -24,11 +24,15 @@ export const apiSlice = createApi({
         getPositions: builder.query({
             query: () => '/crypto/positions',
         }),
+        getActivities: builder.query({
+            query: () => '/crypto/activities',
+        }),
     }),
 });
 
 export const {
     useGetAccountQuery,
+    useGetActivitiesQuery,
     useGetBarsQuery,
     useGetLatestTradesQuery,
     useGetPositionsQuery,

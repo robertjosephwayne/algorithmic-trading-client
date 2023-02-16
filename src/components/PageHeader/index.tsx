@@ -14,6 +14,10 @@ export default function PageHeader() {
             label: 'Positions',
             path: '/positions',
         },
+        {
+            label: 'Activities',
+            path: '/activities',
+        },
     ];
 
     return (
