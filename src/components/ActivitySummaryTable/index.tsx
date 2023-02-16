@@ -102,8 +102,6 @@ export default function ActivitySummaryTableRow() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <div className='p-4'>
-            <MaterialReactTable columns={columns} data={rowData} />
-        </div>
+        <MaterialReactTable columns={columns} data={rowData} />
     );
 }
