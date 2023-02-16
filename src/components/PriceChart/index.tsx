@@ -1,7 +1,7 @@
 import { XAxis, YAxis, ResponsiveContainer, Tooltip, BarChart, Bar, Cell } from 'recharts';
 import { useEffect, useState } from 'react';
 import { currencyFormatter, dateFormatter } from '../../utils';
-import CustomTooltip from '../CustomTooltip';
+import PriceChartTooltip from '../PriceChartTooltip';
 import Candlestick from '../Candlestick';
 import Loader from '../Loader';
 
@@ -83,10 +83,11 @@ export default function PriceChart({ data, isLoading, showTooltipTime }: Props) 
                                 tickLine={false}
                                 padding={{ bottom: 3 }}
                                 allowDataOverflow={true}
+                                width={80}
                             />
                             <Tooltip
                                 formatter={(value: string) => currencyFormatter(value, 2)}
-                                content={<CustomTooltip showTime={showTooltipTime} />}
+                                content={<PriceChartTooltip showTime={showTooltipTime} />}
                                 cursor={{ fill: 'white', opacity: 0.2 }}
                             />
                             <Bar

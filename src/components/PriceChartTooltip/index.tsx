@@ -1,6 +1,6 @@
 import { currencyFormatter, dateFormatter } from '../../utils';
 
-export default function CustomTooltip({ active, payload, showTime }: any) {
+export default function PriceChartTooltip({ active, payload, showTime }: any) {
     if (active && payload && payload.length) {
         return (
             <div className='p-2 bg-black'>

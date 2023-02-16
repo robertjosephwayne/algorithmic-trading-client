@@ -27,6 +27,9 @@ export const apiSlice = createApi({
         getActivities: builder.query({
             query: () => '/crypto/activities',
         }),
+        getPortfolioHistory: builder.query({
+            query: () => '/crypto/portfolio-history',
+        }),
     }),
 });
 
@@ -35,6 +38,7 @@ export const {
     useGetActivitiesQuery,
     useGetBarsQuery,
     useGetLatestTradesQuery,
+    useGetPortfolioHistoryQuery,
     useGetPositionsQuery,
     useGetSnapshotAllTickersQuery,
 } = apiSlice;

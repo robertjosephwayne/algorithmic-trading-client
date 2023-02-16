@@ -17,6 +17,7 @@ import Market from './routes/Market';
 import Positions from './routes/Positions';
 import Activities from './routes/Activities';
 import Account from './routes/Account';
+import Portfolio from './routes/Portfolio';
 
 const darkTheme = createTheme({
     palette: {
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
     {
         path: '/account',
         element: <Account />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: '/portfolio',
+        element: <Portfolio />,
         errorElement: <ErrorPage />,
     },
 ]);

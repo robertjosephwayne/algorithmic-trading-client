@@ -19,6 +19,10 @@ export default function PageHeader() {
             path: '/activities',
         },
         {
+            label: 'Portfolio',
+            path: '/portfolio',
+        },
+        {
             label: 'Account',
             path: '/account',
         },
