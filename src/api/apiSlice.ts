@@ -28,7 +28,10 @@ export const apiSlice = createApi({
             query: () => '/crypto/activities',
         }),
         getPortfolioHistory: builder.query({
-            query: () => '/crypto/portfolio-history',
+            query: ({ timeframe, start }) =>
+                `/crypto/portfolio-history?timeframe=${timeframe}&start=${encodeURIComponent(
+                    start,
+                )}`,
         }),
     }),
 });

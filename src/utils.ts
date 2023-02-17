@@ -15,12 +15,11 @@ export function currencyFormatter(value: number | string, maximumFractionDigits 
 }
 
 export function dateFormatter(value: any, showTime: boolean): string {
-    if (!value) return '';
+    if (!value || value === 'auto') return '';
 
     let formattedDate = format(new Date(value), 'M/d/yyyy');
     if (showTime) {
         formattedDate = format(new Date(value), 'M/d/yyyy, pp');
     }
-
     return formattedDate;
 }
