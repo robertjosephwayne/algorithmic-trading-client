@@ -55,12 +55,12 @@ export default function PortfolioChart({ data, isLoading }: Props) {
                             )}
                             <Tooltip
                                 formatter={(value: string) => currencyFormatter(value, 2)}
-                                content={<PortfolioChartTooltip showTime={true} />}
+                                content={<PortfolioChartTooltip showTime={false} />}
                                 cursor={{ fill: 'white', opacity: 0.2 }}
                             />
                             <XAxis
                                 dataKey='timestamp'
-                                tickFormatter={(value) => dateFormatter(value, true)}
+                                tickFormatter={(value) => dateFormatter(value, false)}
                                 tick={{ fill: 'white' }}
                                 axisLine={{ stroke: 'white', strokeWidth: 2 }}
                                 tickLine={false}
@@ -71,6 +71,8 @@ export default function PortfolioChart({ data, isLoading }: Props) {
                                 tick={{ fill: 'white' }}
                                 axisLine={{ stroke: 'white', strokeWidth: 2 }}
                                 tickLine={false}
+                                padding={{ bottom: 3 }}
+                                allowDataOverflow={true}
                                 width={80}
                             />
                         </LineChart>
