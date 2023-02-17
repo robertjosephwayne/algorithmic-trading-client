@@ -24,7 +24,7 @@ export default function Portfolio() {
             ) : (
                 <>
                     <PortfolioChart data={data} isLoading={portfolioHistoryQueryIsLoading} />
-                    <div className='flex px-4 pb-4'>
+                    <div className='flex justify-center px-4 pb-4'>
                         <AccountSummary />
                     </div>
                 </>
