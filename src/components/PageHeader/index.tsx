@@ -22,10 +22,6 @@ export default function PageHeader() {
             label: 'Portfolio',
             path: '/portfolio',
         },
-        {
-            label: 'Account',
-            path: '/account',
-        },
     ];
 
     return (
