@@ -4,7 +4,7 @@ import Page from '../components/Page';
 export default function Market() {
     return (
         <Page>
-            <div className='px-4 pb-4'>
+            <div className='mx-4 mb-4 border border-white'>
                 <ActivitySummaryTable />
             </div>
         </Page>

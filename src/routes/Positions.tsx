@@ -11,7 +11,7 @@ export default function Positions() {
             {positionsQueryIsLoading ? (
                 <Loader fullPage={true} />
             ) : (
-                <div className='px-4 pb-4'>
+                <div className='mx-4 mb-4 border border-white'>
                     <PositionSummaryTable />
                 </div>
             )}
