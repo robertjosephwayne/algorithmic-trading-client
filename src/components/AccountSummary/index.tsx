@@ -3,6 +3,7 @@ import { currencyFormatter } from '../../utils';
 
 export default function AccountSummary() {
     const { data: accountData } = useGetAccountQuery({}, { pollingInterval: 5000 });
+
     return (
         <div className='p-2 border border-white'>
             <span className='font-bold'>Account Summary - Paper Trading</span>
