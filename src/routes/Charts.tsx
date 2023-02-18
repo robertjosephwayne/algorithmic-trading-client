@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
 import PriceChart from '../components/PriceChart';
 import { useGetBarsQuery } from '../api/apiSlice';
-import { formatRFC3339 } from 'date-fns';
+import { formatRFC3339, subMinutes } from 'date-fns';
 import Page from '../components/Page';
 import PriceChartControlPanel from '../components/PriceChartControlPanel';
 
 export default function Charts() {
     const [selectedSymbol, setSelectedSymbol] = useState('BTCUSD');
-    const [selectedTimeframe, setSelectedTimeframe] = useState('Month');
-    const [startDate, setStartDate] = useState(formatRFC3339(new Date(2015, 0, 1)));
+    const [selectedTimeframe, setSelectedTimeframe] = useState('Minute');
+    const [startDate, setStartDate] = useState(formatRFC3339(subMinutes(new Date(), 60)));
     const [interval] = useState(1);
     const [chartData, setChartData] = useState([]);
 
-    const { data, isLoading, isFetching } = useGetBarsQuery({
-        symbol: selectedSymbol,
-        timeframe: selectedTimeframe.toLowerCase(),
-        start: startDate,
-        interval,
-    });
+    const { data, isLoading, isFetching } = useGetBarsQuery(
+        {
+            symbol: selectedSymbol,
+            timeframe: selectedTimeframe.toLowerCase(),
+            start: startDate,
+            interval,
+        },
+        { pollingInterval: 60000 },
+    );
 
     useEffect(() => {
         if (!data) return;
