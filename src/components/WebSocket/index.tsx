@@ -16,8 +16,7 @@ export default function WebSocket({ children }: { children: ReactNode }) {
     const dispatch = useDispatch();
 
     if (!socket) {
-        socket = io(wsUrl);
-
+        socket = io(wsUrl, { transports: ['websocket', 'polling', 'flashsocket'] });
         socket.on('bar', (bar) => {
             dispatch(addBar(bar));
         });
