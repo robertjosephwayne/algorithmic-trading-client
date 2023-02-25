@@ -42,12 +42,12 @@ const darkTheme = createTheme({
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Market />,
+        element: <Charts />,
         errorElement: <ErrorPage />,
     },
     {
-        path: '/charts',
-        element: <Charts />,
+        path: '/market',
+        element: <Market />,
         errorElement: <ErrorPage />,
     },
     {

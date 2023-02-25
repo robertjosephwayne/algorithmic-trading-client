@@ -3,12 +3,12 @@ import PageHeaderButton from '../PageHeaderButton';
 export default function PageHeader() {
     const pages = [
         {
-            label: 'Market',
+            label: 'Charts',
             path: '/',
         },
         {
-            label: 'Charts',
-            path: '/charts',
+            label: 'Market',
+            path: '/market',
         },
         {
             label: 'Positions',
