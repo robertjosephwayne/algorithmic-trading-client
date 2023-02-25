@@ -22,9 +22,13 @@ export default function PageHeader() {
 
     return (
         <div className='flex justify-end p-4 space-x-4'>
-            {pages.map((page) => (
-                <PageHeaderButton key={page.label} path={page.path} label={page.label} />
-            ))}
+            <nav className='text-sm font-semibold leading-60'>
+                <ul className='flex space-x-4'>
+                    {pages.map((page) => (
+                        <PageHeaderButton key={page.label} path={page.path} label={page.label} />
+                    ))}
+                </ul>
+            </nav>
         </div>
     );
 }
