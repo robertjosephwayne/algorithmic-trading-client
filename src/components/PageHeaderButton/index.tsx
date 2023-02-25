@@ -7,7 +7,7 @@ export default function PageHeaderButton({ path, label }: { path: string; label:
             <NavLink
                 to={path}
                 className={({ isActive }) => {
-                    return cn('px-3 py-2 rounded-md ', {
+                    return cn('px-3 py-2 rounded-md whitespace-nowrap', {
                         'hover:bg-white hover:bg-opacity-20': !isActive,
                         'bg-white bg-opacity-20': isActive,
                     });
