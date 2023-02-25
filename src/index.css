@@ -9,3 +9,12 @@ body,
     font-family: 'Helvetica Monospaced', sans-serif;
     height: 100%;
 }
+
+#tradingview_widget_wrapper,
+#tradingview_widget_wrapper > div:first-child {
+    height: 100%;
+}
+
+#tradingview_widget_wrapper > div:nth-child(2) {
+    visibility: hidden;
+}
