@@ -1,4 +1,4 @@
-import { CryptoCurrencyMarket, MarketOverview } from 'react-ts-tradingview-widgets';
+import { CryptoCurrencyMarket } from 'react-ts-tradingview-widgets';
 import Page from '../components/Page';
 
 export default function Market() {

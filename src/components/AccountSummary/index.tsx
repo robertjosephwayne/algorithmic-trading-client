@@ -1,6 +1,6 @@
 import { useGetAccountQuery } from '../../api/apiSlice';
 import { currencyFormatter } from '../../utils';
-import { Card, CardContent, CardHeader, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 
 export default function AccountSummary() {
     const { data: accountData } = useGetAccountQuery({}, { pollingInterval: 5000 });
