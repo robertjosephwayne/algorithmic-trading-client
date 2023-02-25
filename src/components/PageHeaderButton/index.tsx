@@ -1,18 +1,14 @@
-import { NavLink } from 'react-router-dom';
-import cn from 'classnames';
+import { NavLink, useMatch } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 export default function PageHeaderButton({ path, label }: { path: string; label: string }) {
+    const match = useMatch(path);
+
     return (
-        <NavLink
-            className={({ isActive }) => {
-                return cn('w-24 px-2 py-1 text-center', {
-                    'hover:bg-white hover:bg-opacity-20': !isActive,
-                    'text-black bg-white': isActive,
-                });
-            }}
-            to={path}
-        >
-            {label}
+        <NavLink to={path}>
+            <Button className='w-32' variant={match ? 'contained' : 'outlined'} size='small'>
+                {label}
+            </Button>
         </NavLink>
     );
 }

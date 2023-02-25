@@ -21,7 +21,7 @@ export default function PageHeader() {
     ];
 
     return (
-        <div className='flex justify-end p-4 space-x-2 text-sm text-white'>
+        <div className='flex justify-end p-4 space-x-4'>
             {pages.map((page) => (
                 <PageHeaderButton key={page.label} path={page.path} label={page.label} />
             ))}
