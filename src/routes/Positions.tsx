@@ -13,14 +13,13 @@ export default function Positions() {
             {positionsQueryIsLoading || accountQueryIsLoading ? (
                 <Loader fullPage={true} />
             ) : (
-                <>
-                    <div className='px-4 pb-4'>
+                <div className='w-full p-4 h-4/5'>
+                    {/* <div className='mb-4'>
                         <AccountSummary />
-                    </div>
-                    <div className='mx-4 mb-4 border border-white'>
-                        <PositionSummaryTable />
-                    </div>
-                </>
+                    </div> */}
+
+                    <PositionSummaryTable />
+                </div>
             )}
         </Page>
     );

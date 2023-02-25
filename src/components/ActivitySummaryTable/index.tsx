@@ -3,6 +3,7 @@ import { useGetActivitiesQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter, dateFormatter } from '../../utils';
 import Loader from '../Loader';
+import { Card } from '@mui/material';
 
 type ActivitySummaryTableRow = {
     activityType: string;
@@ -102,6 +103,8 @@ export default function ActivitySummaryTableRow() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <MaterialReactTable columns={columns} data={rowData} />
+        <Card variant='outlined'>
+            <MaterialReactTable columns={columns} data={rowData} />
+        </Card>
     );
 }

@@ -3,6 +3,7 @@ import { useGetPositionsQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter } from '../../utils';
 import Loader from '../Loader';
+import { Card } from '@mui/material';
 
 type PositionSummaryTableRow = {
     symbol: string;
@@ -82,6 +83,8 @@ export default function PositionSummaryTable() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <MaterialReactTable columns={columns} data={rowData} />
+        <Card variant='outlined'>
+            <MaterialReactTable columns={columns} data={rowData} />
+        </Card>
     );
 }

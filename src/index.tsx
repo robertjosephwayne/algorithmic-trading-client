@@ -20,6 +20,22 @@ import Activities from './routes/Activities';
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
+        background: {
+            default: '#131722',
+        },
+        info: {
+            main: '#171B26',
+        },
+    },
+    components: {
+        MuiTable: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#171B26',
+                    borderColor: '#363C4E',
+                },
+            },
+        },
     },
 });
 

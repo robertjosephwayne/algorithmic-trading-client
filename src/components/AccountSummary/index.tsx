@@ -1,20 +1,30 @@
 import { useGetAccountQuery } from '../../api/apiSlice';
 import { currencyFormatter } from '../../utils';
+import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 
 export default function AccountSummary() {
     const { data: accountData } = useGetAccountQuery({}, { pollingInterval: 5000 });
 
     return (
-        <div className='p-2 border border-white'>
-            <span className='font-bold'>Account Summary - Paper Trading</span>
-            <div className='flex flex-col'>
-                <span>Buying Power: {currencyFormatter(accountData.buying_power)}</span>
-                <span>Cash: {currencyFormatter(accountData.cash)}</span>
-                <span>
-                    Position Market Value: {currencyFormatter(accountData.position_market_value)}
-                </span>
-                <span>Equity: {currencyFormatter(accountData.equity)}</span>
-            </div>
-        </div>
+        <Card variant='outlined'>
+            <CardContent>
+                <div className='flex flex-col'>
+                    <Typography variant='h6'>Account Summary - Paper Trading</Typography>
+                    <Typography variant='body1'>
+                        Buying Power: {currencyFormatter(accountData.buying_power)}
+                    </Typography>
+                    <Typography variant='body1'>
+                        Cash: {currencyFormatter(accountData.cash)}
+                    </Typography>
+                    <Typography variant='body1'>
+                        Position Market Value:{' '}
+                        {currencyFormatter(accountData.position_market_value)}
+                    </Typography>
+                    <Typography variant='body1'>
+                        Equity: {currencyFormatter(accountData.equity)}
+                    </Typography>
+                </div>
+            </CardContent>
+        </Card>
     );
 }
