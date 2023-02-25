@@ -15,7 +15,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Market from './routes/Market';
 import Positions from './routes/Positions';
-import Activities from './routes/Activities';
+import TradeBook from './routes/TradeBook';
 
 const darkTheme = createTheme({
     palette: {
@@ -56,8 +56,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
-        path: '/activities',
-        element: <Activities />,
+        path: '/trade-book',
+        element: <TradeBook />,
         errorElement: <ErrorPage />,
     },
 ]);

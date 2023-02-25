@@ -15,8 +15,8 @@ export default function PageHeader() {
             path: '/positions',
         },
         {
-            label: 'Activities',
-            path: '/activities',
+            label: 'Trade Book',
+            path: '/trade-book',
         },
     ];
 
