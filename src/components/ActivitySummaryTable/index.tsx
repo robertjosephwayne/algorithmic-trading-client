@@ -1,15 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useGetActivitiesQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { currencyFormatter, dateFormatter } from '../../utils';
+import { currencyFormatter, dateFormatter, toProperCase } from '../../utils';
 import Loader from '../Loader';
 import { Card } from '@mui/material';
 
 type ActivitySummaryTableRow = {
-    activityType: string;
-    type: string;
-    cumulativeQuantity: string;
-    orderStatus: string;
     price: string;
     quantity: string;
     side: string;
@@ -35,17 +31,9 @@ export default function ActivitySummaryTableRow() {
                 header: 'Symbol',
             },
             {
-                accessorKey: 'activityType',
-                header: 'Activity Type',
-            },
-            {
-                accessorKey: 'cumulativeQuantity',
-                header: 'Cumulative Quantity',
-                filterVariant: 'range',
-            },
-            {
-                accessorKey: 'orderStatus',
-                header: 'Order Status',
+                accessorKey: 'side',
+                header: 'Side',
+                Cell: ({ cell }) => toProperCase(cell.getValue<string>()),
             },
             {
                 accessorKey: 'price',
@@ -58,10 +46,6 @@ export default function ActivitySummaryTableRow() {
                 header: 'Quantity',
                 filterVariant: 'range',
             },
-            {
-                accessorKey: 'side',
-                header: 'Side',
-            },
         ],
         [],
     );
@@ -70,27 +54,13 @@ export default function ActivitySummaryTableRow() {
         if (!activities) return;
 
         const updatedRowData = Object.entries(activities).map((activity: any) => {
-            const {
-                activity_type,
-                cumulative_quantity,
-                order_status,
+            const { price, quantity, side, symbol, transaction_time } = activity[1];
+
+            const rowData: ActivitySummaryTableRow = {
                 price,
                 quantity,
                 side,
                 symbol,
-                transaction_time,
-                type,
-            } = activity[1];
-
-            const rowData: ActivitySummaryTableRow = {
-                activityType: activity_type,
-                type,
-                cumulativeQuantity: cumulative_quantity,
-                orderStatus: order_status.replace('_', ' '),
-                price,
-                quantity,
-                side,
-                symbol: symbol.replace('/', ''),
                 transactionTime: transaction_time,
             };
 

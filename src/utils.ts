@@ -23,3 +23,10 @@ export function dateFormatter(value: any, showTime: boolean): string {
     }
     return formattedDate;
 }
+
+export function toProperCase(text: string): string {
+    text = text.toLowerCase();
+    const characters = text.split('');
+    characters[0] = characters[0].toUpperCase();
+    return characters.join('');
+}
