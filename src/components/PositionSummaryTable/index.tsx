@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useGetPositionsQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { currencyFormatter } from '../../utils';
+import { currencyFormatter, toProperCase } from '../../utils';
 import Loader from '../Loader';
 import { Card } from '@mui/material';
 
@@ -33,6 +33,9 @@ export default function PositionSummaryTable() {
             {
                 accessorKey: 'side',
                 header: 'Side',
+                Cell: ({ cell }) => {
+                    return toProperCase(cell.getValue<string>());
+                },
             },
             {
                 accessorKey: 'exchange',
