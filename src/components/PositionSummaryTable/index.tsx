@@ -87,7 +87,7 @@ export default function PositionSummaryTable() {
         <Loader fullPage={true} />
     ) : (
         <Card variant='outlined'>
-            <MaterialReactTable columns={columns} data={rowData} />
+            <MaterialReactTable columns={columns} data={rowData} autoResetPageIndex={false} />
         </Card>
     );
 }

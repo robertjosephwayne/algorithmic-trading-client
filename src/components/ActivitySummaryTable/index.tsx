@@ -78,7 +78,7 @@ export default function ActivitySummaryTableRow() {
         <Loader fullPage={true} />
     ) : (
         <Card variant='outlined'>
-            <MaterialReactTable columns={columns} data={rowData} />
+            <MaterialReactTable columns={columns} data={rowData} autoResetPageIndex={false} />
         </Card>
     );
 }
