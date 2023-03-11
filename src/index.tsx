@@ -16,6 +16,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Market from './routes/Market';
 import Positions from './routes/Positions';
 import TradeBook from './routes/TradeBook';
+import Orders from './routes/Orders';
 
 const darkTheme = createTheme({
     palette: {
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
     {
         path: '/market',
         element: <Market />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: '/orders',
+        element: <Orders />,
         errorElement: <ErrorPage />,
     },
     {

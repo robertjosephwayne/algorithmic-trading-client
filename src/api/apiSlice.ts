@@ -6,11 +6,11 @@ export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: `${SERVER_URL}/api` }),
     endpoints: (builder) => ({
-        getSnapshotAllTickers: builder.query({
-            query: () => '/snapshot/markets/crypto/tickers',
+        getAccount: builder.query({
+            query: () => '/crypto/account',
         }),
-        getLatestTrades: builder.query({
-            query: () => '/crypto/trades/latest',
+        getActivities: builder.query({
+            query: () => '/crypto/activities',
         }),
         getBars: builder.query({
             query: ({ start, symbol, timeframe, interval }) =>
@@ -18,20 +18,23 @@ export const apiSlice = createApi({
                     start,
                 )}&interval=${interval}`,
         }),
-        getAccount: builder.query({
-            query: () => '/crypto/account',
+        getLatestTrades: builder.query({
+            query: () => '/crypto/trades/latest',
         }),
-        getPositions: builder.query({
-            query: () => '/crypto/positions',
-        }),
-        getActivities: builder.query({
-            query: () => '/crypto/activities',
+        getOrders: builder.query({
+            query: () => '/crypto/orders',
         }),
         getPortfolioHistory: builder.query({
             query: ({ timeframe, start }) =>
                 `/crypto/portfolio-history?timeframe=${timeframe}&start=${encodeURIComponent(
                     start,
                 )}`,
+        }),
+        getPositions: builder.query({
+            query: () => '/crypto/positions',
+        }),
+        getSnapshotAllTickers: builder.query({
+            query: () => '/snapshot/markets/crypto/tickers',
         }),
     }),
 });
@@ -41,6 +44,7 @@ export const {
     useGetActivitiesQuery,
     useGetBarsQuery,
     useGetLatestTradesQuery,
+    useGetOrdersQuery,
     useGetPortfolioHistoryQuery,
     useGetPositionsQuery,
     useGetSnapshotAllTickersQuery,

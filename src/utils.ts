@@ -4,7 +4,7 @@ export function currencyFormatter(value: number | string, maximumFractionDigits 
     if (!value) return '';
 
     if (typeof value === 'string') {
-        value = parseInt(value);
+        value = parseFloat(value);
     }
 
     return value.toLocaleString(undefined, {
