@@ -33,7 +33,11 @@ export default function ActivitySummaryTableRow() {
             {
                 accessorKey: 'side',
                 header: 'Side',
-                Cell: ({ cell }) => toProperCase(cell.getValue<string>()),
+                Cell: ({ cell }) => {
+                    let value = cell.getValue<string>();
+                    value = value.replace('_', ' ');
+                    return toProperCase(value);
+                },
             },
             {
                 accessorKey: 'price',
