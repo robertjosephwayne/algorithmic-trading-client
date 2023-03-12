@@ -10,10 +10,10 @@ type PositionSummaryTableRow = {
     quantity: number;
     side: string;
     exchange: string;
-    marketValue: string;
     averageEntryPrice: string;
+    costBasis: string;
+    marketValue: string;
     currentPrice: string;
-    stopPrice: string;
     totalProfitLoss: string;
 };
 
@@ -44,12 +44,6 @@ export default function PositionSummaryTable() {
                 header: 'Quantity',
             },
             {
-                accessorKey: 'marketValue',
-                header: 'Market Value',
-                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
-                filterVariant: 'range',
-            },
-            {
                 accessorKey: 'averageEntryPrice',
                 header: 'Avg. Entry Price',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
@@ -60,9 +54,15 @@ export default function PositionSummaryTable() {
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
             },
             {
-                accessorKey: 'stopPrice',
-                header: 'Stop Price',
+                accessorKey: 'costBasis',
+                header: 'Cost Basis',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+            },
+            {
+                accessorKey: 'marketValue',
+                header: 'Market Value',
+                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                filterVariant: 'range',
             },
             {
                 accessorKey: 'totalProfitLoss',
@@ -84,9 +84,9 @@ export default function PositionSummaryTable() {
                 side: position[1].side,
                 exchange: position[1].exchange,
                 marketValue: position[1].market_value,
+                costBasis: position[1].cost_basis,
                 averageEntryPrice: position[1].average_entry_price,
                 currentPrice: position[1].current_price,
-                stopPrice: position[1].stop_price,
                 totalProfitLoss: position[1].market_value - position[1].cost_basis,
             };
 
