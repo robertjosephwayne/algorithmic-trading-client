@@ -5,7 +5,7 @@ export default function Charts() {
     return (
         <Page>
             <div className='w-full p-4 h-4/5'>
-                <AdvancedRealTimeChart theme='dark' symbol='COINBASE:BTCUSD' autosize={true} />
+                <AdvancedRealTimeChart symbol='COINBASE:BTCUSD' autosize={true} />
             </div>
         </Page>
     );

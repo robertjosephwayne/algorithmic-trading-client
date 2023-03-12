@@ -18,6 +18,12 @@ import Positions from './routes/Positions';
 import TradeBook from './routes/TradeBook';
 import Orders from './routes/Orders';
 
+const lightTheme = createTheme({
+    palette: {
+        mode: 'light',
+    },
+});
+
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -74,7 +80,7 @@ root.render(
         <LocalizationProvider dateAdapter={AdapterMoment}>
             <Provider store={store}>
                 <WebSocketProvider>
-                    <ThemeProvider theme={darkTheme}>
+                    <ThemeProvider theme={lightTheme}>
                         <RouterProvider router={router} />
                     </ThemeProvider>
                 </WebSocketProvider>
