@@ -78,7 +78,12 @@ export default function OrderSummaryTable() {
                 accessorKey: 'trailPercent',
                 header: 'Trail Percent',
                 Cell: ({ cell }) => {
-                    if (cell) {
+                    if (cell.getValue<string>()) {
+                        const floatValue = parseFloat(cell.getValue<string>());
+                        (floatValue / 100).toLocaleString(undefined, {
+                            style: 'percent',
+                            minimumFractionDigits: 2,
+                        });
                         return `${cell.getValue<string>()}%`;
                     }
                 },

@@ -14,7 +14,8 @@ type PositionSummaryTableRow = {
     costBasis: string;
     marketValue: string;
     currentPrice: string;
-    totalProfitLoss: string;
+    totalProfitLossAmount: string;
+    totalProfitLossPercent: string;
 };
 
 export default function PositionSummaryTable() {
@@ -65,9 +66,24 @@ export default function PositionSummaryTable() {
                 filterVariant: 'range',
             },
             {
-                accessorKey: 'totalProfitLoss',
+                accessorKey: 'totalProfitLossAmount',
                 header: 'Total P/L ($)',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                filterVariant: 'range',
+            },
+            {
+                accessorKey: 'totalProfitLossPercent',
+                header: 'Total P/L (%)',
+                Cell: ({ cell }) => {
+                    if (cell.getValue<number>()) {
+                        const floatValue = cell.getValue<number>();
+                        const formattedValue = floatValue.toLocaleString(undefined, {
+                            style: 'percent',
+                            minimumFractionDigits: 2,
+                        });
+                        return formattedValue;
+                    }
+                },
                 filterVariant: 'range',
             },
         ],
@@ -78,6 +94,13 @@ export default function PositionSummaryTable() {
         if (!positions) return;
 
         const updatedRowData = Object.entries(positions).map((position: any) => {
+            const totalProfitLossAmount = position[1].market_value - position[1].cost_basis;
+            let totalProfitLossPercent = totalProfitLossAmount / position[1].cost_basis;
+
+            if (position[1].quantity < 0) {
+                totalProfitLossPercent = -totalProfitLossPercent;
+            }
+
             const rowData: any = {
                 symbol: position[1].symbol,
                 quantity: position[1].quantity,
@@ -87,7 +110,8 @@ export default function PositionSummaryTable() {
                 costBasis: position[1].cost_basis,
                 averageEntryPrice: position[1].average_entry_price,
                 currentPrice: position[1].current_price,
-                totalProfitLoss: position[1].market_value - position[1].cost_basis,
+                totalProfitLossAmount,
+                totalProfitLossPercent,
             };
 
             return rowData;
