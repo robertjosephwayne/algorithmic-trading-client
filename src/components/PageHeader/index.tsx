@@ -25,16 +25,14 @@ export default function PageHeader() {
     ];
 
     return (
-        <div className='flex justify-center'>
-            {pages.map((page, index) => (
-                <PageHeaderButton
-                    key={page.label}
-                    path={page.path}
-                    label={page.label}
-                    leftSideRounded={index === 0}
-                    rightSideRounded={index === pages.length - 1}
-                />
-            ))}
+        <div className='flex sm:justify-end'>
+            <nav className='px-2 py-4 sm:px-4 grow'>
+                <ul className='flex flex-wrap justify-between sm:justify-end sm:space-x-4'>
+                    {pages.map((page) => (
+                        <PageHeaderButton key={page.label} path={page.path} label={page.label} />
+                    ))}
+                </ul>
+            </nav>
         </div>
     );
 }

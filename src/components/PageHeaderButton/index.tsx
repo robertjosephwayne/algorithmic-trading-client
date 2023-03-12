@@ -3,30 +3,19 @@ import cn from 'classnames';
 import './index.css';
 import { Box } from '@mui/system';
 
-export default function PageHeaderButton({
-    path,
-    label,
-    leftSideRounded,
-    rightSideRounded,
-}: {
-    path: string;
-    label: string;
-    leftSideRounded: boolean;
-    rightSideRounded: boolean;
-}) {
+export default function PageHeaderButton({ path, label }: { path: string; label: string }) {
     return (
-        <NavLink
-            to={path}
-            className={({ isActive }) => {
-                return cn(
-                    'text-center inline-block py-2 my-1 whitespace-nowrap text-xs sm:text-sm font-semibold page-header-button transition-all w-32',
-                    {
-                        'page-header-button-active': isActive,
-                    },
-                );
-            }}
-        >
-            {label}
-        </NavLink>
+        <li>
+            <NavLink
+                to={path}
+                className={({ isActive }) => {
+                    return cn(
+                        'text-center inline-block w-28 py-1 my-1 rounded-full whitespace-nowrap page-header-button text-sm text-white font-semibold transition-all hover:shadow-md duration-200 ease-in-out',
+                    );
+                }}
+            >
+                {label}
+            </NavLink>
+        </li>
     );
 }
