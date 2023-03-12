@@ -8,7 +8,7 @@ export default function Loader({ fullPage }: { fullPage?: boolean }) {
                 'absolute w-screen h-screen': !!fullPage,
             })}
         >
-            <PuffLoader />
+            <PuffLoader color='white' />
         </div>
     );
 }

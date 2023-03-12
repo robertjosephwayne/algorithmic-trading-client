@@ -5,7 +5,7 @@ export default function Market() {
     return (
         <Page>
             <div className='w-full p-4 h-4/5'>
-                <CryptoCurrencyMarket displayCurrency='USD' autosize={true} />
+                <CryptoCurrencyMarket colorTheme='dark' displayCurrency='USD' autosize={true} />
             </div>
         </Page>
     );
