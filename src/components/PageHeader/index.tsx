@@ -26,14 +26,8 @@ export default function PageHeader() {
 
     return (
         <div className='flex justify-center'>
-            {pages.map((page, index) => (
-                <PageHeaderButton
-                    key={page.label}
-                    path={page.path}
-                    label={page.label}
-                    leftSideRounded={index === 0}
-                    rightSideRounded={index === pages.length - 1}
-                />
+            {pages.map((page) => (
+                <PageHeaderButton key={page.label} path={page.path} label={page.label} />
             ))}
         </div>
     );

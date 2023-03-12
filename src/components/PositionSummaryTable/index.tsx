@@ -3,7 +3,6 @@ import { useGetPositionsQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter, toProperCase } from '../../utils';
 import Loader from '../Loader';
-import { Card } from '@mui/material';
 
 type PositionSummaryTableRow = {
     symbol: string;
