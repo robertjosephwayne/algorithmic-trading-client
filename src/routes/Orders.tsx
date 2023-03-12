@@ -11,7 +11,7 @@ export default function Orders() {
             {ordersQueryIsLoading ? (
                 <Loader fullPage={true} />
             ) : (
-                <div className='w-full p-4 h-4/5'>
+                <div className='w-full h-4/5'>
                     <OrderSummaryTable />
                 </div>
             )}

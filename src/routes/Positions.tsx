@@ -12,7 +12,7 @@ export default function Positions() {
             {positionsQueryIsLoading || accountQueryIsLoading ? (
                 <Loader fullPage={true} />
             ) : (
-                <div className='w-full p-4 h-4/5'>
+                <div className='w-full h-4/5'>
                     <PositionSummaryTable />
                 </div>
             )}
