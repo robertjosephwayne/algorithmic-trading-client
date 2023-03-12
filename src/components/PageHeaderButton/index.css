@@ -1,3 +1,20 @@
+.page-header-button-active {
+    background-color: rgb(221, 230, 205);
+}
+
 .page-header-button {
-    background-color: #405c23;
+    border-color: rgb(27, 28, 24);
+    border-width: 1px 0 1px 1px;
+}
+
+.page-header-button:first-child {
+    border-left-width: 1px;
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+}
+
+.page-header-button:last-child {
+    border-width: 1px;
+    border-top-right-radius: 9999px;
+    border-bottom-right-radius: 9999px;
 }
