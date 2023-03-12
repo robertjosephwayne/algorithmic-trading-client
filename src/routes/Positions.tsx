@@ -13,8 +13,8 @@ export default function Positions() {
             {positionsQueryIsLoading || accountQueryIsLoading ? (
                 <Loader fullPage={true} />
             ) : (
-                <div className='p-4'>
-                    <Card>
+                <div className='w-full p-4 h-4/5'>
+                    <Card className='h-full'>
                         <PositionSummaryTable />
                     </Card>
                 </div>

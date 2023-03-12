@@ -1,8 +1,19 @@
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import './index.css';
+import { Box } from '@mui/system';
 
-export default function PageHeaderButton({ path, label }: { path: string; label: string }) {
+export default function PageHeaderButton({
+    path,
+    label,
+    leftSideRounded,
+    rightSideRounded,
+}: {
+    path: string;
+    label: string;
+    leftSideRounded: boolean;
+    rightSideRounded: boolean;
+}) {
     return (
         <NavLink
             to={path}
