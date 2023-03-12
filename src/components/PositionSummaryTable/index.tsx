@@ -10,8 +10,10 @@ type PositionSummaryTableRow = {
     quantity: number;
     side: string;
     exchange: string;
-    costBasis: string;
     marketValue: string;
+    averageEntryPrice: string;
+    currentPrice: string;
+    stopPrice: string;
     totalProfitLoss: string;
 };
 
@@ -27,8 +29,8 @@ export default function PositionSummaryTable() {
                 header: 'Symbol',
             },
             {
-                accessorKey: 'quantity',
-                header: 'Quantity',
+                accessorKey: 'exchange',
+                header: 'Exchange',
             },
             {
                 accessorKey: 'side',
@@ -38,20 +40,29 @@ export default function PositionSummaryTable() {
                 },
             },
             {
-                accessorKey: 'exchange',
-                header: 'Exchange',
-            },
-            {
-                accessorKey: 'costBasis',
-                header: 'Cost Basis',
-                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
-                filterVariant: 'range',
+                accessorKey: 'quantity',
+                header: 'Quantity',
             },
             {
                 accessorKey: 'marketValue',
                 header: 'Market Value',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
                 filterVariant: 'range',
+            },
+            {
+                accessorKey: 'averageEntryPrice',
+                header: 'Avg. Entry Price',
+                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+            },
+            {
+                accessorKey: 'currentPrice',
+                header: 'Current Price',
+                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+            },
+            {
+                accessorKey: 'stopPrice',
+                header: 'Stop Price',
+                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
             },
             {
                 accessorKey: 'totalProfitLoss',
@@ -72,8 +83,10 @@ export default function PositionSummaryTable() {
                 quantity: position[1].quantity,
                 side: position[1].side,
                 exchange: position[1].exchange,
-                costBasis: position[1].cost_basis,
                 marketValue: position[1].market_value,
+                averageEntryPrice: position[1].average_entry_price,
+                currentPrice: position[1].current_price,
+                stopPrice: position[1].stop_price,
                 totalProfitLoss: position[1].market_value - position[1].cost_basis,
             };
 
