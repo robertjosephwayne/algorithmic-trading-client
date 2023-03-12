@@ -119,8 +119,6 @@ export default function OrderSummaryTable() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <Card variant='outlined'>
-            <MaterialReactTable columns={columns} data={rowData} autoResetPageIndex={false} />
-        </Card>
+        <MaterialReactTable columns={columns} data={rowData} autoResetPageIndex={false} />
     );
 }

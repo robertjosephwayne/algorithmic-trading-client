@@ -1,3 +1,4 @@
+import { Card } from '@mui/material';
 import { useGetAccountQuery, useGetPositionsQuery } from '../api/apiSlice';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
@@ -13,7 +14,9 @@ export default function Positions() {
                 <Loader fullPage={true} />
             ) : (
                 <div className='w-full p-4 h-4/5'>
-                    <PositionSummaryTable />
+                    <Card className='h-full'>
+                        <PositionSummaryTable />
+                    </Card>
                 </div>
             )}
         </Page>
