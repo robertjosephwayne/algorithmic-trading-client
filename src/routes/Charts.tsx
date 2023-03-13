@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 export default function Charts() {
     const [watchlist, setWatchlist] = useState([]);
-    const { data: positions, isLoading } = useGetPositionsQuery({});
+    const { data: positions } = useGetPositionsQuery({});
 
     useEffect(() => {
         if (!positions) return;
