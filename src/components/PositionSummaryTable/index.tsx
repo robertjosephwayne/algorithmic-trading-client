@@ -124,7 +124,21 @@ export default function PositionSummaryTable() {
         <Loader fullPage={true} />
     ) : (
         <Card variant='outlined'>
-            <MaterialReactTable columns={columns} data={rowData} autoResetPageIndex={false} />
+            <MaterialReactTable
+                columns={columns}
+                data={rowData}
+                autoResetPageIndex={false}
+                enableRowActions
+                renderRowActions={({ row }: { row: any }) => (
+                    <a href={`/fundamentals?symbol=${row.getValue('symbol')}`}>Fundamentals</a>
+                )}
+                positionActionsColumn='last'
+                displayColumnDefOptions={{
+                    'mrt-row-actions': {
+                        header: '', // change header text
+                    },
+                }}
+            />
         </Card>
     );
 }

@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ErrorPage from './components/ErrorPage';
-import Charts from './routes/Charts';
 import store from './redux/store';
 
 import WebSocketProvider from './components/WebSocket';
@@ -17,6 +16,8 @@ import Market from './routes/Market';
 import Positions from './routes/Positions';
 import TradeBook from './routes/TradeBook';
 import Orders from './routes/Orders';
+import Fundamentals from './routes/Fundamentals';
+import Charts from './routes/Charts';
 
 const darkTheme = createTheme({
     palette: {
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Charts />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: '/fundamentals',
+        element: <Fundamentals />,
         errorElement: <ErrorPage />,
     },
     {
