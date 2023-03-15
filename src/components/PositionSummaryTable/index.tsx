@@ -14,8 +14,10 @@ type PositionSummaryTableRow = {
     costBasis: string;
     marketValue: string;
     currentPrice: string;
-    totalProfitLossAmount: string;
-    totalProfitLossPercent: string;
+    totalUnrealizedProfitLossAmount: string;
+    totalUnrealizedProfitLossPercent: string;
+    intradayUnrealizedProfitLossAmount: string;
+    intradayUnrealizedProfitLossPercent: string;
 };
 
 export default function PositionSummaryTable() {
@@ -66,17 +68,38 @@ export default function PositionSummaryTable() {
                 filterVariant: 'range',
             },
             {
-                accessorKey: 'totalProfitLossAmount',
+                accessorKey: 'totalUnrealizedProfitLossAmount',
                 header: 'Total P/L ($)',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
                 filterVariant: 'range',
             },
             {
-                accessorKey: 'totalProfitLossPercent',
+                accessorKey: 'totalUnrealizedProfitLossPercent',
                 header: 'Total P/L (%)',
                 Cell: ({ cell }) => {
-                    if (cell.getValue<number>()) {
-                        const floatValue = cell.getValue<number>();
+                    if (cell.getValue<string>()) {
+                        const floatValue = parseFloat(cell.getValue<string>());
+                        const formattedValue = floatValue.toLocaleString(undefined, {
+                            style: 'percent',
+                            minimumFractionDigits: 2,
+                        });
+                        return formattedValue;
+                    }
+                },
+                filterVariant: 'range',
+            },
+            {
+                accessorKey: 'intradayUnrealizedProfitLossAmount',
+                header: 'Today P/L ($)',
+                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                filterVariant: 'range',
+            },
+            {
+                accessorKey: 'intradayUnrealizedProfitLossPercent',
+                header: 'Today P/L (%)',
+                Cell: ({ cell }) => {
+                    if (cell.getValue<string>()) {
+                        const floatValue = parseFloat(cell.getValue<string>());
                         const formattedValue = floatValue.toLocaleString(undefined, {
                             style: 'percent',
                             minimumFractionDigits: 2,
@@ -94,13 +117,6 @@ export default function PositionSummaryTable() {
         if (!positions) return;
 
         const updatedRowData = Object.entries(positions).map((position: any) => {
-            const totalProfitLossAmount = position[1].market_value - position[1].cost_basis;
-            let totalProfitLossPercent = totalProfitLossAmount / position[1].cost_basis;
-
-            if (position[1].quantity < 0) {
-                totalProfitLossPercent = -totalProfitLossPercent;
-            }
-
             const rowData: any = {
                 symbol: position[1].symbol,
                 quantity: position[1].quantity,
@@ -110,8 +126,10 @@ export default function PositionSummaryTable() {
                 costBasis: position[1].cost_basis,
                 averageEntryPrice: position[1].average_entry_price,
                 currentPrice: position[1].current_price,
-                totalProfitLossAmount,
-                totalProfitLossPercent,
+                totalUnrealizedProfitLossAmount: position[1].total_unrealized_pl,
+                totalUnrealizedProfitLossPercent: position[1].total_unrealized_pl_percent,
+                intradayUnrealizedProfitLossAmount: position[1].intraday_unrealized_pl,
+                intradayUnrealizedProfitLossPercent: position[1].intraday_unrealized_pl_percent,
             };
 
             return rowData;
