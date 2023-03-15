@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useGetPositionsQuery } from '../../api/apiSlice';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnDef, MRT_Row } from 'material-react-table';
 import { currencyFormatter, toProperCase } from '../../utils';
 import Loader from '../Loader';
-import { Card } from '@mui/material';
+import { Box, Button, Card } from '@mui/material';
+import { ExportToCsv } from 'export-to-csv';
+import { FileDownload } from '@mui/icons-material';
 
 type PositionSummaryTableRow = {
     symbol: string;
@@ -113,19 +115,48 @@ export default function PositionSummaryTable() {
         [],
     );
 
+    const headers = useMemo(() => {
+        const firstRow = rowData[0];
+        const headers = [];
+        for (const property in firstRow) {
+            const column = columns.find((column) => column.accessorKey === property);
+            if (column && column.header) {
+                headers.push(column.header);
+            }
+        }
+        return headers;
+    }, [rowData]);
+
+    const csvOptions = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalSeparator: '.',
+        showLabels: true,
+        useBom: true,
+        useKeysAsHeaders: false,
+        headers,
+        filename: `positions ${new Date().toLocaleDateString()}`,
+    };
+
+    const csvExporter = new ExportToCsv(csvOptions);
+
+    const handleExportData = () => {
+        csvExporter.generateCsv(rowData);
+    };
+
     useEffect(() => {
         if (!positions) return;
 
         const updatedRowData = Object.entries(positions).map((position: any) => {
             const rowData: any = {
                 symbol: position[1].symbol,
-                quantity: position[1].quantity,
-                side: position[1].side,
                 exchange: position[1].exchange,
-                marketValue: position[1].market_value,
-                costBasis: position[1].cost_basis,
+                side: position[1].side,
+                quantity: position[1].quantity,
                 averageEntryPrice: position[1].average_entry_price,
                 currentPrice: position[1].current_price,
+                costBasis: position[1].cost_basis,
+                marketValue: position[1].market_value,
                 totalUnrealizedProfitLossAmount: position[1].total_unrealized_pl,
                 totalUnrealizedProfitLossPercent: position[1].total_unrealized_pl_percent,
                 intradayUnrealizedProfitLossAmount: position[1].intraday_unrealized_pl,
@@ -150,6 +181,22 @@ export default function PositionSummaryTable() {
                 renderRowActions={({ row }: { row: any }) => (
                     <a href={`/fundamentals?symbol=${row.getValue('symbol')}`}>Fundamentals</a>
                 )}
+                positionToolbarAlertBanner='bottom'
+                renderTopToolbarCustomActions={({ table }) => {
+                    return (
+                        <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
+                            <Button
+                                color='info'
+                                onClick={handleExportData}
+                                startIcon={<FileDownload />}
+                                variant='outlined'
+                                sx={{ color: 'white' }}
+                            >
+                                Export All Data
+                            </Button>
+                        </Box>
+                    );
+                }}
                 positionActionsColumn='last'
                 displayColumnDefOptions={{
                     'mrt-row-actions': {

@@ -3,7 +3,9 @@ import { useGetOrdersQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter } from '../../utils';
 import Loader from '../Loader';
-import { Card } from '@mui/material';
+import { Box, Button, Card } from '@mui/material';
+import { ExportToCsv } from 'export-to-csv';
+import { FileDownload } from '@mui/icons-material';
 
 type OrderSummaryTableRow = {
     symbol: string;
@@ -97,6 +99,35 @@ export default function OrderSummaryTable() {
         [],
     );
 
+    const headers = useMemo(() => {
+        const firstRow = rowData[0];
+        const headers = [];
+        for (const property in firstRow) {
+            const column = columns.find((column) => column.accessorKey === property);
+            if (column && column.header) {
+                headers.push(column.header);
+            }
+        }
+        return headers;
+    }, [rowData]);
+
+    const csvOptions = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalSeparator: '.',
+        showLabels: true,
+        useBom: true,
+        useKeysAsHeaders: false,
+        headers,
+        filename: `open orders ${new Date().toLocaleDateString()}`,
+    };
+
+    const csvExporter = new ExportToCsv(csvOptions);
+
+    const handleExportData = () => {
+        csvExporter.generateCsv(rowData);
+    };
+
     useEffect(() => {
         if (!orders) return;
 
@@ -125,7 +156,26 @@ export default function OrderSummaryTable() {
         <Loader fullPage={true} />
     ) : (
         <Card variant='outlined'>
-            <MaterialReactTable columns={columns} data={rowData} autoResetPageIndex={false} />
+            <MaterialReactTable
+                columns={columns}
+                data={rowData}
+                autoResetPageIndex={false}
+                renderTopToolbarCustomActions={({ table }) => {
+                    return (
+                        <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
+                            <Button
+                                color='info'
+                                onClick={handleExportData}
+                                startIcon={<FileDownload />}
+                                variant='outlined'
+                                sx={{ color: 'white' }}
+                            >
+                                Export All Data
+                            </Button>
+                        </Box>
+                    );
+                }}
+            />
         </Card>
     );
 }
