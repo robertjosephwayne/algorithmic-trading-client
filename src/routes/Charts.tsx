@@ -1,16 +1,15 @@
 import Page from '../components/Page';
 import { AdvancedRealTimeChart } from 'react-ts-tradingview-widgets';
 import { useGetPositionsQuery } from '../api/apiSlice';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 export default function Charts() {
-    const [watchlist, setWatchlist] = useState([]);
     const { data: positions } = useGetPositionsQuery({});
 
-    useEffect(() => {
-        if (!positions) return;
+    const watchlist = useMemo(() => {
+        if (!positions) return [];
 
-        const updatedWatchlist = positions.map((position: any) => {
+        return positions.map((position: any) => {
             let marketEtf = '';
 
             switch (position.exchange) {
@@ -24,14 +23,12 @@ export default function Charts() {
                     break;
             }
 
-            if (marketEtf) {
+            if (marketEtf && marketEtf !== position.symbol) {
                 return `${position.exchange}:${position.symbol}/${marketEtf}`;
             } else {
-                return `${position.exchange}:${position.symbol}`;
+                return `${position.symbol}`;
             }
         });
-
-        setWatchlist(updatedWatchlist);
     }, [positions]);
 
     return (
