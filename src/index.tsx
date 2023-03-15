@@ -12,12 +12,12 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Market from './routes/Market';
 import Positions from './routes/Positions';
 import TradeBook from './routes/TradeBook';
 import Orders from './routes/Orders';
 import Fundamentals from './routes/Fundamentals';
 import Charts from './routes/Charts';
+import Watchlist from './routes/Watchlist';
 
 const darkTheme = createTheme({
     palette: {
@@ -53,8 +53,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
-        path: '/market',
-        element: <Market />,
+        path: '/watchlist',
+        element: <Watchlist />,
         errorElement: <ErrorPage />,
     },
     {

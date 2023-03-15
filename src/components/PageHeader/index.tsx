@@ -7,8 +7,8 @@ export default function PageHeader() {
             path: '/',
         },
         {
-            label: 'Market',
-            path: '/market',
+            label: 'Watchlist',
+            path: '/watchlist',
         },
         {
             label: 'Positions',
