@@ -71,13 +71,13 @@ export default function PositionSummaryTable() {
             },
             {
                 accessorKey: 'totalUnrealizedProfitLossAmount',
-                header: 'Total P/L ($)',
+                header: 'Unrealized P/L ($)',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
                 filterVariant: 'range',
             },
             {
                 accessorKey: 'totalUnrealizedProfitLossPercent',
-                header: 'Total P/L (%)',
+                header: 'Unrealized P/L (%)',
                 Cell: ({ cell }) => {
                     if (cell.getValue<string>()) {
                         const floatValue = parseFloat(cell.getValue<string>());
