@@ -9,7 +9,12 @@ export default function Fundamentals() {
     return (
         <Page>
             <div className='justify-center w-full h-4/5'>
-                <FundamentalData symbol={symbol || ''} colorTheme='dark' autosize={true} />
+                <FundamentalData
+                    symbol={symbol || ''}
+                    colorTheme='dark'
+                    autosize={true}
+                    largeChartUrl='https://trading.robertjosephwayne.com'
+                />
             </div>
         </Page>
     );
