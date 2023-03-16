@@ -113,7 +113,7 @@ export default function ActivitySummaryTableRow() {
                 columns={columns}
                 data={rowData}
                 autoResetPageIndex={false}
-                renderTopToolbarCustomActions={({ table }) => {
+                renderTopToolbarCustomActions={() => {
                     return (
                         <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
                             <Button

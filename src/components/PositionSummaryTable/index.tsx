@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useGetPositionsQuery } from '../../api/apiSlice';
-import MaterialReactTable, { MRT_ColumnDef, MRT_Row } from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter, toProperCase } from '../../utils';
 import Loader from '../Loader';
 import { Box, Button, Card } from '@mui/material';
@@ -182,7 +182,7 @@ export default function PositionSummaryTable() {
                     <a href={`/fundamentals?symbol=${row.getValue('symbol')}`}>Fundamentals</a>
                 )}
                 positionToolbarAlertBanner='bottom'
-                renderTopToolbarCustomActions={({ table }) => {
+                renderTopToolbarCustomActions={() => {
                     return (
                         <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
                             <Button
