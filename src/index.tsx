@@ -18,6 +18,7 @@ import Orders from './routes/Orders';
 import Fundamentals from './routes/Fundamentals';
 import Charts from './routes/Charts';
 import Watchlist from './routes/Watchlist';
+import PortfolioMetrics from './routes/PortfolioMetrics';
 
 const darkTheme = createTheme({
     palette: {
@@ -70,6 +71,11 @@ const router = createBrowserRouter([
     {
         path: '/trade-book',
         element: <TradeBook />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: '/portfolio-metrics',
+        element: <PortfolioMetrics />,
         errorElement: <ErrorPage />,
     },
 ]);

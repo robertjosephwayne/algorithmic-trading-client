@@ -14,6 +14,21 @@ export function currencyFormatter(value: number | string, maximumFractionDigits 
     });
 }
 
+export function percentageFormatter(value: number | string, minimumFractionDigits = 2): string {
+    if (!value) return '';
+
+    if (typeof value === 'string') {
+        value = parseFloat(value);
+    }
+
+    const formattedValue = value.toLocaleString(undefined, {
+        style: 'percent',
+        minimumFractionDigits,
+    });
+
+    return formattedValue;
+}
+
 export function dateFormatter(value: any, showTime: boolean): string {
     if (!value || value === 'auto') return '';
 

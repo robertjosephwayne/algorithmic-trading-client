@@ -22,6 +22,10 @@ export default function PageHeader() {
             label: 'Trade Book',
             path: '/trade-book',
         },
+        {
+            label: 'Portfolio Metrics',
+            path: '/portfolio-metrics',
+        },
     ];
 
     return (
