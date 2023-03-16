@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useGetActivitiesQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { currencyFormatter, dateFormatter, toProperCase } from '../../utils';
+import { currencyFormatter, dateFormatter, tableSortingFunctions, toProperCase } from '../../utils';
 import Loader from '../Loader';
 import { Box, Button, Card } from '@mui/material';
 import { ExportToCsv } from 'export-to-csv';
@@ -12,7 +12,7 @@ type ActivitySummaryTableRow = {
     quantity: string;
     side: string;
     symbol: string;
-    transactionTime: string;
+    transactionTime: Date;
 };
 
 export default function ActivitySummaryTableRow() {
@@ -26,6 +26,7 @@ export default function ActivitySummaryTableRow() {
                 accessorKey: 'transactionTime',
                 header: 'Transaction Time',
                 Cell: ({ cell }) => dateFormatter(cell.getValue<string>(), true),
+                sortingFn: 'dateSorting',
                 enableColumnFilter: false,
             },
             {
@@ -129,6 +130,7 @@ export default function ActivitySummaryTableRow() {
                         </Box>
                     );
                 }}
+                sortingFns={tableSortingFunctions}
             />
         </Card>
     );

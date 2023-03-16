@@ -63,4 +63,13 @@ export const tableSortingFunctions = {
 
         return rowAFloatValue < rowBFloatValue ? 1 : -1;
     },
+    dateSorting: (rowA: any, rowB: any, columnId: any): number => {
+        const rowADateString = rowA.getValue(columnId);
+        const rowADate = new Date(rowADateString);
+
+        const rowBDateString = rowB.getValue(columnId);
+        const rowBDate = new Date(rowBDateString);
+
+        return rowADate < rowBDate ? 1 : -1;
+    },
 };
