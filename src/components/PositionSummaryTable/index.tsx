@@ -57,27 +57,32 @@ export default function PositionSummaryTable() {
                 accessorKey: 'averageEntryPrice',
                 header: 'Avg. Entry Price',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
             },
             {
                 accessorKey: 'currentPrice',
                 header: 'Current Price',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
             },
             {
                 accessorKey: 'costBasis',
                 header: 'Cost Basis',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
             },
             {
                 accessorKey: 'marketValue',
                 header: 'Market Value',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
                 filterVariant: 'range',
             },
             {
                 accessorKey: 'totalUnrealizedProfitLossAmount',
                 header: 'Unrealized P/L ($)',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
                 filterVariant: 'range',
             },
             {
@@ -88,13 +93,14 @@ export default function PositionSummaryTable() {
                         return percentageFormatter(cell.getValue<string>());
                     }
                 },
-                filterVariant: 'range',
                 sortingFn: 'percentageSorting',
+                filterVariant: 'range',
             },
             {
                 accessorKey: 'intradayUnrealizedProfitLossAmount',
                 header: 'Today P/L ($)',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
                 filterVariant: 'range',
             },
             {
@@ -105,8 +111,8 @@ export default function PositionSummaryTable() {
                         return percentageFormatter(cell.getValue<string>());
                     }
                 },
-                filterVariant: 'range',
                 sortingFn: 'percentageSorting',
+                filterVariant: 'range',
             },
         ],
         [],

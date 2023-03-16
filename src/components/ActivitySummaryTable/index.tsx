@@ -45,6 +45,7 @@ export default function ActivitySummaryTableRow() {
                 accessorKey: 'price',
                 header: 'Price',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
                 filterVariant: 'range',
             },
             {

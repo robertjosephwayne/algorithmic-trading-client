@@ -52,4 +52,15 @@ export const tableSortingFunctions = {
         const rowBFloatValue = parseFloat(rowB.getValue(columnId));
         return rowAFloatValue < rowBFloatValue ? 1 : -1;
     },
+    currencySorting: (rowA: any, rowB: any, columnId: any): number => {
+        const rowACurrencyString = rowA.getValue(columnId);
+        const rowAWithoutCurrencySymbol = rowACurrencyString.toLocaleString();
+        const rowAFloatValue = parseFloat(rowAWithoutCurrencySymbol);
+
+        const rowBCurrencyString = rowB.getValue(columnId);
+        const rowBWithoutCurrencySymbol = rowBCurrencyString.toLocaleString();
+        const rowBFloatValue = parseFloat(rowBWithoutCurrencySymbol);
+
+        return rowAFloatValue < rowBFloatValue ? 1 : -1;
+    },
 };

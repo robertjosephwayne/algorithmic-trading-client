@@ -65,16 +65,19 @@ export default function OrderSummaryTable() {
                 accessorKey: 'limitPrice',
                 header: 'Limit Price',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
             },
             {
                 accessorKey: 'stopPrice',
                 header: 'Stop Price',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
             },
             {
                 accessorKey: 'notional',
                 header: 'Notional',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
             },
             {
                 accessorKey: 'trailPercent',
@@ -90,6 +93,7 @@ export default function OrderSummaryTable() {
                 accessorKey: 'trailPrice',
                 header: 'Trail Price',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
+                sortingFn: 'currencySorting',
             },
         ],
         [],
