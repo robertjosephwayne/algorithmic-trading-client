@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useGetOrdersQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { currencyFormatter } from '../../utils';
+import { currencyFormatter, percentageFormatter, tableSortingFunctions } from '../../utils';
 import Loader from '../Loader';
 import { Box, Button, Card } from '@mui/material';
 import { ExportToCsv } from 'export-to-csv';
@@ -81,14 +81,10 @@ export default function OrderSummaryTable() {
                 header: 'Trail Percent',
                 Cell: ({ cell }) => {
                     if (cell.getValue<string>()) {
-                        const floatValue = parseFloat(cell.getValue<string>());
-                        (floatValue / 100).toLocaleString(undefined, {
-                            style: 'percent',
-                            minimumFractionDigits: 2,
-                        });
-                        return `${cell.getValue<string>()}%`;
+                        return percentageFormatter(cell.getValue<string>());
                     }
                 },
+                sortingFn: 'percentageSorting',
             },
             {
                 accessorKey: 'trailPrice',
@@ -175,6 +171,7 @@ export default function OrderSummaryTable() {
                         </Box>
                     );
                 }}
+                sortingFns={tableSortingFunctions}
             />
         </Card>
     );

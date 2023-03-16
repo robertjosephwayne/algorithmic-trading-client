@@ -45,3 +45,11 @@ export function toProperCase(text: string): string {
     characters[0] = characters[0].toUpperCase();
     return characters.join('');
 }
+
+export const tableSortingFunctions = {
+    percentageSorting: (rowA: any, rowB: any, columnId: any): number => {
+        const rowAFloatValue = parseFloat(rowA.getValue(columnId));
+        const rowBFloatValue = parseFloat(rowB.getValue(columnId));
+        return rowAFloatValue < rowBFloatValue ? 1 : -1;
+    },
+};

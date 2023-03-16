@@ -1,7 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useGetPositionsQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { currencyFormatter, toProperCase } from '../../utils';
+import {
+    currencyFormatter,
+    percentageFormatter,
+    toProperCase,
+    tableSortingFunctions,
+} from '../../utils';
 import Loader from '../Loader';
 import { Box, Button, Card } from '@mui/material';
 import { ExportToCsv } from 'export-to-csv';
@@ -80,15 +85,11 @@ export default function PositionSummaryTable() {
                 header: 'Unrealized P/L (%)',
                 Cell: ({ cell }) => {
                     if (cell.getValue<string>()) {
-                        const floatValue = parseFloat(cell.getValue<string>());
-                        const formattedValue = floatValue.toLocaleString(undefined, {
-                            style: 'percent',
-                            minimumFractionDigits: 2,
-                        });
-                        return formattedValue;
+                        return percentageFormatter(cell.getValue<string>());
                     }
                 },
                 filterVariant: 'range',
+                sortingFn: 'percentageSorting',
             },
             {
                 accessorKey: 'intradayUnrealizedProfitLossAmount',
@@ -101,15 +102,11 @@ export default function PositionSummaryTable() {
                 header: 'Today P/L (%)',
                 Cell: ({ cell }) => {
                     if (cell.getValue<string>()) {
-                        const floatValue = parseFloat(cell.getValue<string>());
-                        const formattedValue = floatValue.toLocaleString(undefined, {
-                            style: 'percent',
-                            minimumFractionDigits: 2,
-                        });
-                        return formattedValue;
+                        return percentageFormatter(cell.getValue<string>());
                     }
                 },
                 filterVariant: 'range',
+                sortingFn: 'percentageSorting',
             },
         ],
         [],
@@ -203,6 +200,7 @@ export default function PositionSummaryTable() {
                         header: '', // change header text
                     },
                 }}
+                sortingFns={tableSortingFunctions}
             />
         </Card>
     );
