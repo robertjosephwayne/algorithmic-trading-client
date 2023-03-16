@@ -2,9 +2,10 @@ import Page from '../components/Page';
 import { AdvancedRealTimeChart } from 'react-ts-tradingview-widgets';
 import { useGetPositionsQuery } from '../api/apiSlice';
 import { useMemo } from 'react';
+import Loader from '../components/Loader';
 
 export default function Charts() {
-    const { data: positions } = useGetPositionsQuery({});
+    const { data: positions, isLoading: positionsQueryIsLoading } = useGetPositionsQuery({});
 
     const watchlist = useMemo(() => {
         if (!positions) return [];
@@ -34,13 +35,17 @@ export default function Charts() {
     return (
         <Page>
             <div className='w-full h-4/5'>
-                <AdvancedRealTimeChart
-                    theme='dark'
-                    symbol={watchlist[0]}
-                    autosize={true}
-                    watchlist={watchlist}
-                    interval='W'
-                />
+                {positionsQueryIsLoading ? (
+                    <Loader fullPage={true} />
+                ) : (
+                    <AdvancedRealTimeChart
+                        theme='dark'
+                        symbol={watchlist[0]}
+                        autosize={true}
+                        watchlist={watchlist}
+                        interval='W'
+                    />
+                )}
             </div>
         </Page>
     );
