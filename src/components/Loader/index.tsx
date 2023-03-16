@@ -1,4 +1,4 @@
-import { PuffLoader } from 'react-spinners';
+import { BarLoader } from 'react-spinners';
 import cn from 'classnames';
 
 export default function Loader({ fullPage }: { fullPage?: boolean }) {
@@ -8,7 +8,7 @@ export default function Loader({ fullPage }: { fullPage?: boolean }) {
                 'absolute w-screen h-screen top-0 left-0': !!fullPage,
             })}
         >
-            <PuffLoader color='white' />
+            <BarLoader color='white' />
         </div>
     );
 }
