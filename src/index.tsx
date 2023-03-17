@@ -18,6 +18,7 @@ import Orders from './routes/Orders';
 import Fundamentals from './routes/Fundamentals';
 import Charts from './routes/Charts';
 import Watchlist from './routes/Watchlist';
+import PortfolioHistory from './routes/PortfolioHistory';
 import PortfolioMetrics from './routes/PortfolioMetrics';
 
 const darkTheme = createTheme({
@@ -76,6 +77,11 @@ const router = createBrowserRouter([
     {
         path: '/portfolio-metrics',
         element: <PortfolioMetrics />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: '/portfolio-history',
+        element: <PortfolioHistory />,
         errorElement: <ErrorPage />,
     },
 ]);
