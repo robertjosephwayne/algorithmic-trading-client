@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import { DesktopDatePicker, DesktopDateTimePicker } from '@mui/x-date-pickers';
+import { DesktopDatePicker } from '@mui/x-date-pickers';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { differenceInDays } from 'date-fns';
