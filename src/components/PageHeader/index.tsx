@@ -26,6 +26,10 @@ export default function PageHeader() {
             label: 'Portfolio Metrics',
             path: '/portfolio-metrics',
         },
+        {
+            label: 'Returns',
+            path: '/returns',
+        },
     ];
 
     return (
