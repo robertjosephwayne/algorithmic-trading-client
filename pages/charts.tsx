@@ -3,6 +3,8 @@ import { AdvancedRealTimeChart } from 'react-ts-tradingview-widgets';
 import { useGetPositionsQuery } from '../api/apiSlice';
 import { useMemo } from 'react';
 import Loader from '../components/Loader';
+import Sidenav from '../components/Sidenav';
+import pageRoutes from '../routes';
 
 export default function Charts() {
     const { data: positions, isLoading: positionsQueryIsLoading } = useGetPositionsQuery({});
@@ -34,19 +36,15 @@ export default function Charts() {
 
     return (
         <Page>
-            <div className='w-full h-4/5'>
-                {positionsQueryIsLoading ? (
-                    <Loader fullPage={true} />
-                ) : (
-                    <AdvancedRealTimeChart
-                        theme='dark'
-                        symbol={watchlist[0]}
-                        autosize={true}
-                        watchlist={watchlist}
-                        interval='W'
-                    />
-                )}
-            </div>
+            <Sidenav routes={pageRoutes} brandName='Trading Dashboard' />
+            {!positionsQueryIsLoading && (
+                <AdvancedRealTimeChart
+                    symbol={watchlist[0]}
+                    autosize={true}
+                    watchlist={watchlist}
+                    interval='W'
+                />
+            )}
         </Page>
     );
 }

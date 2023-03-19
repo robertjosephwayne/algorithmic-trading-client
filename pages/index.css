@@ -5,8 +5,6 @@
 html,
 body,
 #__next {
-    background-color: #13192c;
-    font-family: 'Helvetica Monospaced', sans-serif;
     height: 100%;
 }
 

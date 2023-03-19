@@ -1,4 +1,4 @@
-// import './index.css';
+import './index.css';
 
 import { Provider } from 'react-redux';
 import type { AppProps } from 'next/app';

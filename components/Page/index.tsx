@@ -39,6 +39,7 @@ export default function Page({ children }: { children: ReactNode }): JSX.Element
             sx={({ breakpoints, transitions, functions: { pxToRem } }: any) => ({
                 p: 3,
                 position: 'relative',
+                height: '100%',
 
                 [breakpoints.up('xl')]: {
                     marginLeft: miniSidenav ? pxToRem(120) : pxToRem(274),
