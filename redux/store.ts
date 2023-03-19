@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from '../api/apiSlice';
 import cryptoReducer, { CryptoState } from './features/crypto/cryptoSlice';
+import { createWrapper } from 'next-redux-wrapper';
 
-export default configureStore({
+const makeStore = () => configureStore({
     reducer: {
         crypto: cryptoReducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
@@ -13,3 +14,8 @@ export default configureStore({
 export interface RootState {
     crypto: CryptoState;
 }
+
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppDispath = AppStore["dispatch"];
+
+export const wrapper = createWrapper<AppStore>(makeStore)

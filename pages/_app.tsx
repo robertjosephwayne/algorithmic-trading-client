@@ -2,14 +2,15 @@ import './index.css';
 
 import { Provider } from 'react-redux';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 
-import store from '../redux/store';
+import { wrapper } from '../redux/store';
+
 import WebSocketProvider from '../components/WebSocket';
+
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Head from 'next/head';
 
 const darkTheme = createTheme({
     palette: {
@@ -33,7 +34,10 @@ const darkTheme = createTheme({
     },
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, ...rest }: AppProps) {
+    const { store, props } = wrapper.useWrappedStore(rest);
+    const { pageProps } = props;
+
     return (
         <>
             <Head>
