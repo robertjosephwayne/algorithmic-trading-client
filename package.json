@@ -24,36 +24,27 @@
         "export-to-csv": "^0.2.1",
         "material-react-table": "^1.7.2",
         "moment": "^2.29.4",
+        "next": "^13.2.4",
+        "next-redux-wrapper": "^8.1.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-redux": "^8.0.5",
-        "react-router-dom": "^6.7.0",
-        "react-scripts": "5.0.1",
         "react-spinners": "^0.13.8",
         "react-ts-tradingview-widgets": "^1.0.14",
         "recharts": "^2.3.2",
         "socket.io-client": "^4.5.4",
-        "tailwindcss": "^3.2.4",
         "typescript": "^4.9.4",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-        "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-        "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+        "dev": "next dev",
+        "start": "next start",
+        "build": "next build",
+        "lint": "next lint",
+        "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
         "prepare": "husky install"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
     },
     "browserslist": {
         "production": [
@@ -71,7 +62,9 @@
         "@redux-devtools/core": "^3.13.1",
         "@typescript-eslint/eslint-plugin": "^5.48.2",
         "@typescript-eslint/parser": "^5.48.2",
+        "autoprefixer": "^10.4.14",
         "eslint": "^8.32.0",
+        "eslint-config-next": "13.2.4",
         "eslint-config-prettier": "^8.6.0",
         "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-react": "^7.32.1",
@@ -79,12 +72,14 @@
         "gh-pages": "^4.0.0",
         "husky": "^8.0.0",
         "lint-staged": "^13.1.0",
-        "prettier": "^2.8.3"
+        "postcss": "^8.4.21",
+        "prettier": "^2.8.3",
+        "tailwindcss": "^3.2.7"
     },
     "lint-staged": {
         "**/*.{js,jsx,ts,tsx}": [
             "npx prettier --write",
-            "npx eslint --fix"
+            "next lint --fix"
         ]
     }
 }

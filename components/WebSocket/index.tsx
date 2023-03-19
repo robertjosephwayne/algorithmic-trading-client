@@ -1,6 +1,6 @@
 import { createContext, ReactNode } from 'react';
 import { io, Socket } from 'socket.io-client';
-import { config } from '../../constants';
+import { config } from '../..//constants';
 import { useDispatch } from 'react-redux';
 import { addBar } from '../../redux/features/crypto/cryptoSlice';
 

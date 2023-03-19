@@ -7,10 +7,6 @@ export default function PageHeader() {
             path: '/',
         },
         {
-            label: 'Watchlist',
-            path: '/watchlist',
-        },
-        {
             label: 'Positions',
             path: '/positions',
         },
