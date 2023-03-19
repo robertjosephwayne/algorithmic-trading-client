@@ -1,6 +1,8 @@
 import { useSearchParams } from 'next/navigation';
 import { FundamentalData } from 'react-ts-tradingview-widgets';
 import Page from '../components/Page';
+import Sidenav from '../components/Sidenav';
+import pageRoutes from '../routes';
 
 export default function Fundamentals() {
     const searchParams = useSearchParams();
@@ -8,14 +10,12 @@ export default function Fundamentals() {
 
     return (
         <Page>
-            <div className='justify-center w-full h-4/5'>
-                <FundamentalData
-                    symbol={symbol || ''}
-                    colorTheme='dark'
-                    autosize={true}
-                    largeChartUrl='https://trading.robertjosephwayne.com'
-                />
-            </div>
+            <Sidenav routes={pageRoutes} brandName='Trading Dashboard' />
+            <FundamentalData
+                symbol={symbol || ''}
+                autosize={true}
+                largeChartUrl='https://trading.robertjosephwayne.com'
+            />
         </Page>
     );
 }
