@@ -1,9 +1,9 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'next/navigation';
 import { FundamentalData } from 'react-ts-tradingview-widgets';
 import Page from '../components/Page';
 
 export default function Fundamentals() {
-    const [searchParams] = useSearchParams();
+    const searchParams = useSearchParams();
     const symbol = searchParams.get('symbol');
 
     return (
