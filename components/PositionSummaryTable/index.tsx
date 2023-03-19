@@ -216,11 +216,14 @@ export default function PositionSummaryTable() {
                     muiTableHeadCellProps={{
                         sx: {
                             backgroundColor: 'white.main',
+                            fontSize: ({ typography: { size } }: any) => ({ fontSize: size.sm }),
+                            textTransform: 'uppercase',
                         },
                     }}
                     muiTableBodyCellProps={{
                         sx: {
                             backgroundColor: 'white.main',
+                            fontSize: ({ typography: { size } }: any) => ({ fontSize: size.sm }),
                         },
                     }}
                     positionActionsColumn='last'
