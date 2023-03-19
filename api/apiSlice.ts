@@ -8,7 +8,7 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: `${SERVER_URL}/api` }),
     extractRehydrationInfo(action, { reducerPath }) {
         if (action.type === HYDRATE) {
-            return action.payload[reducerPath]
+            return action.payload[reducerPath];
         }
     },
     endpoints: (builder) => ({
@@ -48,4 +48,15 @@ export const {
     useGetOrdersQuery,
     useGetPortfolioHistoryQuery,
     useGetPositionsQuery,
+    util: { getRunningQueriesThunk },
 } = apiSlice;
+
+export const {
+    getAccount,
+    getActivities,
+    getBars,
+    getLatestTrades,
+    getOrders,
+    getPortfolioHistory,
+    getPositions,
+} = apiSlice.endpoints;

@@ -1,11 +1,18 @@
 import { Card, CardContent, Typography } from '@mui/material';
 import { useMemo } from 'react';
-import { useGetAccountQuery, useGetPositionsQuery } from '../api/apiSlice';
+import {
+    getAccount,
+    getPositions,
+    getRunningQueriesThunk,
+    useGetAccountQuery,
+    useGetPositionsQuery,
+} from '../api/apiSlice';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
 import Sidenav from '../components/Sidenav';
 import { currencyFormatter, percentageFormatter } from '../utils';
 import pageRoutes from '../routes';
+import { wrapper } from '../redux/store';
 
 export default function PortfolioMetrics() {
     const { data: accountData, isLoading: accountDataIsLoading } = useGetAccountQuery(
@@ -69,3 +76,14 @@ export default function PortfolioMetrics() {
         </Page>
     );
 }
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
+    store.dispatch(getAccount.initiate({}));
+    store.dispatch(getPositions.initiate({}));
+
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
+
+    return {
+        props: {},
+    };
+});
