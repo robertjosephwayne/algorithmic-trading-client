@@ -1,4 +1,4 @@
-import './index.css';
+// import './index.css';
 
 import { Provider } from 'react-redux';
 import type { AppProps } from 'next/app';
@@ -10,49 +10,47 @@ import WebSocketProvider from '../components/WebSocket';
 
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
-const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-        background: {
-            default: '#131722',
-        },
-        info: {
-            main: '#171B26',
-        },
-    },
-    components: {
-        MuiTable: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: '#171B26',
-                    borderColor: '#363C4E',
-                },
-            },
-        },
-    },
-});
+import { MaterialUIControllerProvider, useMaterialUIController } from '../context';
+import { CssBaseline } from '@mui/material';
 
-export default function App({ Component, ...rest }: AppProps) {
+import theme from '../assets/theme';
+import themeDark from '../assets/theme-dark';
+import createCache from '@emotion/cache';
+const clientSideEmotionCache = createCache({ key: 'css', prepend: true });
+import { CacheProvider } from '@emotion/react';
+
+function Main({ Component, ...rest }: any) {
+    const [controller] = useMaterialUIController();
+    const { darkMode } = controller;
     const { store, props } = wrapper.useWrappedStore(rest);
     const { pageProps } = props;
 
     return (
-        <>
-            <Head>
-                <link rel='icon' href='/favicon.ico' />
-                <title>Trading Dashboard</title>
-            </Head>
+        <ThemeProvider theme={darkMode ? themeDark : theme}>
+            <CssBaseline />
             <LocalizationProvider dateAdapter={AdapterMoment}>
                 <Provider store={store}>
                     <WebSocketProvider>
-                        <ThemeProvider theme={darkTheme}>
-                            <Component {...pageProps} />
-                        </ThemeProvider>
+                        <Component {...pageProps} />
                     </WebSocketProvider>
                 </Provider>
             </LocalizationProvider>
-        </>
+        </ThemeProvider>
+    );
+}
+
+export default function App({ Component, pageProps, emotionCache = clientSideEmotionCache }: any) {
+    return (
+        <MaterialUIControllerProvider>
+            <CacheProvider value={emotionCache}>
+                <Head>
+                    <link rel='icon' href='/favicon.ico' />
+                    <title>Trading Dashboard</title>
+                </Head>
+                <Main Component={Component} pageProps={pageProps} />
+            </CacheProvider>
+        </MaterialUIControllerProvider>
     );
 }
