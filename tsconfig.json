@@ -17,6 +17,17 @@
         "jsx": "preserve",
         "incremental": true
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js"],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "tailwind.config.js",
+        "pages/_document.js",
+        "pages/_app.js",
+        "components/MDAlert/index.js",
+        "components/MDAlert/MDAlertCloseIcon.js",
+        "components/MDAlert/MDAlertRoot.js",
+        "components/MDAvatar/index.js"
+    ],
     "exclude": ["node_modules"]
 }
