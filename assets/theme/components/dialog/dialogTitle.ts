@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import typography from "assets/theme/base/typography";
+import typography from "../../base/typography";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "../../functions/pxToRem";
 
 const { size } = typography;
 

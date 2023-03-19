@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import colors from "assets/theme/base/colors";
+import colors from "../../base/colors";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "../../functions/pxToRem";
 
 const { transparent } = colors;
 

@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import borders from "assets/theme-dark/base/borders";
+import borders from "../..//base/borders";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import pxToRem from "assets/theme-dark/functions/pxToRem";
+import pxToRem from "../..//functions/pxToRem";
 
 const { borderRadius } = borders;
 

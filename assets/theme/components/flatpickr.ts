@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import colors from "assets/theme/base/colors";
+import colors from "../base/colors";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import rgba from "assets/theme/functions/rgba";
+import rgba from "../functions/rgba";
 
 const { info, white, gradients } = colors;
 

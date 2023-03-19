@@ -109,6 +109,7 @@ SidenavItem.propTypes = {
     nested: PropTypes.bool,
     children: PropTypes.node,
     open: PropTypes.bool,
+    onClick: PropTypes.func,
 };
 
 export default SidenavItem;
