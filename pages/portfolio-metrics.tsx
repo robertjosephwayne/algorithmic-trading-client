@@ -3,9 +3,7 @@ import { useMemo } from 'react';
 import { useGetAccountQuery, useGetPositionsQuery } from '../api/apiSlice';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
-import Sidenav from '../components/Sidenav';
 import { currencyFormatter, percentageFormatter } from '../utils';
-import pageRoutes from '../routes';
 
 export default function PortfolioMetrics() {
     const { data: accountData, isLoading: accountDataIsLoading } = useGetAccountQuery(
@@ -45,26 +43,29 @@ export default function PortfolioMetrics() {
 
     return (
         <Page>
-            <Sidenav routes={pageRoutes} brandName='Trading Dashboard' />
-            {!accountDataIsLoading && !positionsDataIsLoading && (
-                <Card variant='outlined'>
-                    <CardContent>
-                        <Typography variant='body1'>
-                            Short Value: {currencyFormatter(shortValue)} (
-                            {percentageFormatter(shortValue / (longValue + shortValue), 4)})
-                        </Typography>
-                        <Typography variant='body1'>
-                            Long Value: {currencyFormatter(longValue)} (
-                            {percentageFormatter(longValue / (longValue + shortValue), 4)})
-                        </Typography>
-                        <Typography variant='body1'>
-                            Total Market Value: {currencyFormatter(longValue + shortValue)}
-                        </Typography>
-                        <Typography variant='body1'>
-                            Total Equity Value: {currencyFormatter(accountData.equity)}
-                        </Typography>
-                    </CardContent>
-                </Card>
+            {accountDataIsLoading || positionsDataIsLoading ? (
+                <Loader fullPage={true} />
+            ) : (
+                <div className='w-full h-4/5'>
+                    <Card variant='outlined'>
+                        <CardContent>
+                            <Typography variant='body1'>
+                                Short Value: {currencyFormatter(shortValue)} (
+                                {percentageFormatter(shortValue / (longValue + shortValue), 4)})
+                            </Typography>
+                            <Typography variant='body1'>
+                                Long Value: {currencyFormatter(longValue)} (
+                                {percentageFormatter(longValue / (longValue + shortValue), 4)})
+                            </Typography>
+                            <Typography variant='body1'>
+                                Total Market Value: {currencyFormatter(longValue + shortValue)}
+                            </Typography>
+                            <Typography variant='body1'>
+                                Total Equity Value: {currencyFormatter(accountData.equity)}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </div>
             )}
         </Page>
     );

@@ -11,7 +11,7 @@ export default function Orders() {
     return (
         <Page>
             <Sidenav routes={pageRoutes} brandName='Trading Dashboard' />
-            {!ordersQueryIsLoading && <OrderSummaryTable />}
+            <OrderSummaryTable />
         </Page>
     );
 }
