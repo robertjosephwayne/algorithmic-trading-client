@@ -41,46 +41,20 @@ import Icon from '@mui/material/Icon';
 const routes = [
     {
         type: 'collapse',
-        name: 'Charts',
-        key: 'charts',
-        route: '/charts',
-        noCollapse: true,
-    },
-    {
-        type: 'collapse',
-        name: 'Positions',
-        key: 'positions',
-        route: '/positions',
-        noCollapse: true,
-    },
-    {
-        type: 'collapse',
         name: 'Orders',
         key: 'orders',
         route: '/orders',
         noCollapse: true,
+        // collapse: [
+        //     {
+        //         name: 'My Profile',
+        //         key: 'my-profile',
+        //         route: '/positions',
+        //         // component: <ProfileOverview />,
+        //     },
+        // ],
     },
-    {
-        type: 'collapse',
-        name: 'Trade Book',
-        key: 'trade-book',
-        route: '/trade-book',
-        noCollapse: true,
-    },
-    {
-        type: 'collapse',
-        name: 'Portfolio Metrics',
-        key: 'portfolio-metrics',
-        route: '/portfolio-metrics',
-        noCollapse: true,
-    },
-    {
-        type: 'collapse',
-        name: 'Returns',
-        key: 'returns',
-        route: '/returns',
-        noCollapse: true,
-    },
+    { type: 'divider', key: 'divider-0' },
 ];
 
 export default routes;

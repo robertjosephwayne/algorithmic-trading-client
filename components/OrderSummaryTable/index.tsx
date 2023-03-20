@@ -3,7 +3,7 @@ import { useGetOrdersQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { currencyFormatter, percentageFormatter, tableSortingFunctions } from '../../utils';
 import Loader from '../Loader';
-import { Box, Button, Card, TableContainer } from '@mui/material';
+import { Box, Button, Card } from '@mui/material';
 import { ExportToCsv } from 'export-to-csv';
 import { FileDownload } from '@mui/icons-material';
 
@@ -155,46 +155,28 @@ export default function OrderSummaryTable() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <Card>
-            <TableContainer sx={{ boxShadow: 'none' }}>
-                <MaterialReactTable
-                    columns={columns}
-                    data={rowData}
-                    autoResetPageIndex={false}
-                    renderTopToolbarCustomActions={() => {
-                        return (
-                            <Box
-                                sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}
+        <Card variant='outlined'>
+            <MaterialReactTable
+                columns={columns}
+                data={rowData}
+                autoResetPageIndex={false}
+                renderTopToolbarCustomActions={() => {
+                    return (
+                        <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
+                            <Button
+                                color='info'
+                                onClick={handleExportData}
+                                startIcon={<FileDownload />}
+                                variant='outlined'
+                                sx={{ color: 'white' }}
                             >
-                                <Button onClick={handleExportData} startIcon={<FileDownload />}>
-                                    Export All Data
-                                </Button>
-                            </Box>
-                        );
-                    }}
-                    sortingFns={tableSortingFunctions}
-                    muiTopToolbarProps={{
-                        sx: {
-                            backgroundColor: 'white.main',
-                        },
-                    }}
-                    muiBottomToolbarProps={{
-                        sx: {
-                            backgroundColor: 'white.main',
-                        },
-                    }}
-                    muiTableHeadCellProps={{
-                        sx: {
-                            backgroundColor: 'white.main',
-                        },
-                    }}
-                    muiTableBodyCellProps={{
-                        sx: {
-                            backgroundColor: 'white.main',
-                        },
-                    }}
-                />
-            </TableContainer>
+                                Export All Data
+                            </Button>
+                        </Box>
+                    );
+                }}
+                sortingFns={tableSortingFunctions}
+            />
         </Card>
     );
 }
