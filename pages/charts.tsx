@@ -1,12 +1,12 @@
 import Page from '../components/Page';
 import { AdvancedRealTimeChart } from 'react-ts-tradingview-widgets';
 import { useGetPositionsQuery } from '../api/apiSlice';
-import { memo, useMemo } from 'react';
+import { useMemo } from 'react';
 import Loader from '../components/Loader';
 import Sidenav from '../components/Sidenav';
 import pageRoutes from '../routes';
 
-function Charts() {
+export default function Charts() {
     const { data: positions, isLoading: positionsQueryIsLoading } = useGetPositionsQuery({});
 
     const watchlist = useMemo(() => {
@@ -48,5 +48,3 @@ function Charts() {
         </Page>
     );
 }
-
-export default memo(Charts);
