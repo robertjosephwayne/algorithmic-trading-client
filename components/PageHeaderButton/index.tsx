@@ -1,10 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import cn from 'classnames';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 export default function PageHeaderButton({ path, label }: { path: string; label: string }) {
-    const router = useRouter();
-    const isActive = router.pathname === path;
+    const pathname = usePathname();
+    const isActive = pathname === path;
 
     return (
         <li>

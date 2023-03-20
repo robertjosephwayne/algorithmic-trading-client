@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useMemo } from 'react';
 import { useGetPortfolioHistoryQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';

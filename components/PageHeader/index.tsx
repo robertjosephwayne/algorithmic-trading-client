@@ -4,7 +4,7 @@ export default function PageHeader() {
     const pages = [
         {
             label: 'Charts',
-            path: '/',
+            path: '/charts',
         },
         {
             label: 'Positions',
