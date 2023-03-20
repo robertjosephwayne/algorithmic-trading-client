@@ -141,14 +141,11 @@ export default function ActivitySummaryTableRow() {
                     muiTableHeadCellProps={{
                         sx: {
                             backgroundColor: 'white.main',
-                            fontSize: ({ typography: { size } }: any) => ({ fontSize: size.sm }),
-                            textTransform: 'uppercase',
                         },
                     }}
                     muiTableBodyCellProps={{
                         sx: {
                             backgroundColor: 'white.main',
-                            fontSize: ({ typography: { size } }: any) => ({ fontSize: size.sm }),
                         },
                     }}
                 />
