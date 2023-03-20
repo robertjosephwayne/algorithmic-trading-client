@@ -66,7 +66,7 @@ function SidenavCollapse({ icon, name, children, active, noCollapse, open, ...re
                         }
                     >
                         {typeof icon === 'string' ? (
-                            <Icon sx={(theme: any) => collapseIcon(theme, { active })}>{icon}</Icon>
+                            <Icon sx={(theme) => collapseIcon(theme, { active })}>{icon}</Icon>
                         ) : (
                             icon
                         )}
@@ -126,7 +126,6 @@ SidenavCollapse.propTypes = {
     active: PropTypes.bool,
     noCollapse: PropTypes.bool,
     open: PropTypes.bool,
-    onClick: PropTypes.func,
 };
 
 export default SidenavCollapse;

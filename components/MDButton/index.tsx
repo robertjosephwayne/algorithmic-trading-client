@@ -19,10 +19,10 @@ import { FC, ReactNode, forwardRef } from 'react';
 import { ButtonProps } from '@mui/material';
 
 // Custom styles for MDButton
-import MDButtonRoot from './MDButtonRoot';
+import MDButtonRoot from 'components/MDButton/MDButtonRoot';
 
 // Material Dashboard 2 PRO React TS contexts
-import { useMaterialUIController } from '../../context';
+import { useMaterialUIController } from 'context';
 
 // Declaring props types for MDButton
 interface Props extends Omit<ButtonProps, 'color' | 'variant'> {

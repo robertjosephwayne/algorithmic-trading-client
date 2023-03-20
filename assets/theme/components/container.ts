@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import breakpoints from "../base/breakpoints";
+import breakpoints from "assets/theme/base/breakpoints";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import pxToRem from "../functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem";
 
 // types
 type Types = any;

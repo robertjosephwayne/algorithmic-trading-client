@@ -19,7 +19,7 @@ Coded by www.creative-tim.com
  */
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import hexToRgb from "./hexToRgb";
+import hexToRgb from "assets/theme/functions/hexToRgb";
 
 function rgba(color: string, opacity: number): string {
   return `rgba(${hexToRgb(color)}, ${opacity})`;

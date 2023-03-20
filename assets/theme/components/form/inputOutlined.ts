@@ -14,12 +14,12 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import colors from "../../base/colors";
-import borders from "../../base/borders";
-import typography from "../../base/typography";
+import colors from "assets/theme/base/colors";
+import borders from "assets/theme/base/borders";
+import typography from "assets/theme/base/typography";
 
 // // Material Dashboard 2 PRO React TSUI Dashboard PRO helper functions
-import pxToRem from "../../functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem";
 
 const { inputBorderColor, info, grey, transparent } = colors;
 const { borderRadius } = borders;

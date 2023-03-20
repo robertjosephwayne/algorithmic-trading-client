@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import colors from "../../theme/base/colors";
-import borders from "../../theme/base/borders";
-import boxShadows from "../../theme/base/boxShadows";
+import colors from "assets/theme/base/colors";
+import borders from "assets/theme/base/borders";
+import boxShadows from "assets/theme/base/boxShadows";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import pxToRem from "../../theme/functions/pxToRem";
-import boxShadow from "../../theme/functions/boxShadow";
+import pxToRem from "assets/theme/functions/pxToRem";
+import boxShadow from "assets/theme/functions/boxShadow";
 
 const { grey, white, black, info } = colors;
 const { borderRadius, borderWidth } = borders;

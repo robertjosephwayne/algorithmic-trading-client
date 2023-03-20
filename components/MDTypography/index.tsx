@@ -19,10 +19,10 @@ import { FC, ReactNode, forwardRef } from 'react';
 import { TypographyProps } from '@mui/material';
 
 // Custom styles for MDTypography
-import MDTypographyRoot from './MDTypographyRoot';
+import MDTypographyRoot from 'components/MDTypography/MDTypographyRoot';
 
 // Material Dashboard 2 PRO React TS contexts
-import { useMaterialUIController } from '../../context';
+import { useMaterialUIController } from 'context';
 
 // Declaring props types for MDTypography
 interface Props extends TypographyProps {

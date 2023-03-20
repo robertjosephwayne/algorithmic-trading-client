@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import borders from "../base/borders";
+import borders from "assets/theme-dark/base/borders";
 
 const { borderRadius } = borders;
 

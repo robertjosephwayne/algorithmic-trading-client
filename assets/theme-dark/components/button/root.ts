@@ -14,11 +14,11 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import typography from "../../base/typography";
-import borders from "../../base/borders";
+import typography from "assets/theme-dark/base/typography";
+import borders from "assets/theme-dark/base/borders";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import pxToRem from "../../functions/pxToRem";
+import pxToRem from "assets/theme-dark/functions/pxToRem";
 
 const { fontWeightBold, size } = typography;
 const { borderRadius } = borders;

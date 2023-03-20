@@ -20,10 +20,10 @@ Coded by www.creative-tim.com
  */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import colors from "../base/colors";
+import colors from "assets/theme-dark/base/colors";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import boxShadow from "../functions/boxShadow";
+import boxShadow from "assets/theme-dark/functions/boxShadow";
 
 const { black, dark, tabs, coloredShadows } = colors;
 

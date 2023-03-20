@@ -109,7 +109,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }: any) {
                     <SidenavItem name={name} nested />
                 </MuiLink>
             ) : (
-                <Link href={route} key={key}>
+                <Link href={route} key={key} sx={{ textDecoration: 'none' }}>
                     <SidenavItem name={name} active={route === pathname} nested />
                 </Link>
             ),
@@ -152,7 +152,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }: any) {
                         <SidenavItem color={color} name={name} active={key === itemName} />
                     </MuiLink>
                 ) : (
-                    <Link href={route} key={key}>
+                    <Link href={route} key={key} sx={{ textDecoration: 'none' }}>
                         <SidenavItem color={color} name={name} active={key === itemName} />
                     </Link>
                 );
@@ -278,7 +278,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }: any) {
                             brand
                         )}
                         <MDBox
-                            width={(!brandName && '100%') || ''}
+                            width={!brandName && '100%'}
                             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
                         >
                             <MDTypography

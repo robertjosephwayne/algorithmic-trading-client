@@ -14,12 +14,12 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import borders from "../../base/borders";
-import colors from "../../base/colors";
+import borders from "assets/theme/base/borders";
+import colors from "assets/theme/base/colors";
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import pxToRem from "../../functions/pxToRem";
-import linearGradient from "../../functions/linearGradient";
+import pxToRem from "assets/theme/functions/pxToRem";
+import linearGradient from "assets/theme/functions/linearGradient";
 
 const { borderWidth, borderColor } = borders;
 const { transparent, info } = colors;
