@@ -1,10 +1,10 @@
 import Page from '../components/Page';
 import { AdvancedRealTimeChart } from 'react-ts-tradingview-widgets';
-import { getPositions, getRunningQueriesThunk, useGetPositionsQuery } from '../api/apiSlice';
+import { useGetPositionsQuery } from '../api/apiSlice';
 import { useMemo } from 'react';
+import Loader from '../components/Loader';
 import Sidenav from '../components/Sidenav';
 import pageRoutes from '../routes';
-import { wrapper } from '../redux/store';
 
 export default function Charts() {
     const { data: positions, isLoading: positionsQueryIsLoading } = useGetPositionsQuery({});
@@ -48,13 +48,3 @@ export default function Charts() {
         </Page>
     );
 }
-
-export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
-    store.dispatch(getPositions.initiate({}));
-
-    await Promise.all(store.dispatch(getRunningQueriesThunk()));
-
-    return {
-        props: {},
-    };
-});

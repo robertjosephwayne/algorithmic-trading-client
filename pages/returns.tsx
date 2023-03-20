@@ -1,14 +1,8 @@
-import {
-    getPortfolioHistory,
-    getPositions,
-    getRunningQueriesThunk,
-    useGetPortfolioHistoryQuery,
-} from '../api/apiSlice';
+import { useGetPortfolioHistoryQuery } from '../api/apiSlice';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
 import ReturnSummaryTable from '../components/ReturnSummaryTable';
 import Sidenav from '../components/Sidenav';
-import { wrapper } from '../redux/store';
 import pageRoutes from '../routes';
 
 export default function Positions() {
@@ -21,13 +15,3 @@ export default function Positions() {
         </Page>
     );
 }
-
-export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
-    store.dispatch(getPortfolioHistory.initiate({}));
-
-    await Promise.all(store.dispatch(getRunningQueriesThunk()));
-
-    return {
-        props: {},
-    };
-});

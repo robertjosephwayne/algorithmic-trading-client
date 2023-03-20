@@ -1,15 +1,10 @@
 import { formatRFC3339 } from 'date-fns';
 import { useState } from 'react';
-import {
-    getPortfolioHistory,
-    getRunningQueriesThunk,
-    useGetPortfolioHistoryQuery,
-} from '../api/apiSlice';
+import { useGetPortfolioHistoryQuery } from '../api/apiSlice';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
 import PortfolioChart from '../components/PortfolioChart';
 import PortfolioChartControlPanel from '../components/PortfolioChartControlPanel';
-import { wrapper } from '../redux/store';
 
 export default function PortfolioHistory() {
     const [selectedTimeframe, setSelectedTimeframe] = useState('1H');
@@ -51,13 +46,3 @@ export default function PortfolioHistory() {
         </Page>
     );
 }
-
-export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
-    store.dispatch(getPortfolioHistory.initiate({}));
-
-    await Promise.all(store.dispatch(getRunningQueriesThunk()));
-
-    return {
-        props: {},
-    };
-});
