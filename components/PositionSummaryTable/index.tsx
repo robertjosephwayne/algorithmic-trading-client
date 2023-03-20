@@ -8,10 +8,9 @@ import {
     tableSortingFunctions,
 } from '../../utils';
 import Loader from '../Loader';
-import { Box, Button, Card, TableContainer } from '@mui/material';
+import { Box, Button, Card } from '@mui/material';
 import { ExportToCsv } from 'export-to-csv';
 import { FileDownload } from '@mui/icons-material';
-import MDBox from '../MDBox';
 
 type PositionSummaryTableRow = {
     symbol: string;
@@ -176,62 +175,39 @@ export default function PositionSummaryTable() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <Card>
-            <TableContainer sx={{ boxShadow: 'none' }}>
-                <MaterialReactTable
-                    columns={columns}
-                    data={rowData}
-                    autoResetPageIndex={false}
-                    enableRowActions
-                    renderRowActions={({ row }: { row: any }) => (
-                        <a href={`/fundamentals?symbol=${row.getValue('symbol')}`}>Fundamentals</a>
-                    )}
-                    positionToolbarAlertBanner='bottom'
-                    renderTopToolbarCustomActions={() => {
-                        return (
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    gap: '1rem',
-                                    p: '0.5rem',
-                                    flexWrap: 'wrap',
-                                }}
+        <Card variant='outlined'>
+            <MaterialReactTable
+                columns={columns}
+                data={rowData}
+                autoResetPageIndex={false}
+                enableRowActions
+                renderRowActions={({ row }: { row: any }) => (
+                    <a href={`/fundamentals?symbol=${row.getValue('symbol')}`}>Fundamentals</a>
+                )}
+                positionToolbarAlertBanner='bottom'
+                renderTopToolbarCustomActions={() => {
+                    return (
+                        <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
+                            <Button
+                                color='info'
+                                onClick={handleExportData}
+                                startIcon={<FileDownload />}
+                                variant='outlined'
+                                sx={{ color: 'white' }}
                             >
-                                <Button onClick={handleExportData} startIcon={<FileDownload />}>
-                                    Export All Data
-                                </Button>
-                            </Box>
-                        );
-                    }}
-                    muiTopToolbarProps={{
-                        sx: {
-                            backgroundColor: 'white.main',
-                        },
-                    }}
-                    muiBottomToolbarProps={{
-                        sx: {
-                            backgroundColor: 'white.main',
-                        },
-                    }}
-                    muiTableHeadCellProps={{
-                        sx: {
-                            backgroundColor: 'white.main',
-                        },
-                    }}
-                    muiTableBodyCellProps={{
-                        sx: {
-                            backgroundColor: 'white.main',
-                        },
-                    }}
-                    positionActionsColumn='last'
-                    displayColumnDefOptions={{
-                        'mrt-row-actions': {
-                            header: '', // change header text
-                        },
-                    }}
-                    sortingFns={tableSortingFunctions}
-                />
-            </TableContainer>
+                                Export All Data
+                            </Button>
+                        </Box>
+                    );
+                }}
+                positionActionsColumn='last'
+                displayColumnDefOptions={{
+                    'mrt-row-actions': {
+                        header: '', // change header text
+                    },
+                }}
+                sortingFns={tableSortingFunctions}
+            />
         </Card>
     );
 }
