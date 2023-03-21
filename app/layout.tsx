@@ -5,7 +5,12 @@ import './index.css';
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html>
-            <head></head>
+            <head>
+                <link
+                    rel='stylesheet'
+                    href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+                />
+            </head>
             <body>
                 <Providers>
                     <Page>{children}</Page>

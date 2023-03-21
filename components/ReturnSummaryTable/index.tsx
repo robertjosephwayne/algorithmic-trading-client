@@ -169,7 +169,7 @@ export default function ReturnSummaryTable() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <Card variant='outlined'>
+        <div className='flex flex-col'>
             <MaterialReactTable
                 columns={columns}
                 data={rowData}
@@ -190,7 +190,10 @@ export default function ReturnSummaryTable() {
                     );
                 }}
                 sortingFns={tableSortingFunctions}
+                enablePagination={false}
+                enableRowVirtualization
+                enableColumnResizing
             />
-        </Card>
+        </div>
     );
 }

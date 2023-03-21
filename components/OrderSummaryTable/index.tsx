@@ -41,6 +41,7 @@ export default function OrderSummaryTable() {
             {
                 accessorKey: 'filledQuantity',
                 header: 'Filled Quantity',
+                size: 200,
             },
             {
                 accessorKey: 'side',
@@ -157,7 +158,7 @@ export default function OrderSummaryTable() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <Card variant='outlined'>
+        <div className='flex flex-col'>
             <MaterialReactTable
                 columns={columns}
                 data={rowData}
@@ -178,7 +179,10 @@ export default function OrderSummaryTable() {
                     );
                 }}
                 sortingFns={tableSortingFunctions}
+                enablePagination={false}
+                enableRowVirtualization
+                enableColumnResizing
             />
-        </Card>
+        </div>
     );
 }

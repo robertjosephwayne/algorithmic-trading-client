@@ -22,6 +22,15 @@ const darkTheme = createTheme({
                 root: {
                     backgroundColor: '#171B26',
                     borderColor: '#363C4E',
+                    textTransform: 'uppercase',
+                },
+            },
+        },
+        MuiTableBody: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'uppercase',
+                    maxHeight: '400px',
                 },
             },
         },

@@ -6,7 +6,7 @@ html,
 body,
 #__next {
     background-color: #13192c;
-    font-family: 'Helvetica Monospaced', sans-serif;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     height: 100%;
 }
 

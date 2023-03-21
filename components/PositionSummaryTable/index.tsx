@@ -10,7 +10,7 @@ import {
     tableSortingFunctions,
 } from '../../utils';
 import Loader from '../Loader';
-import { Box, Button, Card } from '@mui/material';
+import { Box, Button, Card, CardContent, Grid, Paper, TableContainer } from '@mui/material';
 import { ExportToCsv } from 'export-to-csv';
 import { FileDownload } from '@mui/icons-material';
 
@@ -86,6 +86,7 @@ export default function PositionSummaryTable() {
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
                 sortingFn: 'currencySorting',
                 filterVariant: 'range',
+                size: 250,
             },
             {
                 accessorKey: 'totalUnrealizedProfitLossPercent',
@@ -97,6 +98,7 @@ export default function PositionSummaryTable() {
                 },
                 sortingFn: 'percentageSorting',
                 filterVariant: 'range',
+                size: 250,
             },
             {
                 accessorKey: 'intradayUnrealizedProfitLossAmount',
@@ -177,7 +179,7 @@ export default function PositionSummaryTable() {
     return isLoading ? (
         <Loader fullPage={true} />
     ) : (
-        <Card variant='outlined'>
+        <div className='flex flex-col'>
             <MaterialReactTable
                 columns={columns}
                 data={rowData}
@@ -186,10 +188,16 @@ export default function PositionSummaryTable() {
                 renderRowActions={({ row }: { row: any }) => (
                     <a href={`/fundamentals?symbol=${row.getValue('symbol')}`}>Fundamentals</a>
                 )}
-                positionToolbarAlertBanner='bottom'
                 renderTopToolbarCustomActions={() => {
                     return (
-                        <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: '1rem',
+                                p: '0.5rem',
+                                flexWrap: 'wrap',
+                            }}
+                        >
                             <Button
                                 color='info'
                                 onClick={handleExportData}
@@ -209,7 +217,11 @@ export default function PositionSummaryTable() {
                     },
                 }}
                 sortingFns={tableSortingFunctions}
+                enablePagination={false}
+                enableRowVirtualization
+                enableColumnResizing
+                defaultColumn={{ size: 200 }}
             />
-        </Card>
+        </div>
     );
 }
