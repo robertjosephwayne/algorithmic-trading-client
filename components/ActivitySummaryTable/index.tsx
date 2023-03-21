@@ -124,7 +124,6 @@ export default function ActivitySummaryTableRow() {
                                 color='info'
                                 onClick={handleExportData}
                                 startIcon={<FileDownload />}
-                                variant='outlined'
                                 sx={{ color: 'white' }}
                             >
                                 Export All Data
