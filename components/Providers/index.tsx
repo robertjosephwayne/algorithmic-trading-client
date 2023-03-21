@@ -10,7 +10,7 @@ const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         background: {
-            default: 'rgb(32, 41, 61)',
+            default: '#131722',
         },
         info: {
             main: '#171B26',
@@ -20,7 +20,7 @@ const darkTheme = createTheme({
         MuiTable: {
             styleOverrides: {
                 root: {
-                    backgroundColor: 'rgb(32, 41, 61)',
+                    backgroundColor: '#171B26',
                     borderColor: '#363C4E',
                     textTransform: 'uppercase',
                 },

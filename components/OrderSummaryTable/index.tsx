@@ -170,6 +170,7 @@ export default function OrderSummaryTable() {
                                 color='info'
                                 onClick={handleExportData}
                                 startIcon={<FileDownload />}
+                                variant='outlined'
                                 sx={{ color: 'white' }}
                             >
                                 Export All Data

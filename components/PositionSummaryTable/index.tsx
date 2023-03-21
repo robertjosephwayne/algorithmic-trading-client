@@ -202,6 +202,7 @@ export default function PositionSummaryTable() {
                                 color='info'
                                 onClick={handleExportData}
                                 startIcon={<FileDownload />}
+                                variant='outlined'
                                 sx={{ color: 'white' }}
                             >
                                 Export All Data

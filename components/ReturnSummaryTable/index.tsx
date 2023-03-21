@@ -181,6 +181,7 @@ export default function ReturnSummaryTable() {
                                 color='info'
                                 onClick={handleExportData}
                                 startIcon={<FileDownload />}
+                                variant='outlined'
                                 sx={{ color: 'white' }}
                             >
                                 Export All Data
