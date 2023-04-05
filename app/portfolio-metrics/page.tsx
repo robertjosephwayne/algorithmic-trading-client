@@ -1,8 +1,7 @@
 'use client';
 
 import { Card, CardContent, Typography } from '@mui/material';
-import { useMemo } from 'react';
-import { useGetAccountQuery, useGetPositionsQuery } from '../../api/apiSlice';
+import { useGetAccountQuery } from '../../api/apiSlice';
 import Loader from '../../components/Loader';
 import { currencyFormatter, percentageFormatter } from '../../utils';
 
@@ -11,54 +10,46 @@ export default function PortfolioMetrics() {
         {},
         { pollingInterval: 1000 },
     );
-    const { data: positionsData, isLoading: positionsDataIsLoading } = useGetPositionsQuery(
-        {},
-        { pollingInterval: 1000 },
-    );
 
-    const shortValue = useMemo(() => {
-        let total = 0;
-        if (!positionsData) return total;
-
-        for (const position of positionsData) {
-            if (position.side === 'short') {
-                total += -parseFloat(position.market_value);
-            }
-        }
-
-        return total;
-    }, [positionsData]);
-
-    const longValue = useMemo(() => {
-        let total = 0;
-        if (!positionsData) return total;
-
-        for (const position of positionsData) {
-            if (position.side === 'long') {
-                total += parseFloat(position.market_value);
-            }
-        }
-
-        return total;
-    }, [positionsData]);
-
-    return accountDataIsLoading || positionsDataIsLoading ? (
+    return accountDataIsLoading ? (
         <Loader fullPage={true} />
     ) : (
         <div className='w-full h-4/5'>
             <Card variant='outlined'>
                 <CardContent>
                     <Typography variant='body1'>
-                        Short Value: {currencyFormatter(shortValue)} (
-                        {percentageFormatter(shortValue / (longValue + shortValue), 4)})
+                        Stock Buying Power: {currencyFormatter(accountData.stock_buying_power)}
                     </Typography>
                     <Typography variant='body1'>
-                        Long Value: {currencyFormatter(longValue)} (
-                        {percentageFormatter(longValue / (longValue + shortValue), 4)})
+                        Option Buying Power: {currencyFormatter(accountData.option_buying_power)}
+                    </Typography>
+
+                    <Typography variant='body1'>
+                        Short Market Value: {currencyFormatter(accountData.short_market_value)} (
+                        {percentageFormatter(
+                            accountData.short_market_value /
+                                (accountData.long_market_value - accountData.short_market_value),
+                            2,
+                        )}
+                        )
                     </Typography>
                     <Typography variant='body1'>
-                        Total Market Value: {currencyFormatter(longValue + shortValue)}
+                        Long Market Value: {currencyFormatter(accountData.long_market_value)} (
+                        {percentageFormatter(
+                            accountData.long_market_value /
+                                (accountData.long_market_value - accountData.short_market_value),
+                            2,
+                        )}
+                        )
                     </Typography>
+                    <Typography variant='body1'>
+                        Total Market Value: {currencyFormatter(accountData.market_value)}
+                    </Typography>
+
+                    <Typography variant='body1'>
+                        Cash: {currencyFormatter(accountData.cash)}
+                    </Typography>
+
                     <Typography variant='body1'>
                         Total Equity Value: {currencyFormatter(accountData.equity)}
                     </Typography>
