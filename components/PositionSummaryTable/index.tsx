@@ -3,30 +3,16 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useGetPositionsQuery } from '../../api/apiSlice';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import {
-    currencyFormatter,
-    percentageFormatter,
-    toProperCase,
-    tableSortingFunctions,
-} from '../../utils';
+import { currencyFormatter, tableSortingFunctions } from '../../utils';
 import Loader from '../Loader';
-import { Box, Button, Card, CardContent, Grid, Paper, TableContainer } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { ExportToCsv } from 'export-to-csv';
 import { FileDownload } from '@mui/icons-material';
 
 type PositionSummaryTableRow = {
     symbol: string;
     quantity: number;
-    side: string;
-    exchange: string;
-    averageEntryPrice: string;
     costBasis: string;
-    marketValue: string;
-    currentPrice: string;
-    totalUnrealizedProfitLossAmount: string;
-    totalUnrealizedProfitLossPercent: string;
-    intradayUnrealizedProfitLossAmount: string;
-    intradayUnrealizedProfitLossPercent: string;
 };
 
 export default function PositionSummaryTable() {
@@ -41,82 +27,14 @@ export default function PositionSummaryTable() {
                 header: 'Symbol',
             },
             {
-                accessorKey: 'exchange',
-                header: 'Exchange',
-            },
-            {
-                accessorKey: 'side',
-                header: 'Side',
-                Cell: ({ cell }) => {
-                    return toProperCase(cell.getValue<string>());
-                },
-            },
-            {
                 accessorKey: 'quantity',
                 header: 'Quantity',
-            },
-            {
-                accessorKey: 'averageEntryPrice',
-                header: 'Avg. Entry Price',
-                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
-                sortingFn: 'currencySorting',
-            },
-            {
-                accessorKey: 'currentPrice',
-                header: 'Current Price',
-                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
-                sortingFn: 'currencySorting',
             },
             {
                 accessorKey: 'costBasis',
                 header: 'Cost Basis',
                 Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
                 sortingFn: 'currencySorting',
-            },
-            {
-                accessorKey: 'marketValue',
-                header: 'Market Value',
-                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
-                sortingFn: 'currencySorting',
-                filterVariant: 'range',
-            },
-            {
-                accessorKey: 'totalUnrealizedProfitLossAmount',
-                header: 'Unrealized P/L ($)',
-                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
-                sortingFn: 'currencySorting',
-                filterVariant: 'range',
-                size: 250,
-            },
-            {
-                accessorKey: 'totalUnrealizedProfitLossPercent',
-                header: 'Unrealized P/L (%)',
-                Cell: ({ cell }) => {
-                    if (cell.getValue<string>()) {
-                        return percentageFormatter(cell.getValue<string>());
-                    }
-                },
-                sortingFn: 'percentageSorting',
-                filterVariant: 'range',
-                size: 250,
-            },
-            {
-                accessorKey: 'intradayUnrealizedProfitLossAmount',
-                header: 'Today P/L ($)',
-                Cell: ({ cell }) => currencyFormatter(cell.getValue<number>()),
-                sortingFn: 'currencySorting',
-                filterVariant: 'range',
-            },
-            {
-                accessorKey: 'intradayUnrealizedProfitLossPercent',
-                header: 'Today P/L (%)',
-                Cell: ({ cell }) => {
-                    if (cell.getValue<string>()) {
-                        return percentageFormatter(cell.getValue<string>());
-                    }
-                },
-                sortingFn: 'percentageSorting',
-                filterVariant: 'range',
             },
         ],
         [],
@@ -157,17 +75,8 @@ export default function PositionSummaryTable() {
         const updatedRowData = Object.entries(positions).map((position: any) => {
             const rowData: any = {
                 symbol: position[1].symbol,
-                exchange: position[1].exchange,
-                side: position[1].side,
                 quantity: position[1].quantity,
-                averageEntryPrice: position[1].average_entry_price,
-                currentPrice: position[1].current_price,
                 costBasis: position[1].cost_basis,
-                marketValue: position[1].market_value,
-                totalUnrealizedProfitLossAmount: position[1].total_unrealized_pl,
-                totalUnrealizedProfitLossPercent: position[1].total_unrealized_pl_percent,
-                intradayUnrealizedProfitLossAmount: position[1].intraday_unrealized_pl,
-                intradayUnrealizedProfitLossPercent: position[1].intraday_unrealized_pl_percent,
             };
 
             return rowData;
