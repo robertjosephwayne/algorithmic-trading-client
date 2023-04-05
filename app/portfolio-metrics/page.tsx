@@ -27,7 +27,7 @@ export default function PortfolioMetrics() {
                     <Typography variant='body1'>
                         Short Market Value: {currencyFormatter(accountData.short_market_value)} (
                         {percentageFormatter(
-                            accountData.short_market_value /
+                            -accountData.short_market_value /
                                 (accountData.long_market_value - accountData.short_market_value),
                             2,
                         )}
