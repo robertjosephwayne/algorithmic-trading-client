@@ -132,9 +132,6 @@ export default function ActivitySummaryTableRow() {
                     );
                 }}
                 sortingFns={tableSortingFunctions}
-                enablePagination={false}
-                enableRowVirtualization
-                enableColumnResizing
             />
         </div>
     );
