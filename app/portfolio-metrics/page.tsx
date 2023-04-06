@@ -17,6 +17,7 @@ export default function PortfolioMetrics() {
         <div className='w-full h-4/5'>
             <Card variant='outlined'>
                 <CardContent>
+                    <Typography variant='h6'>Buying Power</Typography>
                     <Typography variant='body1'>
                         Stock Buying Power: {currencyFormatter(accountData.stock_buying_power)}
                     </Typography>
@@ -24,6 +25,9 @@ export default function PortfolioMetrics() {
                         Option Buying Power: {currencyFormatter(accountData.option_buying_power)}
                     </Typography>
 
+                    <Typography variant='h6' sx={{ mt: 2 }}>
+                        Portfolio Value
+                    </Typography>
                     <Typography variant='body1'>
                         Short Market Value: {currencyFormatter(accountData.short_market_value)} (
                         {percentageFormatter(

@@ -125,10 +125,6 @@ export default function PositionSummaryTable() {
                     },
                 }}
                 sortingFns={tableSortingFunctions}
-                enablePagination={false}
-                enableRowVirtualization
-                enableColumnResizing
-                defaultColumn={{ size: 200 }}
             />
         </div>
     );

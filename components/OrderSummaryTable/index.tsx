@@ -135,9 +135,6 @@ export default function OrderSummaryTable() {
                     );
                 }}
                 sortingFns={tableSortingFunctions}
-                enablePagination={false}
-                enableRowVirtualization
-                enableColumnResizing
             />
         </div>
     );
